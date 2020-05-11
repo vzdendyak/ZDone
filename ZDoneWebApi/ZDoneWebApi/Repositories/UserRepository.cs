@@ -1,6 +1,8 @@
-﻿namespace ZDoneWebApi.Repositories
+﻿using ZDoneWebApi.Repositories.Interfaces;
+
+namespace ZDoneWebApi.Repositories
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         
     }

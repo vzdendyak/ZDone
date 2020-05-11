@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using ZDoneWebApi.BusinessLogic;
+using ZDoneWebApi.BusinessLogic.Interfaces;
 using ZDoneWebApi.Data;
 using ZDoneWebApi.Repositories;
 using ZDoneWebApi.Repositories.Interfaces;
@@ -45,6 +47,28 @@ namespace ZDoneWebApi
             });
 
             services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<IItemBl, IItemBl>();
+
+            services.AddScoped<IProjectRepository, ProjectRepository>();
+            services.AddScoped<IProjectBl, ProjectBl>();
+
+            services.AddScoped<IListRepository, ListRepository>();
+            services.AddScoped<IListBl, ListBl>();
+
+            services.AddScoped<IFolderRepository, FolderRepository>();
+            services.AddScoped<IFolderBl, FolderBl>();
+
+            services.AddScoped<IStatusRepository, StatusRepository>();
+            services.AddScoped<IStatusBl, StatusBl>();
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserBl, UserBl>();
+
+            services.AddScoped<IProjectsUsersRepository, ProjectsUsersRepository>();
+            services.AddScoped<IProjectsUsersBl, ProjectsUsersBl>();
+
+            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<ICommentBl, CommentBl>();
 
             services.AddMvcCore().AddApiExplorer();
 

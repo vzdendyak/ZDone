@@ -1,6 +1,8 @@
-﻿namespace ZDoneWebApi.BusinessLogic
+﻿using ZDoneWebApi.BusinessLogic.Interfaces;
+
+namespace ZDoneWebApi.BusinessLogic
 {
-    public class ProjectsUsersBl
+    public class ProjectsUsersBl : IProjectsUsersBl
     {
         
     }
