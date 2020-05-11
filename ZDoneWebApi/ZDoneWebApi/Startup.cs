@@ -47,7 +47,7 @@ namespace ZDoneWebApi
             });
 
             services.AddScoped<IItemRepository, ItemRepository>();
-            services.AddScoped<IItemBl, IItemBl>();
+            services.AddScoped<IItemBl, ItemBl>();
 
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IProjectBl, ProjectBl>();
