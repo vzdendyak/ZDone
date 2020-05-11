@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ZDoneWebApi.BusinessLogic.Interfaces;
@@ -9,6 +10,7 @@ using ZDoneWebApi.Data.DTOs;
 
 namespace ZDoneWebApi.Controllers
 {
+    [EnableCors]
     [Route("api/items")]
     [ApiController]
     public class ItemController : ControllerBase
@@ -53,7 +55,7 @@ namespace ZDoneWebApi.Controllers
 
         // PUT: api/Item/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id,  ItemDto item)
+        public async Task<ActionResult> Put(int id, ItemDto item)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

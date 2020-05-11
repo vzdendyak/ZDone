@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Item} from '../../../models/item';
 
 @Component({
   selector: 'app-items',
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./items.component.css']
 })
 export class ItemsComponent implements OnInit {
+  @Input() items: Item[];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
