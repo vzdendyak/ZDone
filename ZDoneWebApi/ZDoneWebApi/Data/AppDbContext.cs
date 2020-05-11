@@ -8,7 +8,7 @@ namespace ZDoneWebApi.Data
         public AppDbContext(DbContextOptions<AppDbContext> options)
            : base(options)
         {
-            Database.EnsureCreated();
+            // Database.EnsureCreated();
         }
 
         public DbSet<Item> Items { get; set; }

@@ -14,6 +14,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using ZDoneWebApi.Data;
+using ZDoneWebApi.Repositories;
+using ZDoneWebApi.Repositories.Interfaces;
 
 namespace ZDoneWebApi
 {
@@ -41,6 +43,9 @@ namespace ZDoneWebApi
             {
                 options.AddPolicy("AllowAllOrigin", builder => builder.AllowAnyOrigin());
             });
+
+            services.AddScoped<IItemRepository, ItemRepository>();
+
             services.AddMvcCore().AddApiExplorer();
 
             services.AddSwaggerGen(options =>

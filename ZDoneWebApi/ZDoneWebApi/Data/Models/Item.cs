@@ -19,7 +19,7 @@ namespace ZDoneWebApi.Data.Models
 
         public int ListId { get; set; }
         public int StatusId { get; set; }
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
 
         #endregion Main props
 

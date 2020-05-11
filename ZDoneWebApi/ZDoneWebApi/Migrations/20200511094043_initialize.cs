@@ -98,7 +98,7 @@ namespace ZDoneWebApi.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
-                    FolderId = table.Column<int>(nullable: false)
+                    FolderId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -108,7 +108,7 @@ namespace ZDoneWebApi.Migrations
                         column: x => x.FolderId,
                         principalTable: "Folders",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -125,7 +125,7 @@ namespace ZDoneWebApi.Migrations
                     ExpiredDate = table.Column<DateTime>(nullable: false),
                     ListId = table.Column<int>(nullable: false),
                     StatusId = table.Column<int>(nullable: false),
-                    ParentId = table.Column<int>(nullable: false)
+                    ParentId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {

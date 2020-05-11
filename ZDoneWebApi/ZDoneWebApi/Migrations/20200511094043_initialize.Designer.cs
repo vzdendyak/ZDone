@@ -10,7 +10,7 @@ using ZDoneWebApi.Data;
 namespace ZDoneWebApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200511084425_initialize")]
+    [Migration("20200511094043_initialize")]
     partial class initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,7 +94,7 @@ namespace ZDoneWebApi.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ParentId")
+                    b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
                     b.Property<int?>("Priority")
@@ -121,7 +121,7 @@ namespace ZDoneWebApi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FolderId")
+                    b.Property<int?>("FolderId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -231,8 +231,7 @@ namespace ZDoneWebApi.Migrations
                     b.HasOne("ZDoneWebApi.Data.Models.Item", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("ZDoneWebApi.Data.Models.Status", "Status")
                         .WithMany("Items")
@@ -245,9 +244,7 @@ namespace ZDoneWebApi.Migrations
                 {
                     b.HasOne("ZDoneWebApi.Data.Models.Folder", "Folder")
                         .WithMany("Lists")
-                        .HasForeignKey("FolderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FolderId");
                 });
 
             modelBuilder.Entity("ZDoneWebApi.Data.Models.ProjectsUsers", b =>
