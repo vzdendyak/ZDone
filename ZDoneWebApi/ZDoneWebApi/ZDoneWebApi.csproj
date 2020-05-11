@@ -9,7 +9,6 @@
     <Folder Include="Controllers\" />
     <Folder Include="Data\DTOs\" />
     <Folder Include="Data\AutoMapperProfiles\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
   <ItemGroup>

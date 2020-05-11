@@ -8,6 +8,7 @@ namespace ZDoneWebApi.Data
         public AppDbContext(DbContextOptions<AppDbContext> options)
            : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public DbSet<Item> Items { get; set; }
@@ -58,7 +59,7 @@ namespace ZDoneWebApi.Data
                 .WithMany(u => u.ProjectsUsers)
                 .HasForeignKey(pu => pu.UserId);
 
-            modelBuilder.Entity<Item>().HasOne(i => i.Parent).WithMany(ii => ii.Children).HasForeignKey(i => i.ParentId);
+            modelBuilder.Entity<Item>().HasOne(i => i.Parent).WithMany(ii => ii.Children).HasForeignKey(i => i.ParentId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
