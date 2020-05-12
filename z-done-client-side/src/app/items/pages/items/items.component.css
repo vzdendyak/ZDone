@@ -1,0 +1,36 @@
+.task {
+  border-bottom: groove;
+  border-bottom-width: medium;
+  /* border: groove; */
+  padding: 10px 10px;
+  margin-top: 2px;
+  border-radius: 5px;
+}
+
+.task:hover {
+  background-color: #cccccc5c;
+  cursor: pointer;
+}
+
+.taskDate {
+  float: right;
+  margin-right: 10px;
+
+}
+
+.taskName {
+  margin-left: 10px;
+}
+
+.itemList {
+  list-style: none;
+  padding-left: 0;
+}
+
+.activeItem {
+  background-color: #e2deff;
+}
+
+.activeItem:hover {
+  background-color: #e2deff;
+}

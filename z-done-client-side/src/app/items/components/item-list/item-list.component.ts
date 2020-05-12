@@ -15,9 +15,15 @@ export class ItemListComponent implements OnInit {
 
   ngOnInit() {
     this.itemService.getItems().subscribe(value => {
-      console.log('GOT : ', value);
       this.items = value;
+      console.log('GOT : ', this.items);
+
     });
   }
 
+  reloadItem(id: number) {
+    this.itemService.reloadTask(id);
+    //console.log('ID: ' + id);
+
+  }
 }

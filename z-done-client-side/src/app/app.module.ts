@@ -12,6 +12,7 @@ import {MatCheckboxModule} from '@angular/material';
 import {RouterModule} from '@angular/router';
 import {ItemsModule} from './items/items.module';
 import {MainWindowComponent} from './items/pages/main-window/main-window.component';
+import {ItemService} from './items/services/item.service';
 
 @NgModule({
   declarations: [
@@ -27,11 +28,11 @@ import {MainWindowComponent} from './items/pages/main-window/main-window.compone
     HttpClientModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
-      { path: 'windows', component: MainWindowComponent }
+      {path: 'windows', component: MainWindowComponent}
     ]),
     ItemsModule
   ],
-  providers: [],
+  providers: [ItemService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

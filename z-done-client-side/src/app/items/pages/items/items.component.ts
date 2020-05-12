@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Item} from '../../../models/item';
+import {DatePipe} from '@angular/common';
+import {ItemService} from '../../services/item.service';
 
 @Component({
   selector: 'app-items',
@@ -8,11 +10,16 @@ import {Item} from '../../../models/item';
 })
 export class ItemsComponent implements OnInit {
   @Input() items: Item[];
+  @Output() reloadItem = new EventEmitter<number>();
 
-  constructor() {
+  constructor(public itemService: ItemService, private datepipe: DatePipe) {
   }
 
   ngOnInit() {
   }
 
+  itemChanged(id: number) {
+    this.reloadItem.emit(id);
+    //console.log('ID: ' + id);
+  }
 }

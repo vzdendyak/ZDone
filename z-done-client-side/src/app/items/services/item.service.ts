@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {Item} from '../../models/item';
 
 @Injectable({
@@ -13,8 +13,11 @@ export class ItemService {
     headers: new HttpHeaders().append('Authorization', 'Bearer <yourtokenhere>'),
     responseType: 'text'
   };
+  reloadTaskSubject = new Subject<number>();
+  activeItemId: number;
 
   constructor(private http: HttpClient) {
+    this.activeItemId = 0;
   }
 
   getItems(): Observable<Item[]> {
@@ -36,5 +39,11 @@ export class ItemService {
 
   deleteItem(itemId: number): Observable<Item> {
     return this.http.delete<Item>(this.url + `/${itemId}`, this.requestOptions);
+  }
+
+  reloadTask(id: number) {
+    //console.log('ID: ' + id);
+    this.activeItemId = id;
+    this.reloadTaskSubject.next(id);
   }
 }

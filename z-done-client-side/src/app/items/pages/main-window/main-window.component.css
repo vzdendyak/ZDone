@@ -1,0 +1,21 @@
+.menuBlock {
+  background-color: #10e4d0;
+  width: 15%;
+}
+
+.taskListBlock {
+  width: 50%;
+}
+
+.taskDetailBlock {
+  width: 30%;
+}
+
+.mainWindow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.block {
+  margin: 5px;
+}

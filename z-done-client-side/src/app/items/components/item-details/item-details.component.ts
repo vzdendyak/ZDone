@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ItemService} from '../../services/item.service';
+import {Item} from '../../../models/item';
 
 @Component({
   selector: 'app-item-details',
@@ -7,7 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItemDetailsComponent implements OnInit {
 
-  constructor() { }
+  activeItem: Item;
+
+  constructor(private itemService: ItemService) {
+    this.activeItem = null;
+    this.itemService.reloadTaskSubject.subscribe(value => {
+      this.itemService.getItem(value).subscribe(item => {
+        this.activeItem = item;
+        console.log('Loaded item: ', this.activeItem);
+      });
+      console.log('ID: ' + value);
+
+    });
+  }
 
   ngOnInit() {
   }
