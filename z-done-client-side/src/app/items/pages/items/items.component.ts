@@ -20,6 +20,6 @@ export class ItemsComponent implements OnInit {
 
   itemChanged(id: number) {
     this.reloadItem.emit(id);
-    //console.log('ID: ' + id);
+    // console.log('ID: ' + id);
   }
 }

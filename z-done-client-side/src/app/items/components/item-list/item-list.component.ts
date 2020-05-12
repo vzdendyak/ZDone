@@ -23,7 +23,7 @@ export class ItemListComponent implements OnInit {
 
   reloadItem(id: number) {
     this.itemService.reloadTask(id);
-    //console.log('ID: ' + id);
+    // console.log('ID: ' + id);
 
   }
 }

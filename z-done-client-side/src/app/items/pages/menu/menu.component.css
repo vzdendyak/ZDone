@@ -1,0 +1,47 @@
+.defaultLinkItem {
+  font-size: 14pt;
+  margin: 3px 8px;
+  padding: 7px 0px 7px 15px;
+  border-radius: 6px;
+}
+
+.defaultLinkItem:hover {
+  background-color: #50b0da;
+  cursor: pointer;
+}
+
+.basicCategories {
+
+}
+
+#userName {
+  font-size: 14pt;
+}
+
+.defaultLinksList {
+  list-style: none;
+  padding: 0;
+}
+
+.leftDefaultLink {
+  color: black;
+  text-decoration: none;
+}
+
+.mainList {
+
+}
+
+.userInformation {
+
+  text-align: center;
+  margin: 15px auto;
+  font-weight: 500;
+  background-color: #e860ff;
+  display: list-item;
+  padding: 7px;
+}
+
+.userFoldersBlock {
+
+}

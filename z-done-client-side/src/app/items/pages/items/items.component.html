@@ -1,8 +1,10 @@
-<h1>items works!</h1>
-<ul class="itemList">
-  <li class="task" *ngFor="let i of items" (click)="itemChanged(i.id)"
-      [ngClass]="{'activeItem': i.id==itemService.activeItemId}">
-    <span class="taskName">{{i.name }}  </span>
-    <span class="taskDate">{{this.datepipe.transform(i.expiredDate, 'dd.MM.yyyy')}}</span>
-  </li>
-</ul>
+<div class="mainContent">
+  <h2>All</h2>
+  <ul class="itemList">
+    <li class="task" *ngFor="let i of items" (click)="itemChanged(i.id)"
+        [ngClass]="{'activeItem': i.id==itemService.activeItemId}">
+      <span class="taskName">{{i.name }}  </span>
+      <span class="taskDate">{{this.datepipe.transform(i.expiredDate, 'dd.MM.yyyy')}}</span>
+    </li>
+  </ul>
+</div>

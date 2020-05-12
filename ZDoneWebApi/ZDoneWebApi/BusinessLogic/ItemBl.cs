@@ -20,6 +20,7 @@ namespace ZDoneWebApi.BusinessLogic
             _mapper = mapper;
             _itemRepository = itemRepository;
         }
+
         public async Task<IEnumerable<ItemDto>> GetAllAsync()
         {
             var items = await _itemRepository.ReadAll();
@@ -56,11 +57,10 @@ namespace ZDoneWebApi.BusinessLogic
         public async Task<ItemResponse> DeleteAsync(int id)
         {
             var realItem = await _itemRepository.Read(id);
-            
+
             if (realItem == null) throw new NotImplementedException();
             await _itemRepository.Delete(id);
             return new ItemResponse(true, "Deleted successfully");
-            
         }
     }
 }

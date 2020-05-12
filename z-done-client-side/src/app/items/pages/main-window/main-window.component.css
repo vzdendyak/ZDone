@@ -1,6 +1,6 @@
 .menuBlock {
-  background-color: #10e4d0;
-  width: 15%;
+  background-color: #68d1ff;
+  width: 18%;
 }
 
 .taskListBlock {
@@ -17,5 +17,5 @@
 }
 
 .block {
-  margin: 5px;
+  /*margin: 5px;*/
 }
