@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ListService} from '../../services/list.service';
+import {FolderService} from '../../services/folder.service';
+import {List} from '../../../models/list';
+import {Folder} from '../../../models/folder';
 
 @Component({
   selector: 'app-menu-details',
@@ -7,9 +11,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuDetailsComponent implements OnInit {
 
-  constructor() { }
+  folders: Folder[];
+  lists: List[];
+
+  constructor(private listService: ListService, private folderService: FolderService) {
+    this.folderService.getFolders().subscribe(value => {
+      this.folders = value;
+    });
+    this.listService.getLists().subscribe(value => {
+      this.lists = value;
+    });
+
+  }
 
   ngOnInit() {
+
   }
+
 
 }

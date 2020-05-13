@@ -12,12 +12,12 @@ import {ItemService} from './services/item.service';
 import {AppModule} from '../app.module';
 import {MaterialAppsModule} from '../ngmaterial.module';
 import {FormsModule} from '@angular/forms';
-import { FoldersComponent } from './pages/folders/folders.component';
+import {FolderComponent} from './pages/folder/folder.component';
 import {FolderService} from './services/folder.service';
 
 
 @NgModule({
-  declarations: [ItemListComponent, ItemDetailsComponent, MenuDetailsComponent, ItemsComponent, ItemComponent, MenuComponent, MainWindowComponent, FoldersComponent],
+  declarations: [ItemListComponent, ItemDetailsComponent, MenuDetailsComponent, ItemsComponent, ItemComponent, MenuComponent, MainWindowComponent, FolderComponent],
   imports: [
     CommonModule,
     MaterialAppsModule,

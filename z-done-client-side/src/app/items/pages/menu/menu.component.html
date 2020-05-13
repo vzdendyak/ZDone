@@ -37,14 +37,8 @@
   </div>
   <div class="basicCategories foldersBlock">
     <ul class="defaultLinksList foldersList">
-      <li class="defaultLinkItem folderItem">
-        <a class="leftDefaultLink" href="#">Folder 1</a>
-      </li>
-      <li class="defaultLinkItem folderItem">
-        <a class="leftDefaultLink" href="#">Folder 2</a>
-      </li>
-      <li class="defaultLinkItem folderItem">
-        <a class="leftDefaultLink" href="#">Folder 3</a>
+      <li class="defaultLinkItem folderItem" *ngFor="let l of folders">
+        <a class="leftDefaultLink" href="#">{{l.name}}</a>
       </li>
     </ul>
   </div>
