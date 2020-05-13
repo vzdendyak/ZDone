@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Item} from '../../../models/item';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-item',
@@ -9,7 +10,7 @@ import {Item} from '../../../models/item';
 export class ItemComponent implements OnInit {
   @Input() item: Item;
 
-  constructor() {
+  constructor(public datePipe: DatePipe) {
   }
 
   ngOnInit() {

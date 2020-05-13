@@ -1,0 +1,30 @@
+#itemDate {
+  font-size: 13pt;
+}
+
+#itemName {
+  font-size: 14pt;
+  font-weight: 500;
+}
+
+.mainContent {
+  height: 100%;
+}
+
+.upContent {
+  border-bottom: groove;
+  padding: 25px 20px;
+  height: 5%;
+}
+
+.infoContent {
+  padding: 20px 20px;
+  height: 70%;
+}
+
+.footerContent {
+  height: 5%;
+  border-top: groove;
+  padding: 10px 0 0 10px;
+
+}

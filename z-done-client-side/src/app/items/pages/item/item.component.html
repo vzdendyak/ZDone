@@ -1,2 +1,12 @@
-<h1 *ngIf="item!=undefined">{{item.name}}</h1>
+<div class="mainContent" *ngIf="item!=undefined">
+  <div class="upContent">
+    <span id="itemDate">Today,March. {{this.datePipe.transform(item.expiredDate, 'dd.MM.yyyy')}}</span>
+  </div>
+  <div class="infoContent">
+    <span id="itemName">{{item.name}}</span>
+  </div>
+  <div class="footerContent">
+    <span>Footer text</span>
+  </div>
+</div>
 

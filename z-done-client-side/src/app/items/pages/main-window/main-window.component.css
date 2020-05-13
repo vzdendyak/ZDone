@@ -9,11 +9,15 @@
 
 .taskDetailBlock {
   width: 30%;
+  border-left: groove;
+  /* margin-left: -3px; */
+  /*padding-left: 10px;*/
 }
 
 .mainWindow {
   display: flex;
   justify-content: space-between;
+  height: 100%;
 }
 
 .block {
