@@ -6,7 +6,7 @@
 }
 
 .defaultLinkItem:hover {
-  background-color: #50b0da;
+  background-color: #ab66d2;
   cursor: pointer;
 }
 
@@ -38,7 +38,7 @@
   text-align: center;
   margin: 15px auto;
   font-weight: 500;
-  background-color: #e860ff;
+  background-color: #7294d4;
   display: list-item;
   padding: 7px;
 }

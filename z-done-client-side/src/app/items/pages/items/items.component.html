@@ -9,17 +9,21 @@
 
     </div>
   </div>
-  <ul class="itemList">
-    <li class="task" *ngFor="let i of items" (click)="itemChanged(i.id)"
-        [ngClass]="{'activeItem': i.id==itemService.activeItemId}">
-      <span class="taskName">{{i.name }}  </span>
-      <i (click)="deleteClicked(i.id)"
-         class="material-icons" id="deleteButton">
-        delete_forever
-      </i>
-      <span class="taskDate">{{this.datepipe.transform(i.expiredDate, 'dd.MM.yyyy')}}</span>
+  <div class="itemsBlock">
 
-    </li>
 
-  </ul>
+    <ul class="itemList">
+      <li class="task" *ngFor="let i of items" (click)="itemChanged(i.id)"
+          [ngClass]="{'activeItem': i.id==itemService.activeItemId}">
+        <span class="taskName">{{i.name }}  </span>
+        <i (click)="deleteClicked(i.id)"
+           class="material-icons" id="deleteButton">
+          delete_forever
+        </i>
+        <span class="taskDate">{{this.datepipe.transform(i.expiredDate, 'dd.MM.yyyy')}}</span>
+
+      </li>
+
+    </ul>
+  </div>
 </div>

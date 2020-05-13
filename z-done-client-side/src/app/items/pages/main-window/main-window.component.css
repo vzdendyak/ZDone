@@ -1,16 +1,10 @@
 .menuBlock {
-  background-color: #68d1ff;
+  background-color: #d281ff;
   width: 18%;
   overflow-y: scroll;
 }
 
-/*#menuScrollStyle::-webkit-scrollbar{*/
-/*  width: 6px;*/
-/*  background-color: #F5F5F5;*/
-/*}*/
-/*#menuScrollStyle::-webkit-scrollbar-thumb{*/
-/*  background-color: #b9b9b9;*/
-/*}*/
+
 .taskListBlock {
   width: 50%;
 }
@@ -18,8 +12,7 @@
 .taskDetailBlock {
   width: 30%;
   border-left: groove;
-  /* margin-left: -3px; */
-  /*padding-left: 10px;*/
+
 }
 
 .mainWindow {
@@ -29,7 +22,6 @@
 }
 
 .block {
-  /*margin: 5px;*/
 }
 
 #menuScrollStyle::-webkit-scrollbar {
