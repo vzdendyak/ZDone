@@ -1,8 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
@@ -13,6 +11,7 @@ import {RouterModule} from '@angular/router';
 import {ItemsModule} from './items/items.module';
 import {MainWindowComponent} from './items/pages/main-window/main-window.component';
 import {ItemService} from './items/services/item.service';
+import {FolderService} from './items/services/folder.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +31,8 @@ import {ItemService} from './items/services/item.service';
     ]),
     ItemsModule
   ],
-  providers: [ItemService],
+  providers: [ItemService, FolderService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

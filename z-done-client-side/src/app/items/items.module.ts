@@ -12,15 +12,17 @@ import {ItemService} from './services/item.service';
 import {AppModule} from '../app.module';
 import {MaterialAppsModule} from '../ngmaterial.module';
 import {FormsModule} from '@angular/forms';
+import { FoldersComponent } from './pages/folders/folders.component';
+import {FolderService} from './services/folder.service';
 
 
 @NgModule({
-  declarations: [ItemListComponent, ItemDetailsComponent, MenuDetailsComponent, ItemsComponent, ItemComponent, MenuComponent, MainWindowComponent],
+  declarations: [ItemListComponent, ItemDetailsComponent, MenuDetailsComponent, ItemsComponent, ItemComponent, MenuComponent, MainWindowComponent, FoldersComponent],
   imports: [
     CommonModule,
     MaterialAppsModule,
     FormsModule,
   ],
-  providers: [DatePipe, ItemService]
+  providers: [DatePipe, ItemService, FolderService]
 })
 export class ItemsModule { }

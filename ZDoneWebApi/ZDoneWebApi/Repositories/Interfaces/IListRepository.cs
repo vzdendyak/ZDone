@@ -1,7 +1,19 @@
-﻿namespace ZDoneWebApi.Repositories.Interfaces
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using ZDoneWebApi.Data.Models;
+
+namespace ZDoneWebApi.Repositories.Interfaces
 {
-    public class IListRepository
+    public interface IListRepository
     {
-        
+        Task<IEnumerable<List>> ReadAll();
+
+        Task<List> Read(int id);
+
+        Task Create(List list);
+
+        Task Update(List list);
+
+        Task Delete(int id);
     }
 }

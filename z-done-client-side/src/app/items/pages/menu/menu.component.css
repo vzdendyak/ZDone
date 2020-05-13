@@ -11,7 +11,8 @@
 }
 
 .basicCategories {
-
+  border-bottom: inset;
+  border-width: thin;
 }
 
 #userName {
