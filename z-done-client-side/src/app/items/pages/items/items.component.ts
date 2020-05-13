@@ -11,6 +11,9 @@ import {ItemService} from '../../services/item.service';
 export class ItemsComponent implements OnInit {
   @Input() items: Item[];
   @Output() reloadItem = new EventEmitter<number>();
+  @Output() newItemName = new EventEmitter<string>();
+  @Output() toDeleteItem = new EventEmitter<number>();
+  itemName = '';
 
   constructor(public itemService: ItemService, private datepipe: DatePipe) {
   }
@@ -21,5 +24,13 @@ export class ItemsComponent implements OnInit {
   itemChanged(id: number) {
     this.reloadItem.emit(id);
     // console.log('ID: ' + id);
+  }
+
+  enterClicked() {
+    this.newItemName.emit(this.itemName);
+  }
+
+  deleteClicked(id: number) {
+    this.toDeleteItem.emit(id);
   }
 }

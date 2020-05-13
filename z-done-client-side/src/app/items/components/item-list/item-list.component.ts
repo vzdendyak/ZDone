@@ -14,16 +14,36 @@ export class ItemListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getAllTasks();
+  }
+
+  getAllTasks() {
     this.itemService.getItems().subscribe(value => {
       this.items = value;
       console.log('GOT : ', this.items);
-
     });
   }
 
   reloadItem(id: number) {
     this.itemService.reloadTask(id);
-    // console.log('ID: ' + id);
-
   }
+
+  createItem(name: string) {
+    console.log('Got: ' + name);
+    const item = this.itemService.getNullItem();
+    item.name = name;
+    this.itemService.createItem(item).subscribe(value => {
+      console.log('Created:');
+      this.items.push(value);
+    });
+  }
+
+  deleteItem(id: number) {
+    this.itemService.deleteItem(id).subscribe(value => {
+      console.log('Deleted: ' + id);
+      let index = this.items.findIndex(i => i.id === id);
+      this.items.splice(index, 1);
+    });
+  }
+
 }

@@ -5,6 +5,7 @@
   padding: 10px 10px;
   margin-top: 2px;
   border-radius: 5px;
+  font-size: 11pt;
 }
 
 .task:hover {
@@ -33,4 +34,53 @@
 
 .activeItem:hover {
   background-color: #e2deff;
+}
+
+#categoryName {
+  font-size: 20pt;
+  font-weight: 500;
+}
+
+.headerContent {
+  padding: 20px 0px 10px 20px;
+}
+
+.enterNameForm {
+
+}
+
+.enterNameInput {
+  position: relative;
+  height: 40px;
+  border: none;
+  width: 95%;
+  padding-left: 12px;
+  margin-top: 20px;
+  border-radius: 6px;
+  background-color: #ececec;
+  font-size: 12pt;
+}
+
+.enterNameInput:focus {
+  /*outline: none;*/
+  border-radius: 6px;
+}
+
+.inputBlock {
+
+}
+
+.createItemField {
+
+}
+
+#deleteButton {
+  float: right;
+  color: #ff1d0cad;
+  padding: 0px 10px;
+}
+
+#deleteButton:hover {
+  color: red;
+
 }

@@ -1,10 +1,25 @@
 <div class="mainContent">
-  <h2>All</h2>
+  <div class="headerContent">
+    <span id="categoryName">All</span>
+    <div class="createItemField">
+      <div class="inputBlock">
+        <input [maxLength]="30" [(ngModel)]="itemName" class="enterNameInput" matInput placeholder="Enter item name"
+               (keyup.enter)="enterClicked()">
+      </div>
+
+    </div>
+  </div>
   <ul class="itemList">
     <li class="task" *ngFor="let i of items" (click)="itemChanged(i.id)"
         [ngClass]="{'activeItem': i.id==itemService.activeItemId}">
       <span class="taskName">{{i.name }}  </span>
+      <i (click)="deleteClicked(i.id)"
+         class="material-icons" id="deleteButton">
+        delete_forever
+      </i>
       <span class="taskDate">{{this.datepipe.transform(i.expiredDate, 'dd.MM.yyyy')}}</span>
+
     </li>
+
   </ul>
 </div>

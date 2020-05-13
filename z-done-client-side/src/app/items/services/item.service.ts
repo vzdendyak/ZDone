@@ -3,6 +3,7 @@ import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {Item} from '../../models/item';
+import {formatDate} from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,8 @@ export class ItemService {
   }
 
   createItem(item: Item): Observable<Item> {
-    return this.http.post<Item>(this.url, item, this.requestOptions);
+    console.log('item to create: ' + item);
+    return this.http.post<Item>(this.url, item);
   }
 
   updateItem(item: Item): Observable<Item> {
@@ -42,8 +44,28 @@ export class ItemService {
   }
 
   reloadTask(id: number) {
-    //console.log('ID: ' + id);
     this.activeItemId = id;
     this.reloadTaskSubject.next(id);
+  }
+
+  getNullItem() {
+    const date = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+    const item: Item = {
+      id: 0,
+      name: ' ',
+      parentId: null,
+      statusId: 1,
+      description: '',
+      createdDate: new Date(date),
+      expiredDate: new Date(date),
+      isDone: false,
+      listId: 1,
+      priority: null,
+      parent: null,
+      status: null,
+      items: null,
+      list: null
+    };
+    return item;
   }
 }
