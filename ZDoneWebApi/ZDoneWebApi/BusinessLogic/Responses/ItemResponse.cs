@@ -10,6 +10,7 @@ namespace ZDoneWebApi.BusinessLogic.Responses
         ///
 
         public ItemDto ItemDto { get; private set; }
+        public int id { get; set; }
 
         /// <summary>
         /// Constructor which initialize ItemDto field.
@@ -36,5 +37,10 @@ namespace ZDoneWebApi.BusinessLogic.Responses
         /// <param name="message">Message which will be returned to cliend</param>
         public ItemResponse(bool state, string message) : this(state, message, null)
         { }
+
+        public ItemResponse(bool state, string message, int id) : this(state, message, null)
+        {
+            this.id = id;
+        }
     }
 }

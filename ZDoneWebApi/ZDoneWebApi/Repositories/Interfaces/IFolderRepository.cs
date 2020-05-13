@@ -15,5 +15,7 @@ namespace ZDoneWebApi.Repositories.Interfaces
         Task Update(Folder folder);
 
         Task Delete(int id);
+
+        Folder GetLastItemStored();
     }
 }

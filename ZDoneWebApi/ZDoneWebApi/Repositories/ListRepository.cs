@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ZDoneWebApi.Data;
 using ZDoneWebApi.Data.Models;
@@ -47,6 +48,12 @@ namespace ZDoneWebApi.Repositories
             List list = await _context.Lists.FindAsync(id);
             _context.Lists.Remove(list);
             await _context.SaveChangesAsync();
+        }
+
+        public List GetLastItemStored()
+        {
+            var answer = _context.Lists.FromSqlRaw("select top 1 * from lists order by id desc").ToList();
+            return answer[0];
         }
     }
 }

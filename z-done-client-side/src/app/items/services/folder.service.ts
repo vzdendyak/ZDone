@@ -9,7 +9,7 @@ import {Folder} from '../../models/folder';
   providedIn: 'root'
 })
 export class FolderService {
-  url: string = environment.basicUrl + '/items';
+  url: string = environment.basicUrl + '/folders';
   requestOptions: object = {
     headers: new HttpHeaders().append('Authorization', 'Bearer <yourtokenhere>'),
     responseType: 'text'
@@ -27,12 +27,12 @@ export class FolderService {
     return this.http.get<Folder>(this.url + `/${id}`);
   }
 
-  createFolder(folder: Item): Observable<Folder> {
+  createFolder(folder: Folder): Observable<Folder> {
     console.log('folder to create: ' + folder);
     return this.http.post<Folder>(this.url, folder);
   }
 
-  updateFolder(folder: Item): Observable<Folder> {
+  updateFolder(folder: Folder): Observable<Folder> {
     console.log(folder);
     return this.http.put<Folder>(this.url, folder, this.requestOptions);
   }

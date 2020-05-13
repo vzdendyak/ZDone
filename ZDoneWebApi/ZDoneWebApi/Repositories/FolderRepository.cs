@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ZDoneWebApi.Data;
 using ZDoneWebApi.Data.Models;
@@ -47,6 +48,12 @@ namespace ZDoneWebApi.Repositories
             Folder folder = await _context.Folders.FindAsync(id);
             _context.Folders.Remove(folder);
             await _context.SaveChangesAsync();
+        }
+
+        public Folder GetLastItemStored()
+        {
+            var answer = _context.Folders.FromSqlRaw("select top 1 * from folders order by id desc").ToList();
+            return answer[0];
         }
     }
 }
