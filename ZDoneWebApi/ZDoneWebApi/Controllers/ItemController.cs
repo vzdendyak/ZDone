@@ -50,7 +50,7 @@ namespace ZDoneWebApi.Controllers
             var result = await _itemBl.CreateAsync(item);
             if (!result.Success)
                 return BadRequest(result.Message);
-            return Ok(result.Message);
+            return Ok(result.ItemDto);
         }
 
         // PUT: api/Item/5

@@ -7,6 +7,8 @@ namespace ZDoneWebApi.BusinessLogic.Responses
         /// <summary>
         /// Instance of ItemDto which can be returned to user with answer if it's need. (Not required)
         /// </summary>
+        ///
+
         public ItemDto ItemDto { get; private set; }
 
         /// <summary>

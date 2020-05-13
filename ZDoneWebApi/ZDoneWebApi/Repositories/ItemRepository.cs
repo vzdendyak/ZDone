@@ -17,6 +17,7 @@ namespace ZDoneWebApi.Repositories
         {
             _context = context;
         }
+
         public async Task<IEnumerable<Item>> ReadAll()
         {
             IEnumerable<Item> items = await _context.Items.ToListAsync();
@@ -26,6 +27,7 @@ namespace ZDoneWebApi.Repositories
         public async Task<Item> Read(int id)
         {
             Item item = await _context.Items.FindAsync(id);
+
             return item;
         }
 
@@ -37,17 +39,22 @@ namespace ZDoneWebApi.Repositories
 
         public async Task Update(Item item)
         {
-             _context.Entry(item).State = EntityState.Modified;
+            _context.Entry(item).State = EntityState.Modified;
             _context.Items.Update(item);
             await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(int id )
+        public async Task Delete(int id)
         {
             Item item = await _context.Items.FindAsync(id);
             _context.Items.Remove(item);
             await _context.SaveChangesAsync();
+        }
 
+        public Item GetLastItemStored()
+        {
+            var answer = _context.Items.FromSqlRaw("exec GetId").ToList();
+            return answer[0];
         }
     }
 }

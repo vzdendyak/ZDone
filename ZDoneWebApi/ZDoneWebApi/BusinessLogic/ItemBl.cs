@@ -40,9 +40,13 @@ namespace ZDoneWebApi.BusinessLogic
 
         public async Task<ItemResponse> CreateAsync(ItemDto item)
         {
+            item.CreatedDate = DateTime.Now;
+            item.ExpiredDate = null;
             var origItem = _mapper.Map<Item>(item);
             await _itemRepository.Create(origItem);
-            return new ItemResponse(true, "Created");
+
+            var returnItem = _mapper.Map<ItemDto>(_itemRepository.GetLastItemStored());
+            return new ItemResponse(returnItem);
         }
 
         public async Task<ItemResponse> UpdateAsync(ItemDto item)

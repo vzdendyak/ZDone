@@ -15,7 +15,7 @@ namespace ZDoneWebApi.Data.Models
         public bool IsDone { get; set; }
         public int? Priority { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime ExpiredDate { get; set; }
+        public DateTime? ExpiredDate { get; set; }
 
         public int ListId { get; set; }
         public int StatusId { get; set; }

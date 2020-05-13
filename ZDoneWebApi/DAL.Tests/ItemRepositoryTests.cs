@@ -1,4 +1,5 @@
 ﻿using DAL.Tests.DbContextAddictions;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -121,6 +122,21 @@ namespace DAL.Tests
                 //Assert
                 Assert.NotNull(added);
                 Assert.Null(searched);
+                context.Database.EnsureDeleted();
+            }
+        }
+
+        [Fact]
+        public async Task StoredProcedureTest()
+        {
+            var cls = new InMemoryDbContext();
+            using (var context = cls.GetContextWithData())
+            {
+                IItemRepository repo = new ItemRepository(context);
+                var answer = context.Items.FromSqlRaw("exec GetId").ToList();
+                Console.WriteLine(answer);
+                //Assert
+
                 context.Database.EnsureDeleted();
             }
         }
