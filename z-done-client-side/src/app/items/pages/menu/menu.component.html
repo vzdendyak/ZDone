@@ -4,24 +4,24 @@
   </div>
   <div class="basicCategories">
     <ul class="defaultLinksList">
-      <li class="defaultLinkItem">
+      <li (click)="goTo(0,'all')" class="defaultLinkItem">
         <span class="material-icons menuIcon"> assignment </span>
-        <a class="leftDefaultLink" href="#">All</a>
+        <a class="leftDefaultLink">All</a>
       </li>
-      <li class="defaultLinkItem">
+      <li (click)="goTo(0,'today')" class="defaultLinkItem">
         <span class="material-icons menuIcon"> today </span>
         <a class="leftDefaultLink" href="#">Today</a>
       </li>
-      <li class="defaultLinkItem">
+      <li (click)="goTo(0,'week')" class="defaultLinkItem">
         <span class="material-icons menuIcon"> next_week </span>
         <a class="leftDefaultLink" href="#">Next 7 days</a>
       </li>
 
-      <li class="defaultLinkItem">
+      <li (click)="goTo(0,'calendar')" class="defaultLinkItem">
         <span class="material-icons menuIcon"> calendar_today </span>
         <a class="leftDefaultLink" href="#">Calendar</a>
       </li>
-      <li class="defaultLinkItem">
+      <li (click)="goTo(0,'inbox')" class="defaultLinkItem">
         <span class="material-icons menuIcon"> inbox </span>
         <a class="leftDefaultLink" href="#">Inbox</a>
       </li>
@@ -32,12 +32,12 @@
         </div>
       </li>
 
-      <li class="defaultLinkItem">
+      <li (click)="goTo(0,'completed')" class="defaultLinkItem">
         <span class="material-icons menuIcon"> check_circle
  </span>
-        <a class="leftDefaultLink" href="#">Completed</a>
+        <a class="leftDefaultLink">Completed</a>
       </li>
-      <li class="defaultLinkItem">
+      <li (click)="goTo(0,'trash')" class="defaultLinkItem">
         <span class="material-icons menuIcon"> restore_from_trash </span>
         <a class="leftDefaultLink" href="#">Trash</a>
       </li>
@@ -45,9 +45,9 @@
   </div>
   <div class="basicCategories foldersBlock">
     <ul class="defaultLinksList foldersList">
-      <li class="defaultLinkItem folderItem" *ngFor="let l of folders">
-        <app-folder   [folder]="l"></app-folder>
-<!--        <a class="leftDefaultLink" href="#">{{l.name}}</a>-->
+      <li *ngFor="let l of folders" class="defaultLinkItem folderItem">
+        <app-folder [folder]="l"></app-folder>
+        <!--        <a class="leftDefaultLink" href="#">{{l.name}}</a>-->
       </li>
     </ul>
   </div>

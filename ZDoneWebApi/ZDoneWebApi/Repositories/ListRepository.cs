@@ -56,9 +56,9 @@ namespace ZDoneWebApi.Repositories
             return answer[0];
         }
 
-        public async Task<IEnumerable<List>> GetsListsByFolderId(int id)
+        public async Task<IEnumerable<Item>> GetItemsByListId(int id)
         {
-            var lists = await _context.Lists.Where(l => l.FolderId == id).ToListAsync();
+            var lists = await _context.Items.Where(l => l.ListId == id).ToListAsync();
             return lists;
         }
     }

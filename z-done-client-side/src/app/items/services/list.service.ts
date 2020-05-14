@@ -3,7 +3,6 @@ import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Item} from '../../models/item';
-import {Folder} from '../../models/folder';
 import {List} from '../../models/list';
 
 @Injectable({
@@ -19,6 +18,10 @@ export class ListService {
   constructor(private http: HttpClient) {
   }
 
+
+  getListItems(id: number): Observable<Item[]> {
+    return this.http.get<Item[]>(`${this.url}/${id}/items`);
+  }
 
   getLists(): Observable<List[]> {
     return this.http.get<List[]>(this.url);

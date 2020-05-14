@@ -39,14 +39,14 @@ namespace ZDoneWebApi.Controllers
             return Ok(list);
         }
 
-        //[HttpGet("folders/{id}")]
-        //public async Task<ActionResult> Get(int id)
-        //{
-        //    var list = await _listBl.ReadAsync(id);
-        //    if (list == null)
-        //        return NotFound();
-        //    return Ok(list);
-        //}
+        [HttpGet("{id}/items")]
+        public async Task<ActionResult> GetItems(int id)
+        {
+            var list = await _listBl.GetItemsByListId(id);
+            if (list == null)
+                return NotFound();
+            return Ok(list);
+        }
 
         // POST: api/Item
         [HttpPost]

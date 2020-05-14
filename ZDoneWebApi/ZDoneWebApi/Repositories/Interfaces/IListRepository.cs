@@ -18,6 +18,6 @@ namespace ZDoneWebApi.Repositories.Interfaces
 
         List GetLastItemStored();
 
-        Task<IEnumerable<List>> GetsListsByFolderId(int id);
+        Task<IEnumerable<Item>> GetItemsByListId(int id);
     }
 }

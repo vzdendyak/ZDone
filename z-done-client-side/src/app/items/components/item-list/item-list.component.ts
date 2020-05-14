@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Item} from '../../../models/item';
 import {ItemService} from '../../services/item.service';
+import {ActivatedRoute} from '@angular/router';
+import {ListService} from '../../services/list.service';
 
 @Component({
   selector: 'app-item-list',
@@ -10,15 +12,67 @@ import {ItemService} from '../../services/item.service';
 export class ItemListComponent implements OnInit {
   items: Item[];
 
-  constructor(private itemService: ItemService) {
+  constructor(private itemService: ItemService, public route: ActivatedRoute, private listService: ListService) {
+    this.route.params.subscribe(value => {
+      if (value.folderId) {
+        console.log('Handled folderId: ' + value.folderId);
+      }
+      if (value.listId) {
+        let listId = value.listId;
+        listId = listId.toString().toLowerCase();
+        switch (listId) {
+          case 'all':
+            this.getAllTasks();
+            break;
+          case 'today':
+            this.items = null;
+            alert('got today');
+            break;
+          case 'week':
+            this.items = null;
+            alert('got week');
+            break;
+          case 'completed':
+            this.items = null;
+            alert('got completed');
+            break;
+          case 'trash':
+            this.items = null;
+            alert('got trash');
+            break;
+          case 'calendar':
+            this.items = null;
+            alert('got calendar');
+            break;
+          case 'inbox':
+            this.items = null;
+            alert('got inbox');
+            break;
+          default:
+            this.listService.getList(value.listId).subscribe(list => {
+              if (list.folderId == value.folderId) {
+                this.getTaskByListId(value.listId);
+              }
+            });
+            break;
+        }
+        console.log('Handled listId: ' + value.listId);
+      }
+
+    });
   }
 
   ngOnInit() {
-    this.getAllTasks();
   }
 
   getAllTasks() {
     this.itemService.getItems().subscribe(value => {
+      this.items = value;
+    });
+  }
+
+  getTaskByListId(id: number) {
+    this.listService.getListItems(id).subscribe(value => {
       this.items = value;
       console.log('GOT : ', this.items);
     });

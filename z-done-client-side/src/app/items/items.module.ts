@@ -23,6 +23,8 @@ import { ListComponent } from './pages/list/list.component';
     CommonModule,
     MaterialAppsModule,
     FormsModule,
+    RouterModule
+
   ],
   providers: [DatePipe, ItemService, FolderService]
 })
