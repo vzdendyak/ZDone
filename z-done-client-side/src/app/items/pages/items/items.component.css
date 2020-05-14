@@ -1,11 +1,11 @@
 .task {
-  border-bottom: groove;
-  border-bottom-width: medium;
-  /* border: groove; */
   padding: 10px 10px;
   margin-top: 2px;
   border-radius: 5px;
   font-size: 11pt;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: #d0d0d0;
 }
 
 .task:hover {
@@ -101,14 +101,23 @@
 
 }
 
-.createItemField {
-
+.listName{
+  float: right;
+  margin-right: 10px;
+  font-style: italic;
+  color: #9e9e9e;
 }
-
 #deleteButton {
   float: right;
   color: #ff1d0cad;
   padding: 0px 10px;
+
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
 }
 
 #deleteButton:hover {

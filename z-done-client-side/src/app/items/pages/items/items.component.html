@@ -1,6 +1,6 @@
 <div class="mainContent">
   <div class="headerContent">
-    <span id="categoryName">All</span>
+    <span id="categoryName">{{name}}</span>
     <div class="createItemField">
       <div class="inputBlock">
         <input [maxLength]="30" [(ngModel)]="itemName" class="enterNameInput" matInput placeholder="Enter item name"
@@ -21,6 +21,7 @@
           delete_forever
         </i>
         <span class="taskDate">{{this.datepipe.transform(i.expiredDate, 'dd.MM.yyyy')}}</span>
+        <span class="listName" *ngIf="i.list!==undefined && i.list!==null && i.list.name!==name">{{i.list.name}}</span>
 
       </li>
 

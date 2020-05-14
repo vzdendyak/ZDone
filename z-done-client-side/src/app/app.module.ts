@@ -27,7 +27,9 @@ import {FolderService} from './items/services/folder.service';
     HttpClientModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
-      {path: 'windows/:folderId/:listId', component: MainWindowComponent}
+      {path: 'windows/:folderId/:listId', component: MainWindowComponent},
+      {path: 'windows', redirectTo: '/windows/0/all' }
+
     ]),
     ItemsModule
   ],

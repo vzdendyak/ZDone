@@ -1,4 +1,5 @@
 ﻿using System;
+using ZDoneWebApi.Data.Models;
 
 namespace ZDoneWebApi.Data.DTOs
 {
@@ -15,5 +16,6 @@ namespace ZDoneWebApi.Data.DTOs
         public int ListId { get; set; }
         public int StatusId { get; set; }
         public int? ParentId { get; set; }
+        public ListDto List { get; set; }
     }
 }

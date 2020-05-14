@@ -20,7 +20,7 @@ namespace ZDoneWebApi.Repositories
 
         public async Task<IEnumerable<Item>> ReadAll()
         {
-            IEnumerable<Item> items = await _context.Items.ToListAsync();
+            IEnumerable<Item> items = await _context.Items.Include(i => i.List).ToListAsync();
             return items;
         }
 

@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Item} from '../../../models/item';
 import {DatePipe} from '@angular/common';
 import {ItemService} from '../../services/item.service';
+import {List} from '../../../models/list';
 
 @Component({
   selector: 'app-items',
@@ -10,6 +11,7 @@ import {ItemService} from '../../services/item.service';
 })
 export class ItemsComponent implements OnInit {
   @Input() items: Item[];
+  @Input() name: string;
   @Output() reloadItem = new EventEmitter<number>();
   @Output() newItemName = new EventEmitter<string>();
   @Output() toDeleteItem = new EventEmitter<number>();
