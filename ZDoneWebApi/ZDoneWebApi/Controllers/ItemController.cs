@@ -54,8 +54,8 @@ namespace ZDoneWebApi.Controllers
         }
 
         // PUT: api/Item/5
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, ItemDto item)
+        [HttpPut]
+        public async Task<ActionResult> Put(ItemDto item)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

@@ -15,7 +15,10 @@ export class ItemService {
     responseType: 'text'
   };
   reloadTaskSubject = new Subject<number>();
+  insertTaskSubject = new Subject<Item>();
+  updatedTaskSubject = new Subject<boolean>();
   activeItemId: number;
+  detailItem;
 
   constructor(private http: HttpClient) {
     this.activeItemId = 0;
@@ -48,6 +51,13 @@ export class ItemService {
     this.reloadTaskSubject.next(id);
   }
 
+  insertNewItem(item: Item) {
+    this.insertTaskSubject.next(item);
+    this.updateItem(item).subscribe(value => {
+      this.updatedTaskSubject.next(true);
+    });
+  }
+
   getNullItem() {
     const date = formatDate(new Date(), 'yyyy-MM-dd', 'en');
     const item: Item = {
@@ -68,4 +78,6 @@ export class ItemService {
     };
     return item;
   }
+
+
 }

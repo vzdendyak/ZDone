@@ -39,8 +39,11 @@ namespace ZDoneWebApi.Repositories
 
         public async Task Update(Item item)
         {
-            _context.Entry(item).State = EntityState.Modified;
+            // var item1 = _context.Items.Find(item.Id);
+            //item1 = item;
+            _context.Entry<Item>(item).State = EntityState.Modified;
             _context.Items.Update(item);
+            // _context.Entry<Item>(item).State = EntityState.Detached;
             await _context.SaveChangesAsync();
         }
 

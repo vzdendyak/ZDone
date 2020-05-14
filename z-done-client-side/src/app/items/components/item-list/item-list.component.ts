@@ -79,6 +79,10 @@ export class ItemListComponent implements OnInit {
       }
 
     });
+    this.itemService.insertTaskSubject.subscribe(value => {
+      let index = this.items.findIndex(i => i.id == value.id);
+      this.items[index] = value;
+    });
   }
 
   ngOnInit() {

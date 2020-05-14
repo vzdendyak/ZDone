@@ -1,9 +1,23 @@
 <div class="mainContent" *ngIf="item!=undefined">
   <div class="upContent">
-    <span id="itemDate">Today,March. {{this.datePipe.transform(item.expiredDate, 'dd.MM.yyyy')}}</span>
+    <span id="itemDate" *ngIf="item.expiredDate!==null">{{this.date.getDay()}},{{this.detailService.getItemDateMonth()}} ( {{this.datePipe.transform(item.expiredDate, 'dd.MM.yyyy')}})</span>
   </div>
   <div class="infoContent">
-    <span id="itemName">{{item.name}}</span>
+<!--    <span id="itemName">{{item.name}}</span>-->
+    <div class="nameBlock">
+      <input [(ngModel)]="item.name" id="inputName"
+             (keyup)="reloadItem()"
+             placeholder="Enter title"
+             type="text">
+    </div>
+
+    <div class="descriptionBlock">
+      <textarea [(ngModel)]="item.description"
+                (keyup)="reloadItem()"
+                id="inputDescription"
+                matInput placeholder="Enter item description"></textarea>
+    </div>
+
   </div>
   <div class="footerContent">
     <span>Footer text</span>

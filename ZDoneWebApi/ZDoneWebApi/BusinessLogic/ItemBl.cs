@@ -51,8 +51,12 @@ namespace ZDoneWebApi.BusinessLogic
 
         public async Task<ItemResponse> UpdateAsync(ItemDto item)
         {
-            var existingItem = await _itemRepository.Read(item.Id);
+            //var existingItem = await _itemRepository.Read(item.Id);
             // Get role
+            if (String.IsNullOrWhiteSpace(item.Description))
+            {
+                item.Description = null;
+            }
             var newItem = _mapper.Map<Item>(item);
             await _itemRepository.Update(newItem);
             return new ItemResponse(true, "Updated successfully!");
