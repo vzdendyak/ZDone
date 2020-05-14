@@ -1,13 +1,12 @@
 .defaultLinkItem {
-  font-size: 14pt;
+  font-size: 14px;
   margin: 3px 8px;
   padding: 7px 0px 7px 15px;
   border-radius: 6px;
 }
 
 .defaultLinkItem:hover {
-  background-color: #ab66d2;
-  cursor: pointer;
+  background-color: #4f8ad6;  cursor: pointer;
 }
 
 .basicCategories {
@@ -25,7 +24,7 @@
 }
 
 .leftDefaultLink {
-  color: black;
+  color: #ffffffeb;
   text-decoration: none;
 }
 
@@ -34,15 +33,26 @@
 }
 
 .userInformation {
-
+  text-shadow: 2px 2px 1px #000000;
+  color: white;
+  border-radius: 7px;
   text-align: center;
   margin: 15px auto;
   font-weight: 500;
-  background-color: #7294d4;
   display: list-item;
   padding: 7px;
+  /* background: linear-gradient(22deg, #4689ca75, #c98bd0); */
+  list-style: none;
+  background-color: #6d91f1;
+  width: 82%;
 }
 
 .userFoldersBlock {
 
+}
+.menuIcon{
+  position: relative;
+  top: 6px;
+  padding-right: 10px;
+  color: white;
 }

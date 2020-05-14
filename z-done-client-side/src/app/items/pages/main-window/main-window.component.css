@@ -1,5 +1,6 @@
 .menuBlock {
-  background-color: #d281ff;
+  /*background-color: #d281ff;*/
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.1, rgb(139, 161, 208)), color-stop(0.7, rgb(42, 94, 158)), color-stop(0.96, rgb(32, 64, 160)));
   width: 18%;
   overflow-y: scroll;
 }

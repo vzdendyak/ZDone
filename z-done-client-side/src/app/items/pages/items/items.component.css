@@ -29,8 +29,7 @@
 }
 
 .activeItem {
-  background-color: #e2deff;
-}
+  background-color: #cae0fd;}
 
 .activeItem:hover {
   background-color: #e2deff;

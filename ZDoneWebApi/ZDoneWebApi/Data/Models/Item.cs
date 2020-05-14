@@ -17,7 +17,7 @@ namespace ZDoneWebApi.Data.Models
         public DateTime CreatedDate { get; set; }
         public DateTime? ExpiredDate { get; set; }
 
-        public int ListId { get; set; }
+        public int? ListId { get; set; }
         public int StatusId { get; set; }
         public int? ParentId { get; set; }
 

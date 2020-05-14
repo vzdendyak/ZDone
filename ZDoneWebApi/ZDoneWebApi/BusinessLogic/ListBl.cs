@@ -50,6 +50,7 @@ namespace ZDoneWebApi.BusinessLogic
         public async Task<ItemResponse> CreateAsync(ListDto list)
         {
             var origList = _mapper.Map<List>(list);
+
             await _listRepository.Create(origList);
 
             var returnList = _mapper.Map<ListDto>(_listRepository.GetLastItemStored());

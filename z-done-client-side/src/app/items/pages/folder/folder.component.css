@@ -1,25 +1,25 @@
 
 .leftDefaultLink {
-  color: black;
+  color: #ffffffeb;
   text-decoration: none;
 }
 .listItem{
   padding-left: 10px;
   list-style: none;
+  padding-bottom: 4px;
 }
 
 .listOfLists{
-  padding-left: 35px;
+  padding-left: 30px;
   padding-top: 5px;
 }
 
 .listItem:hover{
-  background-color: #9778ff;
-  cursor: pointer;
+  background-color: #3d6ead;  cursor: pointer;
   border-radius: 4px;
 }
 .folderIcon{
-  top: 4px;
+  top: 6px;
   padding-right: 7px;
   color: #ffffff;
   position: relative;
