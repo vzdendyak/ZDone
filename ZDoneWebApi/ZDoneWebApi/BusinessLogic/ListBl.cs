@@ -30,6 +30,15 @@ namespace ZDoneWebApi.BusinessLogic
             return dtoItems;
         }
 
+        public async Task<IEnumerable<ListDto>> GetAllByFolderID(int id)
+        {
+            var lists = await _listRepository.GetsListsByFolderId(id);
+
+            IEnumerable<ListDto> dtoItems = _mapper.Map<IEnumerable<List>, IEnumerable<ListDto>>(lists);
+
+            return dtoItems;
+        }
+
         public async Task<ListDto> ReadAsync(int id)
         {
             var list = await _listRepository.Read(id);

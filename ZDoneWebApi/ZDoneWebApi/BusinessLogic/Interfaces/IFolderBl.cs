@@ -9,6 +9,8 @@ namespace ZDoneWebApi.BusinessLogic.Interfaces
     {
         Task<IEnumerable<FolderDto>> GetAllAsync();
 
+        Task<IEnumerable<ListDto>> GetRelatedLists(int id);
+
         Task<FolderDto> ReadAsync(int id);
 
         Task<ItemResponse> CreateAsync(FolderDto folder);

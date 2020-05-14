@@ -24,7 +24,7 @@ namespace ZDoneWebApi.Controllers
 
         // GET: api/Item
         [HttpGet]
-        public async Task<ActionResult> Get()
+        public async Task<IActionResult> Get()
         {
             var allItems = await _folderBl.GetAllAsync();
             if (allItems == null)
@@ -33,7 +33,7 @@ namespace ZDoneWebApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
             var folder = await _folderBl.ReadAsync(id);
             if (folder == null)
@@ -41,9 +41,18 @@ namespace ZDoneWebApi.Controllers
             return Ok(folder);
         }
 
+        [HttpGet("{id}/lists")]
+        public async Task<IActionResult> GetLists(int id)
+        {
+            var lists = await _folderBl.GetRelatedLists(id);
+            if (lists == null)
+                return NotFound();
+            return Ok(lists);
+        }
+
         // POST: api/Item
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] FolderDto folder)
+        public async Task<IActionResult> Post([FromBody] FolderDto folder)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -55,7 +64,7 @@ namespace ZDoneWebApi.Controllers
 
         // PUT: api/Item/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, FolderDto folder)
+        public async Task<IActionResult> Put(int id, FolderDto folder)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -67,7 +76,7 @@ namespace ZDoneWebApi.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var result = await _folderBl.DeleteAsync(id);
             if (!result.Success)

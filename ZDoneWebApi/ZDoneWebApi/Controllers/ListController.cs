@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using ZDoneWebApi.BusinessLogic.Interfaces;
 using ZDoneWebApi.Data.DTOs;
 
@@ -42,6 +39,15 @@ namespace ZDoneWebApi.Controllers
             return Ok(list);
         }
 
+        //[HttpGet("folders/{id}")]
+        //public async Task<ActionResult> Get(int id)
+        //{
+        //    var list = await _listBl.ReadAsync(id);
+        //    if (list == null)
+        //        return NotFound();
+        //    return Ok(list);
+        //}
+
         // POST: api/Item
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] ListDto list)
@@ -55,8 +61,8 @@ namespace ZDoneWebApi.Controllers
         }
 
         // PUT: api/Item/5
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, ListDto list)
+        [HttpPut]
+        public async Task<ActionResult> Put(ListDto list)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

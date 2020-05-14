@@ -14,10 +14,11 @@ import {MaterialAppsModule} from '../ngmaterial.module';
 import {FormsModule} from '@angular/forms';
 import {FolderComponent} from './pages/folder/folder.component';
 import {FolderService} from './services/folder.service';
+import { ListComponent } from './pages/list/list.component';
 
 
 @NgModule({
-  declarations: [ItemListComponent, ItemDetailsComponent, MenuDetailsComponent, ItemsComponent, ItemComponent, MenuComponent, MainWindowComponent, FolderComponent],
+  declarations: [ItemListComponent, ItemDetailsComponent, MenuDetailsComponent, ItemsComponent, ItemComponent, MenuComponent, MainWindowComponent, FolderComponent, ListComponent],
   imports: [
     CommonModule,
     MaterialAppsModule,

@@ -1,0 +1,33 @@
+
+.leftDefaultLink {
+  color: black;
+  text-decoration: none;
+}
+.listItem{
+  padding-left: 10px;
+  list-style: none;
+}
+
+.listOfLists{
+  padding-left: 35px;
+  padding-top: 5px;
+}
+
+.listItem:hover{
+  background-color: #9778ff;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.folderIcon{
+  top: 4px;
+  padding-right: 7px;
+  color: #ffffff;
+  position: relative;
+  font-size: 20pt;
+}
+.expandIcon{
+  float: right;
+  color: white;
+  position: relative;
+  top: 5px;
+}

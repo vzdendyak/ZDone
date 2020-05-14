@@ -1,1 +1,17 @@
-<p>folders works!</p>
+<div class="allContent">
+  <div (click)="showList()" class="headerContent">
+    <span class="material-icons folderIcon">folder </span>
+    <span class="leftDefaultLink" href="#">{{folder.name}}</span>
+    <span *ngIf="!showLists; else hide" class="material-icons expandIcon">expand_more </span>
+    <ng-template #hide>
+      <span class="material-icons expandIcon"> expand_less </span>
+    </ng-template>
+  </div>
+  <div class="listContent">
+    <ul *ngIf="showLists" class="listOfLists">
+      <li *ngFor="let l of lists" class="listItem">
+        <app-list [list]="l"></app-list>
+      </li>
+    </ul>
+  </div>
+</div>

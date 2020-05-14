@@ -38,7 +38,8 @@
   <div class="basicCategories foldersBlock">
     <ul class="defaultLinksList foldersList">
       <li class="defaultLinkItem folderItem" *ngFor="let l of folders">
-        <a class="leftDefaultLink" href="#">{{l.name}}</a>
+        <app-folder   [folder]="l"></app-folder>
+<!--        <a class="leftDefaultLink" href="#">{{l.name}}</a>-->
       </li>
     </ul>
   </div>

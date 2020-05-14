@@ -55,5 +55,11 @@ namespace ZDoneWebApi.Repositories
             var answer = _context.Lists.FromSqlRaw("select top 1 * from lists order by id desc").ToList();
             return answer[0];
         }
+
+        public async Task<IEnumerable<List>> GetsListsByFolderId(int id)
+        {
+            var lists = await _context.Lists.Where(l => l.FolderId == id).ToListAsync();
+            return lists;
+        }
     }
 }

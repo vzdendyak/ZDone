@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Item} from '../../models/item';
 import {Folder} from '../../models/folder';
+import {List} from '../../models/list';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,14 @@ export class FolderService {
   }
 
 
+
+
   getFolders(): Observable<Folder[]> {
     return this.http.get<Folder[]>(this.url);
+  }
+
+  getRelatedLists(id: number): Observable<List[]> {
+    return this.http.get<List[]>(`${this.url}/${id}/lists`);
   }
 
   getFolder(id: number): Observable<Folder> {

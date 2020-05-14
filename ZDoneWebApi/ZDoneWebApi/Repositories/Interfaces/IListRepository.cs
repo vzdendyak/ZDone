@@ -17,5 +17,7 @@ namespace ZDoneWebApi.Repositories.Interfaces
         Task Delete(int id);
 
         List GetLastItemStored();
+
+        Task<IEnumerable<List>> GetsListsByFolderId(int id);
     }
 }
