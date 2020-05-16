@@ -3,8 +3,8 @@
     <span id="categoryName">{{name}}</span>
     <div class="createItemField">
       <div class="inputBlock">
-        <input [maxLength]="30" [(ngModel)]="itemName" class="enterNameInput" matInput placeholder="Enter item name"
-               (keyup.enter)="enterClicked()">
+        <input (keyup.enter)="enterClicked()" [(ngModel)]="itemName" [maxLength]="30" class="enterNameInput" matInput
+               placeholder="Enter item name">
       </div>
 
     </div>
@@ -13,18 +13,26 @@
 
 
     <ul class="itemList">
-      <li class="task" *ngFor="let i of items" (click)="itemChanged(i.id)"
-          [ngClass]="{'activeItem': i.id==itemService.activeItemId}">
-        <span class="taskName">{{i.name }}  </span>
-        <i (click)="deleteClicked(i.id)"
-           class="material-icons" id="deleteButton">
-          delete_forever
-        </i>
-        <span class="taskDate">{{this.datepipe.transform(i.expiredDate, 'dd.MM.yyyy')}}</span>
-        <span class="listName" *ngIf="i.list!==undefined && i.list!==null && i.list.name!==name">{{i.list.name}}</span>
-
-      </li>
-
+      <div *ngFor="let i of items" class="liContent">
+      <span class="stateButtonBlock" (click)="doneClicked(i)">
+      <span [ngClass]="{DoneButton: i.isDone, unDoneButton: !i.isDone}">
+        <span class="material-icons" id="doneIcon">done</span>
+      </span>
+        </span>
+        <li (click)="itemChanged(i.id)" [ngClass]="{'activeItem': i.id==itemService.activeItemId}"
+            class="task">
+          <div class="liInsideContent">
+            <span class="taskName">{{i.name }}  </span>
+            <i (click)="deleteClicked(i.id)"
+               class="material-icons" id="deleteButton">
+              delete_forever
+            </i>
+            <span class="taskDate">{{this.datepipe.transform(i.expiredDate, 'dd.MM.yyyy')}}</span>
+            <span *ngIf="i.list!==undefined && i.list!==null && i.list.name!==name"
+                  class="listName">{{i.list.name}}</span>
+          </div>
+        </li>
+      </div>
     </ul>
   </div>
 </div>

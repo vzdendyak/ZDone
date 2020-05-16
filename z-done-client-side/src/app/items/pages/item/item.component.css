@@ -15,6 +15,7 @@
   border-bottom: groove;
   padding: 25px 20px;
   height: 5%;
+  display: flex;
 }
 
 .infoContent {
@@ -48,4 +49,36 @@
   margin-top: 10px;
   margin-left: 10px;
   width: 88%;
+}
+.unDoneButton{
+  display: block;
+  width: 60%;
+  height: 56%;
+  border: solid 2px;
+  /* margin: 7px auto; */
+  margin: 15px 0px 0px 1px;
+  border-color: #848484;
+  border-radius: 5px;
+}
+.DoneButton{
+  display: block;
+  width: 60%;
+  height: 56%;
+  border: solid 2px;
+  margin: 15px 0px 0px 1px;
+  border-color: #848484;
+  border-radius: 5px;
+  background-color: #969696db;
+}
+.stateButtonBlock{
+  width: 8%;
+  margin-right: 5px;
+}
+
+.datePickerBlock{
+
+}
+#doneIcon{
+  color: white;
+  margin-left: 1.2px;
 }

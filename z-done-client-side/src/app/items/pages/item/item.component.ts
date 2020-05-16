@@ -3,6 +3,12 @@ import {Item} from '../../../models/item';
 import {DatePipe} from '@angular/common';
 import {DetailService} from '../../services/detail.service';
 import {ItemService} from '../../services/item.service';
+import * as _moment from 'moment';
+import {defaultFormat as _rollupMoment} from 'moment';
+import {FormControl} from '@angular/forms';
+
+const moment = _rollupMoment || _moment;
+
 
 @Component({
   selector: 'app-item',
@@ -13,10 +19,13 @@ export class ItemComponent implements OnInit {
   @Input() item: Item;
   @Input() date: Date;
 
+  date2 = new FormControl(moment);
+
   constructor(public datePipe: DatePipe, public detailService: DetailService, private itemService: ItemService) {
     this.itemService.updatedTaskSubject.subscribe(value => {
-      alert('Updated_'+value);
+      console.log('Updated_' + value);
     });
+
   }
 
   ngOnInit() {
@@ -24,8 +33,14 @@ export class ItemComponent implements OnInit {
   }
 
   reloadItem() {
-    console.log('S');
+    console.log('newDate : ' + this.date);
+    this.item.expiredDate = this.date;
     this.itemService.insertNewItem(this.item);
   }
 
+  doneButton() {
+    //alert('DONE');
+    this.item.isDone = !this.item.isDone;
+    this.itemService.insertNewItem(this.item);
+  }
 }

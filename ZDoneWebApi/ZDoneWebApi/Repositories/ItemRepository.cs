@@ -26,7 +26,7 @@ namespace ZDoneWebApi.Repositories
 
         public async Task<Item> Read(int id)
         {
-            Item item = await _context.Items.FindAsync(id);
+            Item item = await _context.Items.Include(i => i.List).FirstOrDefaultAsync(i => i.Id == id);
 
             return item;
         }

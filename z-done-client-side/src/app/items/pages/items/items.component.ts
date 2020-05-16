@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Item} from '../../../models/item';
 import {DatePipe} from '@angular/common';
 import {ItemService} from '../../services/item.service';
-import {List} from '../../../models/list';
 
 @Component({
   selector: 'app-items',
@@ -34,5 +33,11 @@ export class ItemsComponent implements OnInit {
 
   deleteClicked(id: number) {
     this.toDeleteItem.emit(id);
+  }
+
+  doneClicked(item: Item) {
+    item.isDone = !item.isDone;
+    this.itemService.insertNewItem(item);
+    // this.reloadItem.emit(item.id);
   }
 }

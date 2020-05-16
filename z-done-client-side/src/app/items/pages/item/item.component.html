@@ -1,19 +1,31 @@
-<div class="mainContent" *ngIf="item!=undefined">
+<div *ngIf="item!=undefined" class="mainContent">
   <div class="upContent">
-    <span id="itemDate" *ngIf="item.expiredDate!==null">{{this.date.getDay()}},{{this.detailService.getItemDateMonth()}} ( {{this.datePipe.transform(item.expiredDate, 'dd.MM.yyyy')}})</span>
+    <div class="stateButtonBlock">
+      <span (click)="doneButton()" [ngClass]="{DoneButton: item.isDone, unDoneButton: !item.isDone}">
+        <span class="material-icons" id="doneIcon">done</span>
+      </span>
+    </div>
+    <div class="datePickerBlock">
+      <mat-form-field>
+        <mat-label>Expire date</mat-label>
+        <input [(ngModel)]="date" [formControl]="date2" [matDatepicker]="dp" matInput>
+        <mat-datepicker-toggle [for]="dp" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #dp (closed)="reloadItem()"></mat-datepicker>
+      </mat-form-field>
+    </div>
   </div>
   <div class="infoContent">
-<!--    <span id="itemName">{{item.name}}</span>-->
+    <!--    <span id="itemName">{{item.name}}</span>-->
     <div class="nameBlock">
-      <input [(ngModel)]="item.name" id="inputName"
-             (keyup)="reloadItem()"
+      <input (keyup)="reloadItem()" [(ngModel)]="item.name"
+             id="inputName"
              placeholder="Enter title"
              type="text">
     </div>
 
     <div class="descriptionBlock">
-      <textarea [(ngModel)]="item.description"
-                (keyup)="reloadItem()"
+      <textarea (keyup)="reloadItem()"
+                [(ngModel)]="item.description"
                 id="inputDescription"
                 matInput placeholder="Enter item description"></textarea>
     </div>
