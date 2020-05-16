@@ -11,6 +11,10 @@ namespace ZDoneWebApi.BusinessLogic.Interfaces
 
         Task<IEnumerable<ItemDto>> GetItemsByListId(int id);
 
+        Task<IEnumerable<ItemDto>> GetDoneItemsByListId(int id);
+
+        Task<IEnumerable<ItemDto>> GetUndoneItemsByListId(int id);
+
         Task<ListDto> ReadAsync(int id);
 
         Task<ItemResponse> CreateAsync(ListDto list);

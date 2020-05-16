@@ -18,7 +18,7 @@ export class ItemDetailsComponent implements OnInit {
     this.itemService.reloadTaskSubject.subscribe(value => {
       this.itemService.getItem(value).subscribe(item => {
         this.activeItem = item;
-        this.itemDate = new Date(item.expiredDate);
+        item.expiredDate == null ? this.itemDate = null : this.itemDate = new Date(item.expiredDate);
         this.detailService.activeItem = item;
         console.log('Loaded item: ', this.activeItem);
       });

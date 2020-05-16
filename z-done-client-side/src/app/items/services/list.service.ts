@@ -22,7 +22,12 @@ export class ListService {
   getListItems(id: number): Observable<Item[]> {
     return this.http.get<Item[]>(`${this.url}/${id}/items`);
   }
-
+  getDoneListItems(id: number): Observable<Item[]> {
+    return this.http.get<Item[]>(`${this.url}/${id}/items/done`);
+  }
+  getUndoneListItems(id: number): Observable<Item[]> {
+    return this.http.get<Item[]>(`${this.url}/${id}/items/undone`);
+  }
   getLists(): Observable<List[]> {
     return this.http.get<List[]>(this.url);
   }

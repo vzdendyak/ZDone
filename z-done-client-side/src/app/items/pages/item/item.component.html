@@ -6,11 +6,11 @@
       </span>
     </div>
     <div class="datePickerBlock">
-      <mat-form-field>
+      <mat-form-field id="chooseDateForm">
         <mat-label>Expire date</mat-label>
-        <input [(ngModel)]="date" [formControl]="date2" [matDatepicker]="dp" matInput>
+        <input [(ngModel)]="date" [formControl]="date2" [matDatepicker]="dp" (focusout)="reloadItem()" matInput>
         <mat-datepicker-toggle [for]="dp" matSuffix></mat-datepicker-toggle>
-        <mat-datepicker #dp (closed)="reloadItem()"></mat-datepicker>
+        <mat-datepicker #dp  [disabled]="false" color="primary" (closed)="reloadItem()"></mat-datepicker>
       </mat-form-field>
     </div>
   </div>

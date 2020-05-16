@@ -9,12 +9,14 @@ import {ItemService} from '../../services/item.service';
   styleUrls: ['./items.component.css']
 })
 export class ItemsComponent implements OnInit {
-  @Input() items: Item[];
+  @Input() doneItems: Item[];
+  @Input() unDoneItems: Item[];
   @Input() name: string;
   @Output() reloadItem = new EventEmitter<number>();
   @Output() newItemName = new EventEmitter<string>();
   @Output() toDeleteItem = new EventEmitter<number>();
   itemName = '';
+  hideCompleted = false;
 
   constructor(public itemService: ItemService, private datepipe: DatePipe) {
   }
@@ -29,6 +31,7 @@ export class ItemsComponent implements OnInit {
 
   enterClicked() {
     this.newItemName.emit(this.itemName);
+    this.itemName = '';
   }
 
   deleteClicked(id: number) {
@@ -37,7 +40,11 @@ export class ItemsComponent implements OnInit {
 
   doneClicked(item: Item) {
     item.isDone = !item.isDone;
-    this.itemService.insertNewItem(item);
+    this.itemService.completeItem(item);
     // this.reloadItem.emit(item.id);
+  }
+
+  toogleCompleted() {
+    this.hideCompleted = !this.hideCompleted;
   }
 }

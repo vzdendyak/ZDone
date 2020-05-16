@@ -10,21 +10,18 @@
     </div>
   </div>
   <div class="itemsBlock">
-
-
     <ul class="itemList">
-      <div *ngFor="let i of items" class="liContent">
-      <span class="stateButtonBlock" (click)="doneClicked(i)">
+      <div *ngFor="let i of unDoneItems" class="liContent">
+      <span (click)="doneClicked(i)" class="stateButtonBlock notSelectable">
       <span [ngClass]="{DoneButton: i.isDone, unDoneButton: !i.isDone}">
-        <span class="material-icons" id="doneIcon">done</span>
-      </span>
+       </span>
         </span>
         <li (click)="itemChanged(i.id)" [ngClass]="{'activeItem': i.id==itemService.activeItemId}"
             class="task">
           <div class="liInsideContent">
             <span class="taskName">{{i.name }}  </span>
             <i (click)="deleteClicked(i.id)"
-               class="material-icons" id="deleteButton">
+               class="material-icons deleteButton">
               delete_forever
             </i>
             <span class="taskDate">{{this.datepipe.transform(i.expiredDate, 'dd.MM.yyyy')}}</span>
@@ -34,5 +31,34 @@
         </li>
       </div>
     </ul>
+    <div (click)="toogleCompleted()" class="itemDividerWrapper notSelectable">
+      <span class="material-icons expandMore" *ngIf="hideCompleted"> arrow_drop_down </span>
+      <span class="material-icons expandMore" *ngIf="!hideCompleted"> arrow_right </span>
+
+      <span class="itemsDivider">Completed</span>
+    </div>
+    <ul *ngIf="!hideCompleted" class="itemList completedList">
+      <div *ngFor="let i2 of doneItems" class="liContent">
+      <span (click)="doneClicked(i2)" class="stateButtonBlock notSelectable">
+      <span [ngClass]="{DoneButton: i2.isDone, unDoneButton: !i2.isDone}">
+        <span class="material-icons  doneIcon">done</span>
+      </span>
+        </span>
+        <li (click)="itemChanged(i2.id)" [ngClass]="{'activeItem': i2.id==itemService.activeItemId}"
+            class="task">
+          <div class="liInsideContent">
+            <span class="taskName">{{i2.name }}  </span>
+            <i (click)="deleteClicked(i2.id)"
+               class="material-icons deleteButton">
+              delete_forever
+            </i>
+            <span class="taskDate">{{this.datepipe.transform(i2.expiredDate, 'dd.MM.yyyy')}}</span>
+            <span *ngIf="i2.list!==undefined && i2.list!==null && i2.list.name!==name"
+                  class="listName">{{i2.list.name}}</span>
+          </div>
+        </li>
+      </div>
+    </ul>
   </div>
+
 </div>

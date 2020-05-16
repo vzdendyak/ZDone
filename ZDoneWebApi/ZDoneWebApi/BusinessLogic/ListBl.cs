@@ -39,6 +39,24 @@ namespace ZDoneWebApi.BusinessLogic
             return dtoItems;
         }
 
+        public async Task<IEnumerable<ItemDto>> GetDoneItemsByListId(int id)
+        {
+            var lists = await _listRepository.GetDoneItemsByListId(id);
+
+            IEnumerable<ItemDto> dtoItems = _mapper.Map<IEnumerable<Item>, IEnumerable<ItemDto>>(lists);
+
+            return dtoItems;
+        }
+
+        public async Task<IEnumerable<ItemDto>> GetUndoneItemsByListId(int id)
+        {
+            var lists = await _listRepository.GetUnDoneItemsByListId(id);
+
+            IEnumerable<ItemDto> dtoItems = _mapper.Map<IEnumerable<Item>, IEnumerable<ItemDto>>(lists);
+
+            return dtoItems;
+        }
+
         public async Task<ListDto> ReadAsync(int id)
         {
             var list = await _listRepository.Read(id);

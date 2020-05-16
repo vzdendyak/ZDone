@@ -1,4 +1,5 @@
-<app-items [items]="items"
+<app-items [doneItems]="doneItems"
+           [unDoneItems]="unDoneItems"
            (reloadItem)="reloadItem($event)"
            (newItemName)="createItem($event)"
            (toDeleteItem)="deleteItem($event)"

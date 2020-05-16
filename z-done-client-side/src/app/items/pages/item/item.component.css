@@ -12,7 +12,8 @@
 }
 
 .upContent {
-  border-bottom: groove;
+  border-bottom: outset;
+border-bottom-style: inset;
   padding: 25px 20px;
   height: 5%;
   display: flex;
@@ -25,7 +26,7 @@
 
 .footerContent {
   height: 5%;
-  border-top: groove;
+  border-top: outset;
   padding: 10px 0 0 10px;
 
 }
@@ -76,7 +77,10 @@
 }
 
 .datePickerBlock{
-
+  color: #0000c5;
+}
+#chooseDateForm{
+  font-weight: 450;
 }
 #doneIcon{
   color: white;

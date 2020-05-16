@@ -19,5 +19,9 @@ namespace ZDoneWebApi.Repositories.Interfaces
         List GetLastItemStored();
 
         Task<IEnumerable<Item>> GetItemsByListId(int id);
+
+        Task<IEnumerable<Item>> GetDoneItemsByListId(int id);
+
+        Task<IEnumerable<Item>> GetUnDoneItemsByListId(int id);
     }
 }

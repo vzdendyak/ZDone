@@ -111,7 +111,7 @@
   font-style: italic;
   color: #9e9e9e;
 }
-#deleteButton {
+.deleteButton {
   float: right;
   color: #ff1d0cad;
   padding: 0px 10px;
@@ -124,7 +124,7 @@
 
 }
 
-#deleteButton:hover {
+.deleteButton:hover {
   color: red;
 
 }
@@ -144,19 +144,24 @@
   margin: 10px 0px 0px 1px;
   border-color: #848484;
   border-radius: 5px;
-  background-color: #969696db;
-}
+  background-color: #295c9e66;}
 .stateButtonBlock{
   width: 5%;
   display: inline-flex;
 }
-
-.datePickerBlock{
-
+.stateButtonBlock{
+  cursor: pointer;
 }
-#doneIcon{
-  color: white;
-  margin-left: 0.7px;
+
+
+.expandMore{
+  margin-left: 12px;
+  color: #666666;
+  position: relative;
+  top: -2px;
+}
+.doneIcon{
+  color: #464646;  margin-left: 0.7px;
   /* margin-bottom: -23.3px; */
   margin-top: -1.6px;
 }
@@ -166,4 +171,29 @@ display: flex;
 .liInsideContent{
   position: relative;
   top: 4px;
+}
+.itemsDivider{
+  border-bottom: solid 2px #444444d1;
+  color: #444444d1;
+  font-weight: 500;
+  margin-left: 5px;
+}
+
+.itemDividerWrapper:hover{
+cursor: pointer;
+}
+
+.itemDividerWrapper{
+  display: inline-flex;
+  margin-top: 20px;
+}
+.completedList{
+
+}
+.notSelectable{
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

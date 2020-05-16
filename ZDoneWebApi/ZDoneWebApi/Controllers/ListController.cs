@@ -48,6 +48,24 @@ namespace ZDoneWebApi.Controllers
             return Ok(list);
         }
 
+        [HttpGet("{id}/items/done")]
+        public async Task<ActionResult> GetDoneItems(int id)
+        {
+            var list = await _listBl.GetDoneItemsByListId(id);
+            if (list == null)
+                return NotFound();
+            return Ok(list);
+        }
+
+        [HttpGet("{id}/items/undone")]
+        public async Task<ActionResult> GetUnDoneItems(int id)
+        {
+            var list = await _listBl.GetUndoneItemsByListId(id);
+            if (list == null)
+                return NotFound();
+            return Ok(list);
+        }
+
         // POST: api/Item
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] ListDto list)

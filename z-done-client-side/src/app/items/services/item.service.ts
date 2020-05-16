@@ -17,6 +17,7 @@ export class ItemService {
   reloadTaskSubject = new Subject<number>();
   insertTaskSubject = new Subject<Item>();
   updatedTaskSubject = new Subject<boolean>();
+  completeTaskSubject = new Subject<Item>();
   activeItemId: number;
   detailItem;
 
@@ -53,6 +54,13 @@ export class ItemService {
 
   insertNewItem(item: Item) {
     this.insertTaskSubject.next(item);
+    this.updateItem(item).subscribe(value => {
+      this.updatedTaskSubject.next(true);
+    });
+  }
+
+  completeItem(item: Item) {
+    this.completeTaskSubject.next(item);
     this.updateItem(item).subscribe(value => {
       this.updatedTaskSubject.next(true);
     });
