@@ -18,7 +18,7 @@ export class ItemsComponent implements OnInit {
   itemName = '';
   hideCompleted = false;
 
-  constructor(public itemService: ItemService, private datepipe: DatePipe) {
+  constructor(public itemService: ItemService, public datePipe: DatePipe) {
   }
 
   ngOnInit() {

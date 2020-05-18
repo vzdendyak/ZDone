@@ -81,8 +81,15 @@ export class ItemListComponent implements OnInit {
 
     });
     this.itemService.insertTaskSubject.subscribe(value => {
-      let index = this.doneItems.findIndex(i => i.id == value.id);
-      this.doneItems[index] = value;
+      let index;
+      if (value.isDone) {
+        index = this.doneItems.findIndex(i => i.id == value.id);
+        this.doneItems[index] = value;
+      } else {
+        index = this.unDoneItems.findIndex(i => i.id == value.id);
+        this.unDoneItems[index] = value;
+      }
+
     });
 
     this.itemService.completeTaskSubject.subscribe(value => {

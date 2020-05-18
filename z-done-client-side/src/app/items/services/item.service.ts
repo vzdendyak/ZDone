@@ -87,5 +87,11 @@ export class ItemService {
     return item;
   }
 
+  getDate(date: Date): string {
+    const newDate = new Date(date);
+    const month = environment.months[newDate.getMonth()];
+    let text = `${newDate.getDate()} ${month}`;
+    return text;
+  }
 
 }

@@ -24,7 +24,8 @@
                class="material-icons deleteButton">
               delete_forever
             </i>
-            <span class="taskDate">{{this.datepipe.transform(i.expiredDate, 'dd.MM.yyyy')}}</span>
+<!--            <span class="taskDate">{{this.datePipe.transform(i.expiredDate, 'dd.MM')}}</span>-->
+            <span class="taskDate" *ngIf="i.expiredDate!==null">{{this.itemService.getDate(i.expiredDate)}}</span>
             <span *ngIf="i.list!==undefined && i.list!==null && i.list.name!==name"
                   class="listName">{{i.list.name}}</span>
           </div>
@@ -52,7 +53,7 @@
                class="material-icons deleteButton">
               delete_forever
             </i>
-            <span class="taskDate">{{this.datepipe.transform(i2.expiredDate, 'dd.MM.yyyy')}}</span>
+            <span class="taskDate" *ngIf="i2.expiredDate!==null">{{this.itemService.getDate(i2.expiredDate)}}</span>
             <span *ngIf="i2.list!==undefined && i2.list!==null && i2.list.name!==name"
                   class="listName">{{i2.list.name}}</span>
           </div>
