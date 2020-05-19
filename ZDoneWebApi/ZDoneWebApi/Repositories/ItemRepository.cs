@@ -24,6 +24,24 @@ namespace ZDoneWebApi.Repositories
             return items;
         }
 
+        public async Task<IEnumerable<Item>> GetTodayItems()
+        {
+            IEnumerable<Item> items = await _context.Items.Where(i => i.ExpiredDate == DateTime.Today).Include(i => i.List).ToListAsync();
+            return items;
+        }
+
+        public async Task<IEnumerable<Item>> GetWeekItems()
+        {
+            IEnumerable<Item> items = await _context.Items.Where(i => i.ExpiredDate >= DateTime.Today && i.ExpiredDate <= DateTime.Today.AddDays(7)).Include(i => i.List).ToListAsync();
+            return items;
+        }
+
+        public async Task<IEnumerable<Item>> GetUnlistedItems()
+        {
+            IEnumerable<Item> items = await _context.Items.Where(i => i.ListId == null).ToListAsync();
+            return items;
+        }
+
         public async Task<Item> Read(int id)
         {
             Item item = await _context.Items.Include(i => i.List).FirstOrDefaultAsync(i => i.Id == id);

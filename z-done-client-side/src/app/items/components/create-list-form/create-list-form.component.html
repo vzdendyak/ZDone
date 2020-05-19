@@ -1,0 +1,25 @@
+<div class="mainContent">
+  <div class="myHeader">
+  <span class="h4">Add list</span></div>
+  <form [formGroup]="myFirstReactiveForm" (submit)="onSubmit()">
+  <div class="form-group">
+  <input  matInput type="text" id="name" class="form-control" placeholder="Name" formControlName="name" />
+  </div>
+    <div class="form-group selectBlock" *ngIf="folders!=undefined && folders!=null">
+      <label for="selectFolder" class="selectLabel">Folder: </label>
+      <mat-select class="form-control form-control-sm" [(value)]="selectedFolder" formControlName="folder" id="selectFolder">
+        <mat-option *ngFor="let f of folders" [value]="f">{{f.name}}</mat-option>
+
+      </mat-select>
+  </div>
+    <br/><br/>
+    <div class="buttons form-group">
+      <button type="button" class="btn btn-light closeButton">Close</button>
+      <button type="submit" class="btn btn-success saveButton">Save</button>
+    </div>
+
+</form>
+<div>
+  {{myFirstReactiveForm.value | json}}
+</div>
+</div>

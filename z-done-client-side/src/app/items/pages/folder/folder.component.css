@@ -31,3 +31,14 @@
   position: relative;
   top: 5px;
 }
+.context-menu {
+  position: absolute;
+  display: none;
+}
+.context-active {
+  display: block;
+  position: absolute;
+}
+.myMenu{
+
+}

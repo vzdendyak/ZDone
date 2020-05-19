@@ -41,6 +41,24 @@ namespace ZDoneWebApi.Controllers
             return Ok(item);
         }
 
+        [HttpGet("date/{date}")]
+        public async Task<ActionResult> GetByDate(string date)
+        {
+            var item = await _itemBl.GetDateItems(date);
+            if (item == null)
+                return NotFound();
+            return Ok(item);
+        }
+
+        [HttpGet("unlisted")]
+        public async Task<ActionResult> GetUnlisted()
+        {
+            var item = await _itemBl.GetUnlistedItems();
+            if (item == null)
+                return NotFound();
+            return Ok(item);
+        }
+
         // POST: api/Item
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] ItemDto item)

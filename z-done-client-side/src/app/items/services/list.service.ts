@@ -22,12 +22,15 @@ export class ListService {
   getListItems(id: number): Observable<Item[]> {
     return this.http.get<Item[]>(`${this.url}/${id}/items`);
   }
+
   getDoneListItems(id: number): Observable<Item[]> {
     return this.http.get<Item[]>(`${this.url}/${id}/items/done`);
   }
+
   getUndoneListItems(id: number): Observable<Item[]> {
     return this.http.get<Item[]>(`${this.url}/${id}/items/undone`);
   }
+
   getLists(): Observable<List[]> {
     return this.http.get<List[]>(this.url);
   }
@@ -37,8 +40,13 @@ export class ListService {
   }
 
   createList(list: List): Observable<number> {
-    console.log('list to create: ' + list);
-    return this.http.post<number>(this.url, list);
+    const sendList: List = {
+      id: 0,
+      name: list.name,
+      folderId: list.folder.id,
+      folder: null
+    };
+    return this.http.post<number>(this.url, sendList);
   }
 
   updateList(list: List): Observable<List> {

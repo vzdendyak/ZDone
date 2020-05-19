@@ -10,6 +10,12 @@ namespace ZDoneWebApi.Repositories.Interfaces
     {
         Task<IEnumerable<Item>> ReadAll();
 
+        Task<IEnumerable<Item>> GetWeekItems();
+
+        Task<IEnumerable<Item>> GetUnlistedItems();
+
+        Task<IEnumerable<Item>> GetTodayItems();
+
         Task<Item> Read(int id);
 
         Task Create(Item item);

@@ -30,6 +30,35 @@ namespace ZDoneWebApi.BusinessLogic
             return dtoItems;
         }
 
+        public async Task<IEnumerable<ItemDto>> GetDateItems(string date)
+        {
+            IEnumerable<Item> items = null;
+            if (date.ToLower() == "today")
+            {
+                items = await _itemRepository.GetTodayItems();
+            }
+            else if (date.ToLower() == "week")
+            {
+                items = await _itemRepository.GetWeekItems();
+            }
+
+            if (items != null)
+            {
+                IEnumerable<ItemDto> dtoItems = _mapper.Map<IEnumerable<Item>, IEnumerable<ItemDto>>(items);
+                return dtoItems;
+            }
+
+            return null;
+        }
+
+        public async Task<IEnumerable<ItemDto>> GetUnlistedItems()
+        {
+            var items = await _itemRepository.GetUnlistedItems();
+
+            IEnumerable<ItemDto> dtoItems = _mapper.Map<IEnumerable<Item>, IEnumerable<ItemDto>>(items);
+            return dtoItems;
+        }
+
         public async Task<ItemDto> ReadAsync(int id)
         {
             var item = await _itemRepository.Read(id);

@@ -1,0 +1,48 @@
+.mainContent{
+  font-family: 'Roboto', sans-serif;
+}
+.myHeader{
+  margin-bottom: 15px;
+}
+.nameForm{
+  border: solid 1px #bbbbbb;
+  border-radius: 8px;
+  padding: 10px;
+  width: 94%;
+  background-color: #eaeaea;
+  font-size: 13pt;
+  font-family: 'Roboto', sans-serif;
+  outline: none;
+}
+.nameForm:focus{
+  border: solid 1.5px #8fb3f9;
+  border-radius: 8px;
+  outline: none;
+}
+input.ng-touched.ng-invalid{
+  border: solid 2px #ff7676;}
+#selectFolder{
+  width: 30%;
+}
+.selectBlock{
+  display: flex;
+}
+.selectLabel{
+  margin-right: 15px;
+  margin-top: 6px;
+}
+.buttons{
+float: right;
+  margin-bottom: 0;
+}
+
+.closeButton{
+  height: 40px;
+  width: 90px;
+  margin-right: 10px;  background-color: #e0e0e0;
+}
+
+.saveButton{
+  height: 40px;
+  width: 90px;
+}

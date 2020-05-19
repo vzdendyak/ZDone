@@ -10,7 +10,7 @@ import {MainWindowComponent} from './pages/main-window/main-window.component';
 import {RouterModule} from '@angular/router';
 import {ItemService} from './services/item.service';
 import {MaterialAppsModule} from '../ngmaterial.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FolderComponent} from './pages/folder/folder.component';
 import {FolderService} from './services/folder.service';
 import {ListComponent} from './pages/list/list.component';
@@ -20,6 +20,7 @@ import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule, MomentDateAdapter}
 // tslint:disable-next-line:no-duplicate-imports
 import * as _moment from 'moment';
 import {defaultFormat as _rollupMoment} from 'moment';
+import { CreateListFormComponent } from './components/create-list-form/create-list-form.component';
 
 const moment = _rollupMoment || _moment;
 
@@ -36,16 +37,17 @@ export const MY_FORMATS = {
 };
 
 @NgModule({
-  declarations: [ItemListComponent, ItemDetailsComponent, MenuDetailsComponent, ItemsComponent, ItemComponent, MenuComponent, MainWindowComponent, FolderComponent, ListComponent],
+  declarations: [ItemListComponent, ItemDetailsComponent, MenuDetailsComponent, ItemsComponent, ItemComponent, MenuComponent, MainWindowComponent, FolderComponent, ListComponent, CreateListFormComponent],
   imports: [
     CommonModule,
     MaterialAppsModule,
     FormsModule,
     RouterModule,
     MatDatepickerModule,
-    MatMomentDateModule
+    MatMomentDateModule, ReactiveFormsModule
 
   ],
+  // entryComponents: [CreateListFormComponent],
   providers: [DatePipe, ItemService, FolderService, {
     provide: DateAdapter,
     useClass: MomentDateAdapter,

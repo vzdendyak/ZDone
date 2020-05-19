@@ -12,11 +12,13 @@ import {ItemsModule} from './items/items.module';
 import {MainWindowComponent} from './items/pages/main-window/main-window.component';
 import {ItemService} from './items/services/item.service';
 import {FolderService} from './items/services/folder.service';
+import {CreateListFormComponent} from './items/components/create-list-form/create-list-form.component';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
+  entryComponents: [CreateListFormComponent],
   imports: [
     BrowserModule,
     MaterialAppsModule,

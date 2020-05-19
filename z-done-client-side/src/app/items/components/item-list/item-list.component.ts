@@ -32,38 +32,50 @@ export class ItemListComponent implements OnInit {
             break;
           case 'today':
             this.listName = 'Today';
+            this.itemService.getItemsByDate('today').subscribe(items => {
+              this.doneItems = items.filter(i => i.isDone == true);
+              this.unDoneItems = items.filter(i => i.isDone == false);
+            });
             this.currentList = null;
-            this.doneItems = null;
             break;
 
           case 'week':
             this.listName = 'Week';
             this.currentList = null;
-            this.doneItems = null;
+            this.itemService.getItemsByDate('week').subscribe(items => {
+              this.doneItems = items.filter(i => i.isDone == true);
+              this.unDoneItems = items.filter(i => i.isDone == false);
+            });
             break;
 
           case 'completed':
             this.listName = 'Completed';
             this.currentList = null;
             this.doneItems = null;
+            this.unDoneItems = null;
             break;
 
           case 'trash':
             this.listName = 'Trash';
             this.currentList = null;
             this.doneItems = null;
+            this.unDoneItems = null;
             break;
 
           case 'calendar':
             this.listName = 'Calendar';
             this.currentList = null;
             this.doneItems = null;
+            this.unDoneItems = null;
             break;
 
           case 'inbox':
             this.listName = 'Inbox';
             this.currentList = null;
-            this.doneItems = null;
+            this.itemService.getUnlistedItems().subscribe(items => {
+              this.doneItems = items.filter(i => i.isDone == true);
+              this.unDoneItems = items.filter(i => i.isDone == false);
+            });
             break;
 
           default:
@@ -109,8 +121,9 @@ export class ItemListComponent implements OnInit {
   }
 
   getAllTasks() {
-    this.itemService.getItems().subscribe(value => {
-      this.doneItems = value;
+    this.itemService.getItems().subscribe(items => {
+      this.doneItems = items.filter(i => i.isDone == true);
+      this.unDoneItems = items.filter(i => i.isDone == false);
     });
   }
 

@@ -29,6 +29,14 @@ export class ItemService {
     return this.http.get<Item[]>(this.url);
   }
 
+  getItemsByDate(date: string): Observable<Item[]> {
+    return this.http.get<Item[]>(`${this.url}/date/${date}`);
+  }
+
+  getUnlistedItems(): Observable<Item[]> {
+    return this.http.get<Item[]>(`${this.url}/unlisted`);
+  }
+
   getItem(id: number): Observable<Item> {
     return this.http.get<Item>(this.url + `/${id}`);
   }

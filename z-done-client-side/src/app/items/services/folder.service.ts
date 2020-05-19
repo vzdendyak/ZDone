@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {Item} from '../../models/item';
 import {Folder} from '../../models/folder';
 import {List} from '../../models/list';
@@ -15,6 +15,7 @@ export class FolderService {
     headers: new HttpHeaders().append('Authorization', 'Bearer <yourtokenhere>'),
     responseType: 'text'
   };
+  openDialogSubject = new Subject<boolean>();
 
   constructor(private http: HttpClient) {
   }
