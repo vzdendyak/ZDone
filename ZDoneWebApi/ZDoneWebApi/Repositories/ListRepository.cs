@@ -38,7 +38,7 @@ namespace ZDoneWebApi.Repositories
 
         public async Task Update(List list)
         {
-            _context.Entry(list).State = EntityState.Modified;
+            _context.Entry<List>(list).State = EntityState.Modified;
             _context.Lists.Update(list);
             await _context.SaveChangesAsync();
         }

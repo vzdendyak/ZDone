@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ZDoneWebApi.Data.Models;
 
 namespace ZDoneWebApi.Data.DTOs
 {
@@ -10,5 +11,6 @@ namespace ZDoneWebApi.Data.DTOs
         public int Id { get; set; }
         public string Name { get; set; }
         public int? FolderId { get; set; }
+        public FolderDto Folder { get; set; }
     }
 }

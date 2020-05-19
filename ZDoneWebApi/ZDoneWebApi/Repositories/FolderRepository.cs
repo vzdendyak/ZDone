@@ -58,7 +58,7 @@ namespace ZDoneWebApi.Repositories
 
         public async Task<IEnumerable<List>> GetAllLists(int id)
         {
-            var lists = await _context.Lists.Where(l => l.FolderId == id).ToListAsync();
+            var lists = await _context.Lists.Where(l => l.FolderId == id).Include(i => i.Folder).ToListAsync();
             return lists;
         }
     }

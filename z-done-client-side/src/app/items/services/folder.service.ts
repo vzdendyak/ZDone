@@ -15,7 +15,9 @@ export class FolderService {
     headers: new HttpHeaders().append('Authorization', 'Bearer <yourtokenhere>'),
     responseType: 'text'
   };
-  openDialogSubject = new Subject<boolean>();
+  openListDialogSubject = new Subject<List>();
+  deleteListSubject = new Subject<List>();
+  folderIdToShow: number = 0;
 
   constructor(private http: HttpClient) {
   }

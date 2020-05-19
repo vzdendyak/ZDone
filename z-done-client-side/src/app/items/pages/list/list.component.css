@@ -5,3 +5,16 @@
 }
 .mainContent{
   color: #eef1f7;}
+.mainContent:hover{
+  background-color: red}
+.context-menu {
+  position: absolute;
+  display: none;
+}
+.context-active {
+  display: block;
+  position: absolute;
+}
+.myMenu{
+
+}

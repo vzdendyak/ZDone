@@ -1,6 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {List} from '../../../models/list';
 import {Router} from '@angular/router';
+import {MatMenuTrigger} from '@angular/material';
+import {FolderService} from '../../services/folder.service';
 
 @Component({
   selector: 'app-list',
@@ -10,8 +12,12 @@ import {Router} from '@angular/router';
 export class ListComponent implements OnInit {
 
   @Input() list: List;
+  @ViewChild(MatMenuTrigger, {static: false}) trigger: MatMenuTrigger;
 
-  constructor(private router: Router) { }
+  contextMenuPosition = {x: '0px', y: '0px'};
+
+  constructor(private router: Router, public folderService: FolderService) {
+  }
 
   ngOnInit() {
 
@@ -19,5 +25,21 @@ export class ListComponent implements OnInit {
 
   goTo(folderId, listId) {
     this.router.navigateByUrl(`windows/${folderId}/${listId}`);
+  }
+
+  rightClickList(event) {
+    event.preventDefault();
+    this.contextMenuPosition.x = event.clientX + 'px';
+    this.contextMenuPosition.y = event.clientY + 'px';
+    this.trigger.menu.focusFirstItem('mouse');
+    this.trigger.openMenu();
+  }
+
+  editListClick() {
+    this.folderService.openListDialogSubject.next(this.list);
+  }
+
+  deleteListClick() {
+    this.folderService.deleteListSubject.next(this.list);
   }
 }

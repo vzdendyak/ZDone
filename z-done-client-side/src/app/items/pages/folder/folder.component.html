@@ -1,9 +1,9 @@
-<div class="allContent" (contextmenu)="rightClick($event)">
+<div class="allContent" >
 
 <!--  <button mat-icon-button >-->
 <!--    <mat-icon>more_vert</mat-icon>-->
 <!--  </button>-->
-  <div (click)="showList()" class="headerContent"   >
+  <div (click)="showList()" class="headerContent" (contextmenu)="rightClickFolder($event)"  >
     <span class="material-icons folderIcon">folder </span>
     <span class="leftDefaultLink" href="#" >{{folder.name}}</span>
     <span *ngIf="!showLists; else hide" class="material-icons expandIcon">expand_more </span>
@@ -24,6 +24,7 @@
      [style.top]="contextMenuPosition.y"
      [matMenuTriggerFor]="appMenu">
 </div>
+
 <mat-menu #appMenu="matMenu" class="myMenu">
   <button mat-menu-item (click)="addListClick()">Add list</button>
   <button mat-menu-item (click)="addListClick()" >Rename</button>

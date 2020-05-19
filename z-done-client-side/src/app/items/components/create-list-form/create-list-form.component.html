@@ -7,15 +7,16 @@
   </div>
     <div class="form-group selectBlock" *ngIf="folders!=undefined && folders!=null">
       <label for="selectFolder" class="selectLabel">Folder: </label>
-      <mat-select class="form-control form-control-sm" [(value)]="selectedFolder" formControlName="folder" id="selectFolder">
+      <mat-select class="form-control form-control-sm" formControlName="folder" id="selectFolder" [(value)]="selectedFolder" [compareWith]="compareFn">
+        <mat-option>None</mat-option>
         <mat-option *ngFor="let f of folders" [value]="f">{{f.name}}</mat-option>
 
       </mat-select>
   </div>
     <br/><br/>
     <div class="buttons form-group">
-      <button type="button" class="btn btn-light closeButton">Close</button>
-      <button type="submit" class="btn btn-success saveButton">Save</button>
+      <button type="button" class="btn btn-light closeButton" (click)="close()" >Close</button>
+      <button type="submit" class="btn btn-success saveButton" >Save</button>
     </div>
 
 </form>

@@ -1,7 +1,17 @@
-<div class="mainContent" (click)="goTo(list.folderId,list.id)">
+<div class="mainContent" (click)="goTo(list.folderId,list.id)" (contextmenu)="rightClickList($event)">
   <span class="material-icons listIcon">
 format_list_bulleted
 </span>
   <span *ngIf="list!==undefined">{{list.name}}</span>
 
+<div class="myMenu" style="visibility: hidden; position: fixed"
+     [style.left]="contextMenuPosition.x"
+     [style.top]="contextMenuPosition.y"
+     [matMenuTriggerFor]="listAppMenu">
+</div>
+<mat-menu #listAppMenu="matMenu" class="myMenu">
+  <button mat-menu-item (click)="editListClick()">Edit</button>
+  <button mat-menu-item (click)="deleteListClick()" >Delete</button>
+  <button mat-menu-item (click)="editListClick()" >Duplicate</button>
+</mat-menu>
 </div>

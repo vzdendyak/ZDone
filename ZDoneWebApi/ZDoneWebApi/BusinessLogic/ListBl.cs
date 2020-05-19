@@ -77,7 +77,7 @@ namespace ZDoneWebApi.BusinessLogic
 
         public async Task<ItemResponse> UpdateAsync(ListDto list)
         {
-            var existingList = await _listRepository.Read(list.Id);
+            //var existingList = await _listRepository.Read(list.Id);
             // Get role
             var newList = _mapper.Map<List>(list);
             await _listRepository.Update(newList);

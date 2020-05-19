@@ -24,24 +24,66 @@ export class MenuDetailsComponent implements OnInit {
     this.listService.getLists().subscribe(value => {
       this.lists = value;
     });
-    this.folderService.openDialogSubject.subscribe(value => {
-      this.openDialog();
+    this.folderService.openListDialogSubject.subscribe(value => {
+      this.openDialog(value);
     });
+    this.folderService.deleteListSubject.subscribe(value => {
+      this.deleteList(value);
+    });
+
   }
 
   ngOnInit() {
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(CreateListFormComponent, {
-      width: '450px'
-    });
+  openDialog(list: List) {
+    let dialogRef;
+    if (list == null) {
+      dialogRef = this.dialog.open(CreateListFormComponent, {
+        width: '450px'
+      });
+    } else {
+      dialogRef = this.dialog.open(CreateListFormComponent, {
+        width: '450px',
+        data: {
+          item: list
+        }
+      });
+    }
+
     dialogRef.afterClosed().subscribe(value => {
-      if (value.folder != null){
-        let index = this.folders.findIndex(fldr => fldr.id == value.folder.id);
-        this.folders.splice(index, 1, value.folder);
+      console.log('dialog closed');
+      if (list == null) {
+        if (value.folder != null) {
+          let index = this.folders.findIndex(fldr => fldr.id == value.folder.id);
+          this.folderService.folderIdToShow=value.folder.id;
+          this.folders.splice(index, 1, value.folder);
+        }
+        this.lists.push(value.list);
+      } else {
+        if (value.folder != null) {
+          let index = this.folders.findIndex(fldr => fldr.id == value.folder.id);
+          this.folders.splice(index, 1, value.folder);
+          index = this.lists.findIndex(l => l.id == list.id);
+          this.folderService.folderIdToShow=list.folderId;
+          this.lists.splice(index, 1, value.list);
+        } else {
+          let index = this.lists.findIndex(l => l.id == list.id);
+          this.folderService.folderIdToShow=list.folderId;
+          this.lists.splice(index, 1, value.list);
+        }
       }
-      this.lists.push(value.list);
     });
+  }
+
+  deleteList(list: List) {
+    this.listService.deleteList(list.id).subscribe(value => {
+      let index = this.folders.findIndex(fldr => fldr.id == list.folderId);
+      this.folders.splice(index, 1, list.folder);
+      index = this.lists.findIndex(l => l.id == list.id);
+      this.lists.splice(index, 1, list);
+      this.folderService.folderIdToShow=list.folderId;
+    });
+
   }
 }
