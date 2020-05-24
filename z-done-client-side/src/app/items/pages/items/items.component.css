@@ -3,10 +3,11 @@
   margin-top: 3px;
   border-radius: 5px;
   font-size: 11pt;
-  border-bottom: solid;
+  /*border-bottom: solid;*/
   width: 100%;
   border-width: thin;
   border-color: #d0d0d0;
+  display: flex;
 }
 
 .task:hover {
@@ -129,19 +130,17 @@
 
 }
 .unDoneButton{
-  width: 57%;
-  height: 50%;
+  width: 79%;  height: 50%;
   border: solid 2px;
   /* margin: 7px auto; */
-  margin: 10px 0px 0px 1px;
+  margin: 15px 0px 0px 1px;
   border-color: #848484;
   border-radius: 5px;
 }
 .DoneButton{
-  width: 57%;
-  height: 50%;
+  width: 79%;  height: 50%;
   border: solid 2px;
-  margin: 10px 0px 0px 1px;
+  margin: 15px 0px 0px 1px;
   border-color: #848484;
   border-radius: 5px;
   background-color: #295c9e66;}
@@ -161,9 +160,9 @@
   top: -2px;
 }
 .doneIcon{
-  color: #464646;  margin-left: 0.7px;
-  /* margin-bottom: -23.3px; */
-  margin-top: -1.6px;
+  color: #464646;
+  margin-left: -1px;
+  margin-top: -3.3px;
 }
 .liContent{
 display: flex;
@@ -171,6 +170,9 @@ display: flex;
 .liInsideContent{
   position: relative;
   top: 4px;
+  width: 70%;
+  border-radius: 4px;
+  border-bottom: inset #b9b9b9 2px;
 }
 .itemsDivider{
   border-bottom: solid 2px #444444d1;
@@ -197,3 +199,21 @@ cursor: pointer;
   -ms-user-select: none;
   user-select: none;
 }
+.reasonContent{
+  display: flex;
+  margin: auto;
+  /*width: 18%;*/
+  /*padding: 2px 13px;*/
+  /*border-radius: 7px;*/
+}
+
+.specificReason:hover{
+  background-color: #b79191;
+}
+.specificReason{
+  margin: auto;
+  background-color: #e2c7c7;
+  padding: 1px 10px;
+  border-radius: 5px;
+}
+

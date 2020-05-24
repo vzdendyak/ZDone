@@ -2,7 +2,6 @@
   <div class="upContent">
     <div class="stateButtonBlock">
       <span (click)="doneButton()" [ngClass]="{DoneButton: item.isDone, unDoneButton: !item.isDone}">
-        <span class="material-icons" id="doneIcon">done</span>
       </span>
     </div>
     <div class="datePickerBlock">
@@ -12,6 +11,12 @@
         <mat-datepicker-toggle [for]="dp" matSuffix></mat-datepicker-toggle>
         <mat-datepicker #dp  [disabled]="false" color="primary" (closed)="reloadItem()"></mat-datepicker>
       </mat-form-field>
+    </div>
+    <div class="reasonBlock">
+      <input (keyup)="reloadItem()" [(ngModel)]="item.reason"
+             id="inputReason"
+             placeholder="Enter reason"
+             type="text">
     </div>
   </div>
   <div class="infoContent">

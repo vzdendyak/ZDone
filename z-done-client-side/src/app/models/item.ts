@@ -7,6 +7,7 @@ export class Item {
   public parentId: number;
   public name: string;
   public description: string;
+  public reason: string;
   public statusId: number;
   public isDone: boolean;
 
