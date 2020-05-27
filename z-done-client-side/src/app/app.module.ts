@@ -13,6 +13,9 @@ import {MainWindowComponent} from './items/pages/main-window/main-window.compone
 import {ItemService} from './items/services/item.service';
 import {FolderService} from './items/services/folder.service';
 import {CreateListFormComponent} from './items/components/create-list-form/create-list-form.component';
+import {LoginModule} from './account/login.module';
+import {LoginFunctionalityComponent} from './account/components/login-functionality/login-functionality.component';
+import {RegistrationFunctionalityComponent} from './account/components/registration-functionality/registration-functionality.component';
 
 @NgModule({
   declarations: [
@@ -29,11 +32,14 @@ import {CreateListFormComponent} from './items/components/create-list-form/creat
     HttpClientModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
+      {path: 'account/login', component: LoginFunctionalityComponent},
+      {path: 'account/registration', component: RegistrationFunctionalityComponent},
       {path: 'windows/:folderId/:listId', component: MainWindowComponent},
       {path: 'windows', redirectTo: '/windows/0/all' }
 
     ]),
-    ItemsModule
+    ItemsModule,
+    LoginModule
   ],
   providers: [ItemService, FolderService],
   bootstrap: [AppComponent]

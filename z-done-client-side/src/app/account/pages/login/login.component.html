@@ -1,0 +1,21 @@
+<div class="mainContent">
+
+<div class="wrapper">
+  <div class="loginForm  text-center">
+    <h2 class="text-center loginText">Login</h2>
+    <form autocomplete="off">
+      <div class="form-group">
+        <input  type="email" placeholder="Enter email" class="form-control" id="emailForm">
+      </div>
+      <div class="form-group">
+        <input   type="password" placeholder="Enter password" class="form-control" id="passwordForm">
+      </div>
+      <div class="form-group buttonsBlock">
+        <button type="submit" class="btn btn-lg btn-primary submitButton" value="submit" name="submit">Sign in</button>
+        <button type="submit" [routerLink]="['/account/registration']" class="btn btn-lg btn-primary submitButton" value="submit" name="submit">Sign up</button>
+      </div>
+    </form>
+<p class="text-muted mt-5 text-center">© Z-Done Application 2019-2020</p>
+  </div>
+  </div>
+</div>
