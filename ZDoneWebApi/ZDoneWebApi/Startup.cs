@@ -1,21 +1,26 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ZDoneWebApi.BusinessLogic;
 using ZDoneWebApi.BusinessLogic.Interfaces;
 using ZDoneWebApi.Data;
+using ZDoneWebApi.Data.Models;
 using ZDoneWebApi.Repositories;
 using ZDoneWebApi.Repositories.Interfaces;
 
@@ -37,6 +42,36 @@ namespace ZDoneWebApi
             services.AddEntityFrameworkSqlServer().AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(connectionString);
+            });
+            services.AddIdentity<User, IdentityRole>(set =>
+            {
+                set.Password = new PasswordOptions()
+                {
+                    RequireNonAlphanumeric = false,
+                    RequireDigit = true,
+                    RequireLowercase = true,
+                    RequireUppercase = true,
+                    RequiredLength = 8
+                };
+                set.User.RequireUniqueEmail = true;
+            }).AddEntityFrameworkStores<AppDbContext>();
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["JwtIssuer"],
+                    ValidAudience = Configuration["JwtAudience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtKey"]))
+                };
             });
             services.AddAutoMapper(typeof(Startup));
             services.AddCors();
@@ -63,6 +98,11 @@ namespace ZDoneWebApi
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserBl, UserBl>();
+
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IAccountBl, AccountBl>();
+
+            services.AddScoped<IAuthBl, AuthBl>();
 
             services.AddScoped<IProjectsUsersRepository, ProjectsUsersRepository>();
             services.AddScoped<IProjectsUsersBl, ProjectsUsersBl>();

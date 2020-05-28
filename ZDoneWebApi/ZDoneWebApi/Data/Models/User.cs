@@ -1,17 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ZDoneWebApi.Data.Models
 {
     [Table("Users")]
-    public class User
+    public class User : IdentityUser
     {
         #region Main props
 
-        public string Id { get; set; }
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        private string Info { get; set; }
 
         #endregion Main props
 

@@ -51,8 +51,8 @@ namespace DAL.Tests.DbContextAddictions
             Comment comment1 = new Comment { Id = 1, ItemId = 1, Text = "1 comment", UserId = "1", Date = DateTime.Today };
             Comment comment2 = new Comment { Id = 2, ItemId = 2, Text = "2 comment", UserId = "2", Date = DateTime.Today };
 
-            User user1 = new User { Id = "1", Email = "vasya@org.com", Password = "qwerty", UserName = "vzdendyak" };
-            User user2 = new User { Id = "2", Email = "ivan@org.com", Password = "qwerty", UserName = "ivanorg" };
+            // User user1 = new User {  };
+            //User user2 = new User { };
 
             ProjectsUsers projectsUsers1 = new ProjectsUsers { ProjectId = 1, UserId = "1" };
             ProjectsUsers projectsUsers2 = new ProjectsUsers { ProjectId = 2, UserId = "2" };
@@ -61,7 +61,7 @@ namespace DAL.Tests.DbContextAddictions
             context.Projects.AddRange(new[] { project1, project2 });
             context.Items.AddRange(new[] { item1, item2, item3, item4, item5 });
             context.Statuses.AddRange(new[] { status1, status2, status3 });
-            context.Users.AddRange(new[] { user1, user2 });
+            //context.Users.AddRange(new[] { user1, user2 });
             context.ProjectsUsers.AddRange(new[] { projectsUsers1, projectsUsers2 });
             context.Folders.AddRange(new[] { folder1, folder2, folder3 });
             context.Lists.AddRange(new[] { list1, list2, list3 });

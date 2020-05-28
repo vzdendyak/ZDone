@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ZDoneWebApi.Data.Models;
 
 namespace ZDoneWebApi.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options)
            : base(options)
@@ -16,8 +17,10 @@ namespace ZDoneWebApi.Data
         public DbSet<List> Lists { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Status> Statuses { get; set; }
-        public DbSet<User> Users { get; set; }
+
+        //public DbSet<User> Users { get; set; }
         public DbSet<ProjectsUsers> ProjectsUsers { get; set; }
+
         public DbSet<Comment> Comments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
