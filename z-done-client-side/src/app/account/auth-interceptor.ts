@@ -9,8 +9,10 @@ import {CookieService} from 'ngx-cookie-service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+  private count: number;
 
   constructor(public http: HttpClient, private router: Router, private cookieService: CookieService) {
+    this.count = 0;
   }
 
 
@@ -22,16 +24,24 @@ export class AuthInterceptor implements HttpInterceptor {
     });
 
     console.log('INTERCEPTED');
-    return next.handle(req).pipe(tap(
-      event => {
-        if (event instanceof HttpResponse) { console.log('Server OK response'); }
-      },
-      err => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status == 401) console.log('Unauthorized interceptor');
-          this.router.navigate(['/account/login']);
+
+    return next.handle(req).pipe(
+      tap(
+        event => {
+          if (event instanceof HttpResponse) {
+            console.log('Server response');
+          }
+        },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status == 401) {
+              console.log('Unauthorized');
+              this.router.navigate(['/account/login']);
+            }
+          }
         }
-      }
-    ));
+      )
+    );
+
   }
 }

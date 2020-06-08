@@ -58,6 +58,7 @@ export class ItemService {
 
   reloadTask(id: number) {
     this.activeItemId = id;
+    //console.log('SERVICE');
     this.reloadTaskSubject.next(id);
   }
 

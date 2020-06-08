@@ -1,21 +1,24 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ItemService} from '../../services/item.service';
 import {Item} from '../../../models/item';
 import {DetailService} from '../../services/detail.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-item-details',
   templateUrl: './item-details.component.html',
   styleUrls: ['./item-details.component.css']
 })
-export class ItemDetailsComponent implements OnInit {
+export class ItemDetailsComponent implements OnInit, OnDestroy {
 
   activeItem: Item;
   itemDate: Date;
+  subscriptionMain: Subscription;
 
   constructor(private itemService: ItemService, private detailService: DetailService) {
     this.activeItem = null;
-    this.itemService.reloadTaskSubject.subscribe(value => {
+
+    this.subscriptionMain =  this.itemService.reloadTaskSubject.subscribe(value => {
       this.itemService.getItem(value).subscribe(item => {
         this.activeItem = item;
         item.expiredDate == null ? this.itemDate = null : this.itemDate = new Date(item.expiredDate);
@@ -28,6 +31,10 @@ export class ItemDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptionMain.unsubscribe();
   }
 
 }

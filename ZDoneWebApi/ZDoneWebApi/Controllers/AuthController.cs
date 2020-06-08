@@ -33,7 +33,7 @@ namespace ZDoneWebApi.Controllers
         }
 
         [HttpGet("isLogined")]
-        public async Task<IActionResult> IsLogined()
+        public IActionResult IsLogined()
         {
             if (!ModelState.IsValid)
             {
@@ -65,12 +65,17 @@ namespace ZDoneWebApi.Controllers
             HttpContext.Response.Cookies.Append(".AspNetCore.Application.Id", authResponse.Token,
             new CookieOptions
             {
-                MaxAge = TimeSpan.FromMinutes(2)
+                //MaxAge = TimeSpan.FromMinutes(2)
+                //Expires = DateTime.UtcNow.AddMinutes(2)
+            }); ;
+            HttpContext.Response.Cookies.Append(".AspNetCore.Application.Id-refresh", authResponse.RefreshToken,
+            new CookieOptions
+            {
+                MaxAge = TimeSpan.FromHours(48)
             });
             HttpContext.Response.Cookies.Append("User-email", model.Email,
             new CookieOptions
             {
-                MaxAge = TimeSpan.FromMinutes(2)
             });
             return Ok(new
             {

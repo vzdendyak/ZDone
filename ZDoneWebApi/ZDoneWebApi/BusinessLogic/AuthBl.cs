@@ -129,7 +129,7 @@ namespace ZDoneWebApi.BusinessLogic
             return await GenerateAuthResultAsync(user);
         }
 
-        private ClaimsPrincipal GetClaimsPrincipalFromToken(string token)
+        public ClaimsPrincipal GetClaimsPrincipalFromToken(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             try
@@ -150,6 +150,25 @@ namespace ZDoneWebApi.BusinessLogic
             {
                 return null;
             }
+        }
+
+        public bool ValidateTokenExpiry(string token)
+        {
+            var validatedToken = GetClaimsPrincipalFromToken(token);
+            if (validatedToken == null)
+            {
+                return false;
+            }
+            var expiryDateUnix =
+                long.Parse(validatedToken.Claims.Single(x => x.Type == JwtRegisteredClaimNames.Exp).Value);
+
+            var expiryDateTimeUtc = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                .AddSeconds(expiryDateUnix);
+            if (expiryDateTimeUtc <= DateTime.UtcNow)
+            {
+                return false;
+            }
+            return true;
         }
 
         public async Task<AuthResultDto> GenerateAuthResultAsync(IdentityUser user)
@@ -196,6 +215,7 @@ namespace ZDoneWebApi.BusinessLogic
             if (!string.IsNullOrEmpty(token))
             {
                 context.Response.Cookies.Delete(".AspNetCore.Application.Id");
+                context.Response.Cookies.Delete(".AspNetCore.Application.Id-refresh");
                 context.Response.Cookies.Delete("User-email");
             }
         }

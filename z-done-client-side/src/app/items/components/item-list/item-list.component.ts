@@ -139,6 +139,7 @@ export class ItemListComponent implements OnInit {
   }
 
   reloadItem(id: number) {
+    //console.log('ITEM_LIST');
     this.itemService.reloadTask(id);
   }
 

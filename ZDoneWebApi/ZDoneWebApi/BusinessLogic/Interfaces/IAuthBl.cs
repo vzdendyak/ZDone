@@ -22,5 +22,9 @@ namespace ZDoneWebApi.BusinessLogic.Interfaces
         Task<AuthResultDto> RefreshTokenAsync(string token, string refreshToken);
 
         Task LogOutAsync(HttpContext context);
+
+        ClaimsPrincipal GetClaimsPrincipalFromToken(string token);
+
+        bool ValidateTokenExpiry(string token);
     }
 }
