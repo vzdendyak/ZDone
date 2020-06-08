@@ -6,11 +6,18 @@ using System.Threading.Tasks;
 
 namespace ZDoneWebApi.Data.Models.Auth
 {
-    public class LoginModel
+    public class RegisterModel
     {
+        [Required]
+        public string Name { get; set; }
+
+        [Required]
         [EmailAddress]
         public string Email { get; set; }
 
+        [Required]
         public string Password { get; set; }
+
+        public string ConfirmedPassword { get; set; }
     }
 }

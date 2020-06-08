@@ -12,8 +12,10 @@ import {List} from '../../models/list';
 export class FolderService {
   url: string = environment.basicUrl + '/folders';
   requestOptions: object = {
-    headers: new HttpHeaders().append('Authorization', 'Bearer <yourtokenhere>'),
-    responseType: 'text'
+    //headers: new HttpHeaders().append('Authorization', 'Bearer <yourtokenhere>'),
+    //responseType: 'text'
+    withCredentials: true
+
   };
   openListDialogSubject = new Subject<List>();
   deleteListSubject = new Subject<List>();

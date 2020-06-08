@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MaterialAppsModule} from './ngmaterial.module';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatCheckboxModule} from '@angular/material';
@@ -16,6 +16,9 @@ import {CreateListFormComponent} from './items/components/create-list-form/creat
 import {LoginModule} from './account/login.module';
 import {LoginFunctionalityComponent} from './account/components/login-functionality/login-functionality.component';
 import {RegistrationFunctionalityComponent} from './account/components/registration-functionality/registration-functionality.component';
+import {AuthGuard} from './account/auth-guard';
+import {AuthInterceptor} from './account/auth-interceptor';
+import {CookieService} from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -34,14 +37,14 @@ import {RegistrationFunctionalityComponent} from './account/components/registrat
     RouterModule.forRoot([
       {path: 'account/login', component: LoginFunctionalityComponent},
       {path: 'account/registration', component: RegistrationFunctionalityComponent},
-      {path: 'windows/:folderId/:listId', component: MainWindowComponent},
-      {path: 'windows', redirectTo: '/windows/0/all' }
+      {path: 'windows/:folderId/:listId', component: MainWindowComponent, canActivate: [AuthGuard]},
+      {path: 'windows', redirectTo: '/windows/0/all', canActivate: [AuthGuard]}
 
     ]),
     ItemsModule,
     LoginModule
   ],
-  providers: [ItemService, FolderService],
+  providers: [ItemService, FolderService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

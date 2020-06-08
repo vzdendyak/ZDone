@@ -12,6 +12,6 @@ namespace ZDoneWebApi.Repositories.Interfaces
 
         Task<bool> CheckPassword(User user, string password);
 
-        Task<User> GetUserByUserName(string userName);
+        Task<User> GetUserByEmail(string userName);
     }
 }

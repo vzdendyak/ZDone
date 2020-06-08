@@ -3,15 +3,44 @@
   <div class="wrapper">
     <div class="loginForm  text-center">
       <h2 class="text-center loginText">Login</h2>
-      <form>
+      <form [formGroup]="registerReactiveForm" (submit)="onSubmit()">
         <div class="form-group">
-          <input type="text" placeholder="Enter username" class="form-control" id="userNameForm">
+          <input type="text" [class.is-invalid] = "registerReactiveForm.get('username').invalid && registerReactiveForm.get('username').touched" placeholder="Enter username" formControlName="username" class="form-control" id="userNameForm">
+          <div *ngIf="(usernameGet.invalid && usernameGet.touched) || usernameGet.dirty" class="text-left">
+            <small *ngIf="usernameGet.errors?.required" class="text-danger">Username is required</small>
+          </div>
         </div>
         <div class="form-group">
-          <input type="email" placeholder="Enter email" class="form-control" id="emailForm">
+          <input  type="email" [class.is-invalid] = "registerReactiveForm.get('email').invalid && registerReactiveForm.get('email').touched" placeholder="Enter email" formControlName="email" class="form-control" id="emailForm">
+          <div *ngIf="(emailGet.invalid && emailGet.touched) || emailGet.dirty" class="text-left">
+            <small *ngIf="emailGet.errors?.required" class="text-danger">Email is required</small>
+            <!--question mark(?) is a safe navigation operator-->
+            <small *ngIf="emailGet.errors?.pattern" class="text-danger">Please provide a valid email address</small>
+          </div>
         </div>
         <div class="form-group">
-          <input type="password" placeholder="Enter password" class="form-control" id="passwordForm">
+          <input   type="password" [class.is-invalid] = "registerReactiveForm.get('password').invalid && registerReactiveForm.get('password').touched" placeholder="Enter password" formControlName="password" class="form-control passwordForm">
+          <div *ngIf="(passwordGet.invalid && passwordGet.touched) || passwordGet.dirty" class="text-left"  >
+            <small *ngIf="passwordGet.errors?.required" class="text-danger">Password is required</small>
+            <!--question mark(?) is a safe navigation operator-->
+            <ul *ngIf="passwordGet.errors?.pattern" class="text-left">
+              <li>
+                <small class="text-danger">Must contains: at least 8 characters</small>
+              </li>
+              <li>
+                <small class="text-danger">Must contains: 1 upper-case letter</small>
+              </li>
+              <li>
+                <small  class="text-danger">Must contains: 1 digit</small>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="password" [class.is-invalid] = "registerReactiveForm.get('confirmedPassword').invalid && registerReactiveForm.get('confirmedPassword').touched" placeholder="Confirm password" formControlName="confirmedPassword" class="form-control passwordForm">
+          <div *ngIf="confirmedPasswordGet.errors || registerReactiveForm.errors?.mismatch" class="text-left">
+            <small  class="text-danger">Confirmed password dont match!</small>
+          </div>
         </div>
         <div class="form-group buttonsBlock">
           <button type="submit" class="btn btn-lg btn-primary submitButton" value="submit" name="submit">Get started</button>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ZDoneWebApi.Data.Models;
+using ZDoneWebApi.Data.Models.Auth;
 
 namespace ZDoneWebApi.Data
 {
@@ -17,6 +18,7 @@ namespace ZDoneWebApi.Data
         public DbSet<List> Lists { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Status> Statuses { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         //public DbSet<User> Users { get; set; }
         public DbSet<ProjectsUsers> ProjectsUsers { get; set; }
@@ -63,6 +65,7 @@ namespace ZDoneWebApi.Data
                 .HasForeignKey(pu => pu.UserId);
 
             modelBuilder.Entity<Item>().HasOne(i => i.Parent).WithMany(ii => ii.Children).HasForeignKey(i => i.ParentId).OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<RefreshToken>().HasKey(r => r.Token);
         }
     }
 }

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using ZDoneWebApi.BusinessLogic.Interfaces;
+using ZDoneWebApi.Data.DTOs.Auth;
 using ZDoneWebApi.Data.Models.Auth;
 
 namespace ZDoneWebApi.Controllers
@@ -31,26 +32,107 @@ namespace ZDoneWebApi.Controllers
             _authBl = authBl;
         }
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody]LoginModel model)
+        [HttpGet("isLogined")]
+        public async Task<IActionResult> IsLogined()
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.SelectMany(e => e.Value.Errors.Select(e => e.ErrorMessage)));
+            }
+            var token = HttpContext.Request.Cookies[".AspNetCore.Application.Id"];
+
+            if (!string.IsNullOrEmpty(token))
+                return Ok();
+            return BadRequest();
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.SelectMany(e => e.Value.Errors.Select(e => e.ErrorMessage)));
+            }
             if (model == null)
                 return BadRequest("Invalid client request");
 
-            var user = await _accountBl.GetUserByName(model.UserName);
-            if (user == null)
+            var authResponse = await _authBl.LoginAsync(model);
+            if (!authResponse.Success)
             {
-                return BadRequest("User not found!");
+                return BadRequest(authResponse.ErrorMessages);
             }
-            if (!await _accountBl.CheckPassword(user, model.Password))
+
+            HttpContext.Response.Cookies.Append(".AspNetCore.Application.Id", authResponse.Token,
+            new CookieOptions
             {
-                return Unauthorized("Wrong password");
+                MaxAge = TimeSpan.FromMinutes(2)
+            });
+            HttpContext.Response.Cookies.Append("User-email", model.Email,
+            new CookieOptions
+            {
+                MaxAge = TimeSpan.FromMinutes(2)
+            });
+            return Ok(new
+            {
+                Token = authResponse.Token,
+                RefreshToken = authResponse.RefreshToken
+            });
+        }
+
+        [HttpPost]
+        [Route("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.SelectMany(e => e.Value.Errors.Select(e => e.ErrorMessage)));
             }
-            var userClaims = await _authBl.GetClaimsAsync(user);
+            if (!string.Equals(model.ConfirmedPassword, model.Password))
+            {
+                return BadRequest("Confirmed password not match");
+            }
+            var authResult = await _authBl.RegisterAsync(model);
+            if (!authResult.Success)
+            {
+                return BadRequest(authResult.ErrorMessages);
+            }
+            var cookieOption = new CookieOptions();
+            return Ok(new { Message = "Registered" });
+        }
 
-            var tokenString = _authBl.GetAccessToken(userClaims);
+        [HttpPost("refresh")]
+        public async Task<IActionResult> Refresh([FromBody] RefreshTokenRequest model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.SelectMany(e => e.Value.Errors.Select(e => e.ErrorMessage)));
+            }
+            if (model == null)
+                return BadRequest("Invalid client request");
 
-            return Ok(new { Token = tokenString });
+            var authResponse = await _authBl.RefreshTokenAsync(model.Token, model.RefreshToken);
+            if (!authResponse.Success)
+            {
+                return BadRequest(authResponse.ErrorMessages);
+            }
+
+            return Ok(new
+            {
+                Token = authResponse.Token,
+                RefreshToken = authResponse.RefreshToken
+            });
+        }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> LogOut()
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.SelectMany(e => e.Value.Errors.Select(e => e.ErrorMessage)));
+            }
+
+            await _authBl.LogOutAsync(HttpContext);
+            return Ok();
         }
     }
 }

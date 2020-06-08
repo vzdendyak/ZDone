@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  basicUrl: 'http://localhost:5000/api',
+  basicUrl: 'https://localhost:5001/api',
   url: 'http://localhost:4200',
   months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 };

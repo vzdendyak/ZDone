@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZDoneWebApi", "ZDoneWebApi\ZDoneWebApi.csproj", "{F384D7BE-7B33-4477-8E6E-719C37218996}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL.Tests", "DAL.Tests\DAL.Tests.csproj", "{D6E65DF8-2975-4638-B3F6-9082C145FC94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL.Tests", "DAL.Tests\DAL.Tests.csproj", "{D6E65DF8-2975-4638-B3F6-9082C145FC94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

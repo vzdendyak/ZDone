@@ -1,21 +1,45 @@
 <div class="mainContent">
 
 <div class="wrapper">
+
   <div class="loginForm  text-center">
     <h2 class="text-center loginText">Login</h2>
-    <form autocomplete="off">
+    <form autocomplete="off" [formGroup]="loginReactiveForm" (submit)="onSubmit()">
+
       <div class="form-group">
-        <input  type="email" placeholder="Enter email" class="form-control" id="emailForm">
+        <input  type="email" [class.is-invalid] = "loginReactiveForm.get('email').invalid && loginReactiveForm.get('email').touched" placeholder="Enter email" formControlName="email" class="form-control" id="emailForm">
+        <div *ngIf="(emailGet.invalid && emailGet.touched) || emailGet.dirty" class="text-left">
+          <small *ngIf="emailGet.errors?.required" class="text-danger">Email is required</small>
+          <!--question mark(?) is a safe navigation operator-->
+          <small *ngIf="emailGet.errors?.pattern" class="text-danger">Please provide a valid email address</small>
+        </div>
       </div>
+
       <div class="form-group">
-        <input   type="password" placeholder="Enter password" class="form-control" id="passwordForm">
+        <input   type="password" [class.is-invalid] = "loginReactiveForm.get('password').invalid && loginReactiveForm.get('password').touched" placeholder="Enter password" formControlName="password" class="form-control" id="passwordForm">
+        <div *ngIf="(passwordGet.invalid && passwordGet.touched) || passwordGet.dirty" class="text-left"  >
+          <small *ngIf="passwordGet.errors?.required" class="text-danger">Password is required</small>
+          <!--question mark(?) is a safe navigation operator-->
+          <ul *ngIf="passwordGet.errors?.pattern" class="text-left">
+            <li>
+              <small class="text-danger">Must contains: at least 8 characters</small>
+            </li>
+            <li>
+              <small class="text-danger">Must contains: 1 upper-case letter</small>
+            </li>
+            <li>
+              <small  class="text-danger">Must contains: 1 digit</small>
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="form-group buttonsBlock">
         <button type="submit" class="btn btn-lg btn-primary submitButton" value="submit" name="submit">Sign in</button>
-        <button type="submit" [routerLink]="['/account/registration']" class="btn btn-lg btn-primary submitButton" value="submit" name="submit">Sign up</button>
+        <button type="button" [routerLink]="['/account/registration']" class="btn btn-lg btn-primary submitButton"  name="register">Sign up</button>
       </div>
     </form>
 <p class="text-muted mt-5 text-center">© Z-Done Application 2019-2020</p>
   </div>
   </div>
+  <button type="button" [routerLink]="['/windows/0/all']" class="btn btn-lg btn-primary">To windows</button>
 </div>

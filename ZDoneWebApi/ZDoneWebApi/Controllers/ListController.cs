@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using ZDoneWebApi.BusinessLogic.Interfaces;
@@ -11,6 +12,7 @@ namespace ZDoneWebApi.Controllers
     [EnableCors]
     [Route("api/lists")]
     [ApiController]
+    [Authorize]
     public class ListController : ControllerBase
     {
         private readonly IListBl _listBl;

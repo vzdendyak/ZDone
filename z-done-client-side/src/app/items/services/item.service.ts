@@ -11,8 +11,9 @@ import {formatDate} from '@angular/common';
 export class ItemService {
   url: string = environment.basicUrl + '/items';
   requestOptions: object = {
-    headers: new HttpHeaders().append('Authorization', 'Bearer <yourtokenhere>'),
-    responseType: 'text'
+    //headers: new HttpHeaders().append('Authorization', 'Bearer <yourtokenhere>'),
+    //responseType: 'text'
+    withCredentials: true
   };
   reloadTaskSubject = new Subject<number>();
   insertTaskSubject = new Subject<Item>();

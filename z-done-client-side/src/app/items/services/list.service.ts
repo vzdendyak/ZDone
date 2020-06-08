@@ -11,8 +11,9 @@ import {List} from '../../models/list';
 export class ListService {
   url: string = environment.basicUrl + '/lists';
   requestOptions: object = {
-    headers: new HttpHeaders().append('Authorization', 'Bearer <yourtokenhere>'),
-    responseType: 'text'
+   // responseType: 'text',
+    withCredentials: true
+
   };
 
   constructor(private http: HttpClient) {

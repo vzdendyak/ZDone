@@ -31,9 +31,9 @@ namespace ZDoneWebApi.Repositories
                 return applicationUser;
         }
 
-        public async Task<User> GetUserByUserName(string userName)
+        public async Task<User> GetUserByEmail(string email)
         {
-            User applicationUser = await userManager.FindByNameAsync(userName);
+            User applicationUser = await userManager.FindByEmailAsync(email);
             if (applicationUser == null)
                 return null;
             else

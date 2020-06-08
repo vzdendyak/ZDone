@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ using ZDoneWebApi.Data.DTOs;
 
 namespace ZDoneWebApi.Controllers
 {
+    [Authorize]
     [EnableCors]
     [Route("api/items")]
     [ApiController]
@@ -26,6 +28,7 @@ namespace ZDoneWebApi.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
+            Console.WriteLine(HttpContext.Request.Cookies["refresh"]);
             var allItems = await _itemBl.GetAllAsync();
             if (allItems == null)
                 return NotFound();

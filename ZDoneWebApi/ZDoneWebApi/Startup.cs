@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +23,7 @@ using ZDoneWebApi.BusinessLogic;
 using ZDoneWebApi.BusinessLogic.Interfaces;
 using ZDoneWebApi.Data;
 using ZDoneWebApi.Data.Models;
+using ZDoneWebApi.Middleware;
 using ZDoneWebApi.Repositories;
 using ZDoneWebApi.Repositories.Interfaces;
 
@@ -55,23 +58,31 @@ namespace ZDoneWebApi
                 };
                 set.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<AppDbContext>();
+
+            var tokenParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = Configuration["JwtIssuer"],
+                ValidAudience = Configuration["JwtAudience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["JwtKey"])),
+                ClockSkew = TimeSpan.Zero
+            };
+
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(options =>
             {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = Configuration["JwtIssuer"],
-                    ValidAudience = Configuration["JwtAudience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtKey"]))
-                };
+                options.SaveToken = true;
+                options.TokenValidationParameters = tokenParameters;
+                options.RequireHttpsMetadata = true;
             });
             services.AddAutoMapper(typeof(Startup));
             services.AddCors();
@@ -80,9 +91,10 @@ namespace ZDoneWebApi
             {
                 options.AddPolicy("AllowAllOrigin", builder => builder.AllowAnyOrigin());
             });
-
+            services.AddSingleton(tokenParameters);
             services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<IItemBl, ItemBl>();
+            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IProjectBl, ProjectBl>();
@@ -115,6 +127,35 @@ namespace ZDoneWebApi
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v2", new OpenApiInfo { Title = "Sprint Controller", Version = "v2" });
+                var security = new Dictionary<string, IEnumerable<string>>
+                {
+                     {"Bearer", new string[0] }
+                };
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the bearer scheme",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                     {
+                         new OpenApiSecurityScheme
+                         {
+                             Reference = new OpenApiReference
+                             {
+                                 Type = ReferenceType.SecurityScheme,
+                                 Id = "Bearer"
+                             },
+                             Scheme = "oauth2",
+                             Name = "Bearer",
+                             In = ParameterLocation.Header,
+                         },
+                         new List<string>()
+                     }
+                });
             });
         }
 
@@ -130,10 +171,17 @@ namespace ZDoneWebApi
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCookiePolicy(new CookiePolicyOptions
+            {
+                MinimumSameSitePolicy = SameSiteMode.None,
+                HttpOnly = HttpOnlyPolicy.Always,
+                Secure = CookieSecurePolicy.Always
+            });
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(builder => builder.WithOrigins("https://localhost:4201").AllowCredentials().AllowAnyMethod().AllowAnyHeader());
+            app.UseMiddleware<AuthMiddleware>();
             app.UseAuthentication();
 
             app.UseAuthorization();
