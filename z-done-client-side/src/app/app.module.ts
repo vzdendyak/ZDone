@@ -38,7 +38,8 @@ import {CookieService} from 'ngx-cookie-service';
       {path: 'account/login', component: LoginFunctionalityComponent},
       {path: 'account/registration', component: RegistrationFunctionalityComponent},
       {path: 'windows/:folderId/:listId', component: MainWindowComponent, canActivate: [AuthGuard]},
-      {path: 'windows', redirectTo: '/windows/0/all', canActivate: [AuthGuard]}
+      {path: 'windows', redirectTo: '/windows/0/all', canActivate: [AuthGuard]},
+      {path: '', redirectTo: '/windows/0/all', pathMatch: 'full' }
 
     ]),
     ItemsModule,

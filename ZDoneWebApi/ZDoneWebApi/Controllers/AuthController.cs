@@ -42,8 +42,8 @@ namespace ZDoneWebApi.Controllers
             var token = HttpContext.Request.Cookies[".AspNetCore.Application.Id"];
 
             if (!string.IsNullOrEmpty(token))
-                return Ok();
-            return BadRequest();
+                return Ok(true);
+            return BadRequest(false);
         }
 
         [HttpPost("login")]

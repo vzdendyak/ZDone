@@ -36,7 +36,7 @@ export class AuthInterceptor implements HttpInterceptor {
           if (err instanceof HttpErrorResponse) {
             if (err.status == 401) {
               console.log('Unauthorized');
-              this.router.navigate(['/account/login']);
+             // this.router.navigate(['/account/login']);
             }
           }
         }
