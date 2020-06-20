@@ -19,6 +19,7 @@ namespace ZDoneWebApi.Data.Models
         public DateTime? ExpiredDate { get; set; }
 
         public int? ListId { get; set; }
+        public bool IsDeleted { get; set; }
         public int StatusId { get; set; }
         public int? ParentId { get; set; }
 

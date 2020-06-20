@@ -1,12 +1,14 @@
 .defaultLinkItem {
   font-size: 14px;
-  margin: 3px 8px;
-  padding: 7px 0px 7px 15px;
+  margin: 1px 10px;
+  padding: 3px 0px 7px 10px;
   border-radius: 6px;
 }
 
 .defaultLinkItem:hover {
-  background-color: #4f8ad6;  cursor: pointer;
+  background-color: #4f8ad6;
+  cursor: pointer;
+  color: white;
 }
 
 .basicCategories {
@@ -34,6 +36,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  height: 100%;
 }
 
 .userInformation {
@@ -57,6 +60,25 @@
 .menuIcon{
   position: relative;
   top: 6px;
+  font-size: 22px;
   padding-right: 10px;
   color: white;
 }
+#scrollableBlock::-webkit-scrollbar {
+  width: 6px;
+}
+
+#scrollableBlock::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+#scrollableBlock::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #1b3782;;
+}
+#scrollableBlock{
+  height: 90%;
+  overflow-y: scroll;
+}
+

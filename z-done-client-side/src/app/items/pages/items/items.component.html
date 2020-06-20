@@ -11,31 +11,28 @@
   </div>
   <div class="itemsBlock">
     <ul class="itemList">
-
-        <div *ngFor="let i of unDoneItems" class="liContent">
-      <span (click)="doneClicked(i)" class="stateButtonBlock notSelectable">
-      <span [ngClass]="{DoneButton: i.isDone, unDoneButton: !i.isDone}">
-       </span>
+      <li *ngFor="let i of unDoneItems" class="liContent">
+<!--      <span (click)="doneClicked(i)" class="stateButtonBlock notSelectable">-->
+      <span  (click)="doneClicked(i)" class="notSelectable" [ngClass]="{DoneButton: i.isDone, unDoneButton: !i.isDone}">
+<!--       </span>-->
         </span>
-          <li (click)="itemChanged(i.id)" [ngClass]="{'activeItem': i.id==itemService.activeItemId}"
-              class="task">
-            <div class="liInsideContent">
-              <span class="taskName">{{i.name }}  </span>
-              <i (click)="deleteClicked(i.id)"
-                 class="material-icons deleteButton">
-                delete_forever
-              </i>
-              <!--            <span class="taskDate">{{this.datePipe.transform(i.expiredDate, 'dd.MM')}}</span>-->
-              <span *ngIf="i.expiredDate!==null" class="taskDate">{{this.itemService.getDate(i.expiredDate)}}</span>
-              <span *ngIf="i.list!==undefined && i.list!==null && i.list.name!==name"
-                    class="listName">{{i.list.name}}</span>
-            </div>
-            <div class="reasonContent">
-              <span class="specificReason">{{i.reason}}</span>
-            </div>
-          </li>
+        <div (click)="itemChanged(i.id)" [ngClass]="{'activeItem': i.id==itemService.activeItemId}"
+            class="task">
+          <div class="liInsideContent">
+            <span class="taskName">{{i.name }}  </span>
 
+            <!--            <span class="taskDate">{{this.datePipe.transform(i.expiredDate, 'dd.MM')}}</span>-->
+            <span *ngIf="i.expiredDate!==null" class="taskDate">{{this.itemService.getDate(i.expiredDate)}}</span>
+            <span *ngIf="i.list!==undefined && i.list!==null && i.list.name!==name"
+                  class="listName">{{i.list.name}}</span>
+          </div>
+          <i (click)="deleteClicked(i2.id)"
+             class="material-icons deleteButton">
+            delete_forever
+          </i>
         </div>
+
+      </li>
 
 
     </ul>
@@ -46,30 +43,27 @@
       <span class="itemsDivider">Completed</span>
     </div>
     <ul *ngIf="!hideCompleted" class="itemList completedList">
-      <div *ngFor="let i2 of doneItems" class="liContent">
-      <span (click)="doneClicked(i2)" class="stateButtonBlock notSelectable">
-      <span [ngClass]="{DoneButton: i2.isDone, unDoneButton: !i2.isDone}">
-
+      <li *ngFor="let i2 of doneItems" class="liContent ">
+<!--        <div (click)="doneClicked(i2)" class="stateButtonBlock notSelectable">-->
+      <span (click)="doneClicked(i2)" class="notSelectable" [ngClass]="{DoneButton: i2.isDone, unDoneButton: !i2.isDone}">
       </span>
-        </span>
-        <li (click)="itemChanged(i2.id)" [ngClass]="{'activeItem': i2.id==itemService.activeItemId}"
+<!--        </div>-->
+        <div (click)="itemChanged(i2.id)" [ngClass]="{'activeItem': i2.id==itemService.activeItemId}"
             class="task">
           <div class="liInsideContent">
             <span class="taskName">{{i2.name }}  </span>
-            <i (click)="deleteClicked(i2.id)"
-               class="material-icons deleteButton">
-              delete_forever
-            </i>
+
             <span *ngIf="i2.expiredDate!==null" class="taskDate">{{this.itemService.getDate(i2.expiredDate)}}</span>
             <span *ngIf="i2.list!==undefined && i2.list!==null && i2.list.name!==name"
                   class="listName">{{i2.list.name}}</span>
 
           </div>
-          <div class="reasonContent">
-            <span class="specificReason">{{i2.reason}}</span>
-          </div>
-        </li>
-      </div>
+          <i (click)="deleteClicked(i2.id)"
+             class="material-icons deleteButton">
+            delete_forever
+          </i>
+        </div>
+      </li>
     </ul>
   </div>
 

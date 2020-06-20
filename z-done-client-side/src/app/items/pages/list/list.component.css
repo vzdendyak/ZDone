@@ -4,9 +4,12 @@
   position: relative;
 }
 .mainContent{
-  color: #eef1f7;}
+  color: #eef1f7;
+  height: 100%;
+ }
 .mainContent:hover{
-  background-color: red}
+  /*background-color: red*/
+}
 .context-menu {
   position: absolute;
   display: none;

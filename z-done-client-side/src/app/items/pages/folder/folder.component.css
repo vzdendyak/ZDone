@@ -4,6 +4,7 @@
   text-decoration: none;
 }
 .listItem{
+  width: 90%;
   padding-left: 10px;
   list-style: none;
   padding-bottom: 4px;

@@ -17,6 +17,8 @@ namespace ZDoneWebApi.Data.DTOs
 
         public int? ListId { get; set; }
         public int StatusId { get; set; }
+        public bool IsDeleted { get; set; }
+
         public int? ParentId { get; set; }
         public ListDto List { get; set; }
     }
