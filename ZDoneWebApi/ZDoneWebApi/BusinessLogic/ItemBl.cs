@@ -23,8 +23,16 @@ namespace ZDoneWebApi.BusinessLogic
 
         public async Task<IEnumerable<ItemDto>> GetAllAsync()
         {
-            var items = await _itemRepository.ReadAll();
+            var items = await _itemRepository.GetAll();
 
+            IEnumerable<ItemDto> dtoItems = _mapper.Map<IEnumerable<Item>, IEnumerable<ItemDto>>(items);
+
+            return dtoItems;
+        }
+
+        public async Task<IEnumerable<ItemDto>> GetDeletedItems()
+        {
+            var items = await _itemRepository.GetDeletedItems();
             IEnumerable<ItemDto> dtoItems = _mapper.Map<IEnumerable<Item>, IEnumerable<ItemDto>>(items);
 
             return dtoItems;
@@ -49,6 +57,14 @@ namespace ZDoneWebApi.BusinessLogic
             }
 
             return null;
+        }
+
+        public async Task<IEnumerable<ItemDto>> GetCompletedItems()
+        {
+            var items = await _itemRepository.GetCompletedItems();
+
+            IEnumerable<ItemDto> dtoItems = _mapper.Map<IEnumerable<Item>, IEnumerable<ItemDto>>(items);
+            return dtoItems;
         }
 
         public async Task<IEnumerable<ItemDto>> GetUnlistedItems()
@@ -96,8 +112,9 @@ namespace ZDoneWebApi.BusinessLogic
             var realItem = await _itemRepository.Read(id);
 
             if (realItem == null) throw new NotImplementedException();
-            await _itemRepository.Delete(id);
-            return new ItemResponse(true, "Deleted successfully");
+            realItem.IsDeleted = !realItem.IsDeleted;
+            await _itemRepository.Update(realItem);
+            return new ItemResponse(true, "(soft)Deleted successfully");
         }
     }
 }

@@ -11,6 +11,10 @@ namespace ZDoneWebApi.BusinessLogic.Interfaces
 
         Task<IEnumerable<ItemDto>> GetDateItems(string date);
 
+        Task<IEnumerable<ItemDto>> GetDeletedItems();
+
+        Task<IEnumerable<ItemDto>> GetCompletedItems();
+
         Task<IEnumerable<ItemDto>> GetUnlistedItems();
 
         Task<ItemDto> ReadAsync(int id);

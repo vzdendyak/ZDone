@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {Item} from '../../models/item';
 import {formatDate} from '@angular/common';
@@ -32,6 +32,14 @@ export class ItemService {
 
   getItemsByDate(date: string): Observable<Item[]> {
     return this.http.get<Item[]>(`${this.url}/date/${date}`);
+  }
+
+  getCompletedItems(): Observable<Item[]> {
+    return this.http.get<Item[]>(`${this.url}/completed`);
+  }
+
+  getDeletedItems(): Observable<Item[]> {
+    return this.http.get<Item[]>(`${this.url}/deleted`);
   }
 
   getUnlistedItems(): Observable<Item[]> {
@@ -88,6 +96,7 @@ export class ItemService {
       createdDate: new Date(date),
       expiredDate: new Date(date),
       isDone: false,
+      isDeleted: false,
       listId: 1,
       priority: null,
       parent: null,

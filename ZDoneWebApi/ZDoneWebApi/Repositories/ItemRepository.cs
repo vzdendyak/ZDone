@@ -18,7 +18,7 @@ namespace ZDoneWebApi.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Item>> ReadAll()
+        public async Task<IEnumerable<Item>> GetAll()
         {
             IEnumerable<Item> items = await _context.Items.Include(i => i.List).ToListAsync();
             return items;
@@ -26,19 +26,31 @@ namespace ZDoneWebApi.Repositories
 
         public async Task<IEnumerable<Item>> GetTodayItems()
         {
-            IEnumerable<Item> items = await _context.Items.Where(i => i.ExpiredDate == DateTime.Today).Include(i => i.List).ToListAsync();
+            IEnumerable<Item> items = await _context.Items.Where(i => i.ExpiredDate == DateTime.Today && i.IsDeleted == false).Include(i => i.List).ToListAsync();
+            return items;
+        }
+
+        public async Task<IEnumerable<Item>> GetDeletedItems()
+        {
+            IEnumerable<Item> items = await _context.Items.Where(i => i.IsDeleted == true).Include(i => i.List).ToListAsync();
+            return items;
+        }
+
+        public async Task<IEnumerable<Item>> GetCompletedItems()
+        {
+            IEnumerable<Item> items = await _context.Items.Where(i => i.IsDeleted == false && i.IsDone == true).Include(i => i.List).ToListAsync();
             return items;
         }
 
         public async Task<IEnumerable<Item>> GetWeekItems()
         {
-            IEnumerable<Item> items = await _context.Items.Where(i => i.ExpiredDate >= DateTime.Today && i.ExpiredDate <= DateTime.Today.AddDays(7)).Include(i => i.List).ToListAsync();
+            IEnumerable<Item> items = await _context.Items.Where(i => i.ExpiredDate >= DateTime.Today && i.ExpiredDate <= DateTime.Today.AddDays(7) && i.IsDeleted == false).Include(i => i.List).ToListAsync();
             return items;
         }
 
         public async Task<IEnumerable<Item>> GetUnlistedItems()
         {
-            IEnumerable<Item> items = await _context.Items.Where(i => i.ListId == null).ToListAsync();
+            IEnumerable<Item> items = await _context.Items.Where(i => i.ListId == null && i.IsDeleted == false).ToListAsync();
             return items;
         }
 

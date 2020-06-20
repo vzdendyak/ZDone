@@ -11,11 +11,9 @@
   </div>
   <div class="itemsBlock">
     <ul class="itemList">
-      <li *ngFor="let i of unDoneItems" class="liContent">
-<!--      <span (click)="doneClicked(i)" class="stateButtonBlock notSelectable">-->
-      <span  (click)="doneClicked(i)" class="notSelectable" [ngClass]="{DoneButton: i.isDone, unDoneButton: !i.isDone}">
-<!--       </span>-->
-        </span>
+      <li *ngFor="let i of unDoneItems" class="liContent" >
+       <span  (click)="doneClicked(i)" class="notSelectable" [ngClass]="{DoneButton: i.isDone, unDoneButton: !i.isDone}">
+         </span>
         <div (click)="itemChanged(i.id)" [ngClass]="{'activeItem': i.id==itemService.activeItemId}"
             class="task">
           <div class="liInsideContent">
@@ -26,7 +24,7 @@
             <span *ngIf="i.list!==undefined && i.list!==null && i.list.name!==name"
                   class="listName">{{i.list.name}}</span>
           </div>
-          <i (click)="deleteClicked(i2.id)"
+          <i (click)="deleteClicked(i.id)" *ngIf="!i.isDeleted"
              class="material-icons deleteButton">
             delete_forever
           </i>
@@ -44,11 +42,9 @@
     </div>
     <ul *ngIf="!hideCompleted" class="itemList completedList">
       <li *ngFor="let i2 of doneItems" class="liContent ">
-<!--        <div (click)="doneClicked(i2)" class="stateButtonBlock notSelectable">-->
-      <span (click)="doneClicked(i2)" class="notSelectable" [ngClass]="{DoneButton: i2.isDone, unDoneButton: !i2.isDone}">
+       <span (click)="doneClicked(i2)" class="notSelectable" [ngClass]="{DoneButton: i2.isDone, unDoneButton: !i2.isDone}">
       </span>
-<!--        </div>-->
-        <div (click)="itemChanged(i2.id)" [ngClass]="{'activeItem': i2.id==itemService.activeItemId}"
+         <div (click)="itemChanged(i2.id)" [ngClass]="{'activeItem': i2.id==itemService.activeItemId}"
             class="task">
           <div class="liInsideContent">
             <span class="taskName">{{i2.name }}  </span>
@@ -59,7 +55,7 @@
 
           </div>
           <i (click)="deleteClicked(i2.id)"
-             class="material-icons deleteButton">
+             class="material-icons deleteButton" *ngIf="!i2.isDeleted">
             delete_forever
           </i>
         </div>

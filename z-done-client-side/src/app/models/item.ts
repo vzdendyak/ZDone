@@ -10,7 +10,7 @@ export class Item {
   public reason: string;
   public statusId: number;
   public isDone: boolean;
-
+  public isDeleted: boolean;
   public priority: number;
   public createdDate: Date;
   public expiredDate: Date;

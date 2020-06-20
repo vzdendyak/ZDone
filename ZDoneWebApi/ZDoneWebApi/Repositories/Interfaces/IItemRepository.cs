@@ -8,9 +8,13 @@ namespace ZDoneWebApi.Repositories.Interfaces
 {
     public interface IItemRepository
     {
-        Task<IEnumerable<Item>> ReadAll();
+        Task<IEnumerable<Item>> GetAll();
 
         Task<IEnumerable<Item>> GetWeekItems();
+
+        Task<IEnumerable<Item>> GetDeletedItems();
+
+        Task<IEnumerable<Item>> GetCompletedItems();
 
         Task<IEnumerable<Item>> GetUnlistedItems();
 

@@ -62,6 +62,24 @@ namespace ZDoneWebApi.Controllers
             return Ok(item);
         }
 
+        [HttpGet("completed")]
+        public async Task<ActionResult> GetCompleted()
+        {
+            var item = await _itemBl.GetCompletedItems();
+            if (item == null)
+                return NotFound();
+            return Ok(item);
+        }
+
+        [HttpGet("deleted")]
+        public async Task<ActionResult> GetDeleted()
+        {
+            var item = await _itemBl.GetDeletedItems();
+            if (item == null)
+                return NotFound();
+            return Ok(item);
+        }
+
         // POST: api/Item
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] ItemDto item)
@@ -83,7 +101,7 @@ namespace ZDoneWebApi.Controllers
             var result = await _itemBl.UpdateAsync(item);
             if (!result.Success)
                 return BadRequest(result.Message);
-            return Ok(result.Message);
+            return Ok();
         }
 
         // DELETE: api/ApiWithActions/5
@@ -93,7 +111,7 @@ namespace ZDoneWebApi.Controllers
             var result = await _itemBl.DeleteAsync(id);
             if (!result.Success)
                 return BadRequest(result.Message);
-            return Ok(result.Message);
+            return Ok();
         }
     }
 }

@@ -22,7 +22,7 @@ namespace DAL.Tests
                 IItemRepository repository = new ItemRepository(context);
                 //Act
                 List<Item> expected = context.Items.ToList();
-                IEnumerable<Item> actual = await repository.ReadAll();
+                IEnumerable<Item> actual = await repository.GetAll();
                 //Assert
                 Assert.True(actual != null);
                 Assert.Equal(expected.Count, actual.ToList().Count);

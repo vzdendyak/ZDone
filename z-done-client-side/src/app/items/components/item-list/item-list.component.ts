@@ -51,15 +51,14 @@ export class ItemListComponent implements OnInit {
           case 'completed':
             this.listName = 'Completed';
             this.currentList = null;
-            this.doneItems = null;
+            this.getCompleted();
             this.unDoneItems = null;
             break;
 
           case 'trash':
             this.listName = 'Trash';
             this.currentList = null;
-            this.doneItems = null;
-            this.unDoneItems = null;
+            this.getDeletedTasks();
             break;
 
           case 'calendar':
@@ -122,8 +121,14 @@ export class ItemListComponent implements OnInit {
 
   getAllTasks() {
     this.itemService.getItems().subscribe(items => {
-      this.doneItems = items.filter(i => i.isDone == true);
-      this.unDoneItems = items.filter(i => i.isDone == false);
+      this.doneItems = items.filter(i => i.isDone == true && i.isDeleted == false);
+      this.unDoneItems = items.filter(i => i.isDone == false && i.isDeleted == false);
+    });
+  }
+
+  getCompleted() {
+    this.itemService.getCompletedItems().subscribe(items => {
+      this.doneItems = items;
     });
   }
 
@@ -158,8 +163,21 @@ export class ItemListComponent implements OnInit {
     this.itemService.deleteItem(id).subscribe(value => {
       console.log('Deleted: ' + id);
       let index = this.doneItems.findIndex(i => i.id === id);
+      if (index === -1) {
+        index = this.unDoneItems.findIndex(i => i.id === id);
+        this.unDoneItems.splice(index, 1);
+        return;
+      }
       this.doneItems.splice(index, 1);
     });
   }
+
+  getDeletedTasks() {
+    this.itemService.getDeletedItems().subscribe(items => {
+      this.doneItems = items.filter(i => i.isDone == true);
+      this.unDoneItems = items.filter(i => i.isDone == false);
+    });
+  }
+
 
 }
