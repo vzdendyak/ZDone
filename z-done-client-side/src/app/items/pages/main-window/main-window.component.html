@@ -3,11 +3,15 @@
     <app-menu-details></app-menu-details>
 
   </div>
-  <div class="taskListBlock block">
+  <div class="taskListBlock block" *ngIf="!isCalendarView; else Cal">
     <app-item-list></app-item-list>
-
   </div>
 
+  <ng-template #Cal>
+    <div class="taskListBlock block">
+      <app-item-calendar></app-item-calendar>
+    </div>
+  </ng-template>
   <div class="taskDetailBlock block">
     <app-item-details></app-item-details>
 

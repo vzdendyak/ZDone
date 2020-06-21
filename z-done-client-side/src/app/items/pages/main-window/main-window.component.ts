@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ItemService} from '../../services/item.service';
 
 @Component({
   selector: 'app-main-window',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainWindowComponent implements OnInit {
 
-  constructor() { }
+  isCalendarView = false;
+
+  constructor(private itemService: ItemService) {
+    this.itemService.calendarSwitchSubject.subscribe(value => {
+      this.isCalendarView = value;
+    });
+  }
 
   ngOnInit() {
   }

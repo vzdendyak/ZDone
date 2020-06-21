@@ -34,12 +34,16 @@ export class ItemComponent implements OnInit {
 
   reloadItem() {
     //console.log('newDate : ' + this.date.getDay());
+
     let date1 = new Date(this.date);
     let date2 = new Date(Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate(), date1.getHours(), date1.getMinutes(), date1.getSeconds()));
     console.log('newDate : ' + date2.toDateString());
 
 
     this.item.expiredDate = date2;
+    if (this.date == null) {
+      this.item.expiredDate = null;
+    }
     this.itemService.insertNewItem(this.item);
   }
 

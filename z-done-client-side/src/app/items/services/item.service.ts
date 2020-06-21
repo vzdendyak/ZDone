@@ -17,6 +17,7 @@ export class ItemService {
   };
   reloadTaskSubject = new Subject<number>();
   insertTaskSubject = new Subject<Item>();
+  calendarSwitchSubject = new Subject<boolean>();
   updatedTaskSubject = new Subject<boolean>();
   completeTaskSubject = new Subject<Item>();
   activeItemId: number;
@@ -113,5 +114,7 @@ export class ItemService {
     let text = `${newDate.getDate()} ${month}`;
     return text;
   }
-
+  switchCalendar(state: boolean){
+    this.calendarSwitchSubject.next(state);
+  }
 }

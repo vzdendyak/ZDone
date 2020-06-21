@@ -19,6 +19,9 @@ import {RegistrationFunctionalityComponent} from './account/components/registrat
 import {AuthGuard} from './account/auth-guard';
 import {AuthInterceptor} from './account/auth-interceptor';
 import {CookieService} from 'ngx-cookie-service';
+import {FullCalendarModule} from '@fullcalendar/angular';
+import {ItemCalendarComponent} from './items/components/item-calendar/item-calendar.component';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +33,7 @@ import {CookieService} from 'ngx-cookie-service';
     MaterialAppsModule,
     DragDropModule,
     FormsModule,
+    FullCalendarModule,
     MatCheckboxModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -38,6 +42,7 @@ import {CookieService} from 'ngx-cookie-service';
       {path: 'account/login', component: LoginFunctionalityComponent},
       {path: 'account/registration', component: RegistrationFunctionalityComponent},
       {path: 'windows/:folderId/:listId', component: MainWindowComponent, canActivate: [AuthGuard]},
+      {path: 'windows/0/calendar', component: ItemCalendarComponent, canActivate: [AuthGuard]},
       {path: 'windows', redirectTo: '/windows/0/all', canActivate: [AuthGuard]},
       {path: '', redirectTo: '/windows/0/all', pathMatch: 'full' }
 

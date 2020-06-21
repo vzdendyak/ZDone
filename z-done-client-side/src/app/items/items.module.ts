@@ -21,6 +21,8 @@ import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule, MomentDateAdapter}
 import * as _moment from 'moment';
 import {defaultFormat as _rollupMoment} from 'moment';
 import { CreateListFormComponent } from './components/create-list-form/create-list-form.component';
+import { ItemCalendarComponent } from './components/item-calendar/item-calendar.component';
+import {FullCalendarModule} from '@fullcalendar/angular';
 
 const moment = _rollupMoment || _moment;
 
@@ -37,14 +39,15 @@ export const MY_FORMATS = {
 };
 
 @NgModule({
-  declarations: [ItemListComponent, ItemDetailsComponent, MenuDetailsComponent, ItemsComponent, ItemComponent, MenuComponent, MainWindowComponent, FolderComponent, ListComponent, CreateListFormComponent],
+  declarations: [ItemListComponent, ItemDetailsComponent, MenuDetailsComponent, ItemsComponent, ItemComponent,
+    MenuComponent, MainWindowComponent, FolderComponent, ListComponent, CreateListFormComponent, ItemCalendarComponent],
   imports: [
     CommonModule,
     MaterialAppsModule,
     FormsModule,
     RouterModule,
     MatDatepickerModule,
-    MatMomentDateModule, ReactiveFormsModule
+    MatMomentDateModule, ReactiveFormsModule, FullCalendarModule
 
   ],
   // entryComponents: [CreateListFormComponent],

@@ -1,0 +1,23 @@
+<!--<button (click)="addEvent()" class="btn-primary btn">Add event</button>-->
+<div class="mainContent">
+  <full-calendar #calendar
+                 (dateClick)="handleDateClick($event)"
+                 (eventClick)="handleEventClick($event)"
+                 [deepChangeDetection]="true"
+                 [dragScroll]="true"
+                 [draggable]="true"
+                 [editable]="true"
+                 [events]="calendarEvents"
+                 [header]="{
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth, timeGridWeek, timeGridDay, listWeek'
+                      }"
+                 [height]="'parent'"
+                 [plugins]="calendarPlugins"
+                 [selectable]="true"
+                 defaultView="dayGridMonth"
+  >
+  </full-calendar>
+</div>
+<!--<div id="calendar"></div>-->

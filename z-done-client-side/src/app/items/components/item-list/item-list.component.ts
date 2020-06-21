@@ -63,6 +63,8 @@ export class ItemListComponent implements OnInit {
 
           case 'calendar':
             this.listName = 'Calendar';
+            this.itemService.switchCalendar(true);
+            return;
             this.currentList = null;
             this.doneItems = null;
             this.unDoneItems = null;
@@ -87,6 +89,7 @@ export class ItemListComponent implements OnInit {
             });
             break;
         }
+        this.itemService.switchCalendar(false);
         console.log('Handled listId: ' + value.listId);
       }
 
