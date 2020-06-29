@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.deploySubpath": ".",
+    "appService.defaultWebAppToDeploy": "/subscriptions/136c2730-9396-498f-a03b-76d31926fd79/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/z-done"
+}
