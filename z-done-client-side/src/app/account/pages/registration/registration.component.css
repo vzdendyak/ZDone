@@ -1,18 +1,27 @@
 .mainContent{
   height: 100%;
+  overflow: auto;
   background-color: #a1c4ff;
 }
 .loginText{
   margin-bottom: 6%;
 }
 .loginForm{
-  width: 25%;
   margin: 0% auto;
-  padding: 2%;
+  padding: 3vh;
   background-color: white;
   border-radius: 15px;
   position: relative;
-  top: 9rem;
+  top: 15vh;
+  max-height: 100vh;
+  max-width: 41vh;
+  /*width: 25%;*/
+  /*margin: 0% auto;*/
+  /*padding: 2%;*/
+  /*background-color: white;*/
+  /*border-radius: 15px;*/
+  /*position: relative;*/
+  /*top: 9rem;*/
 }
 
 #emailForm{
@@ -22,10 +31,18 @@
 
 }
 .submitButton{
-  width: 40%;
+  width: 25vh;
+  /* height: 6vh; */
+  font-size: 15px;
+  padding: 10px;
 }
 .buttonsBlock{
   display: flex;
-  margin-top: 30px;
+  margin-top: 4vh;
+  margin-bottom: 1vh;
   justify-content: space-around;
+}
+.text{
+  font-size: 12px;
+  text-align: center;
 }

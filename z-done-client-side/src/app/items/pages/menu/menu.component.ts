@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {List} from '../../../models/list';
 import {Folder} from '../../../models/folder';
 import {Route, Router} from '@angular/router';
+import {IdentityService} from '../../../account/services/identity.service';
 
 @Component({
   selector: 'app-menu',
@@ -11,8 +12,9 @@ import {Route, Router} from '@angular/router';
 export class MenuComponent implements OnInit {
   @Input() folders: Folder[];
   @Input() lists: List[];
-
-  constructor(private router: Router) {
+  userName = '';
+  constructor(private router: Router, private identityService: IdentityService) {
+  this.userName = localStorage.getItem('sub');
   }
 
   ngOnInit() {
@@ -20,5 +22,12 @@ export class MenuComponent implements OnInit {
 
   goTo(folderId, listId) {
     this.router.navigateByUrl(`windows/${folderId}/${listId}`);
+  }
+  logout(){
+    this.identityService.logOut().subscribe(value => {
+       this.router.navigateByUrl('account/login');
+    },error => {
+      console.log('Error logout: = '  + error);
+    });
   }
 }

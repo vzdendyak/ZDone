@@ -23,6 +23,12 @@ namespace ZDoneWebApi.Repositories
             return folders;
         }
 
+        public async Task<IEnumerable<Folder>> GetByProjectId(int id)
+        {
+            var folders = await _context.Folders.Where(f => f.ProjectId == id).ToListAsync();
+            return folders;
+        }
+
         public async Task<Folder> Read(int id)
         {
             Folder folder = await _context.Folders.FindAsync(id);

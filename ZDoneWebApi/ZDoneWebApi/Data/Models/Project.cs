@@ -10,12 +10,13 @@ namespace ZDoneWebApi.Data.Models
 
         public int Id { get; set; }
         public string Name { get; set; }
+        public string UserId { get; set; }
 
         #endregion Main props
 
         #region Navigation props
 
-        public virtual ICollection<ProjectsUsers> ProjectsUsers { get; set; }
+        public virtual User User { get; set; }
         public virtual ICollection<Folder> Folders { get; set; }
 
         #endregion Navigation props

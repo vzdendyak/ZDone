@@ -8,6 +8,8 @@ namespace ZDoneWebApi.Repositories.Interfaces
     {
         Task<IEnumerable<Folder>> ReadAll();
 
+        Task<IEnumerable<Folder>> GetByProjectId(int id);
+
         Task<IEnumerable<List>> GetAllLists(int id);
 
         Task<Folder> Read(int id);

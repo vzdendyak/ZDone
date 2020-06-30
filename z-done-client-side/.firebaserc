@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "z-done": {
+      "hosting": {
+        "z-done-client-side": [
+          "z-done"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "z-done"
+  }
+}

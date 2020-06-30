@@ -18,17 +18,37 @@ namespace ZDoneWebApi.Controllers
     public class FolderController : ControllerBase
     {
         private readonly IFolderBl _folderBl;
+        private readonly IUserBl _userBl;
+        private string userId;
+        private int projectId;
 
-        public FolderController(IFolderBl folderBl)
+        public FolderController(IFolderBl folderBl, IUserBl userBl)
         {
             _folderBl = folderBl;
+            _userBl = userBl;
+        }
+
+        private (string, int) GetUserId()
+        {
+            var userId = User != null ? User.Claims.Single(c => c.Type == "id").Value : null;
+            var projectId = User != null ? User.Claims.Single(c => c.Type == "projectId").Value : null;
+            if (projectId != null)
+            {
+                return (userId, int.Parse(projectId));
+            }
+            return (userId, 0);
         }
 
         // GET: api/Item
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var allItems = await _folderBl.GetAllAsync();
+            (userId, projectId) = GetUserId();
+            if (!(await _userBl.IsHaveProjectPermission(userId, projectId)))
+            {
+                return Forbid();
+            }
+            var allItems = await _folderBl.GetByProjectIdAsync(projectId, userId);
             if (allItems == null)
                 return NotFound();
             return Ok(allItems);
@@ -37,6 +57,11 @@ namespace ZDoneWebApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
+            (userId, projectId) = GetUserId();
+            if (!(await _userBl.isHaveAccessToFolder(id, userId)))
+            {
+                return Forbid();
+            }
             var folder = await _folderBl.ReadAsync(id);
             if (folder == null)
                 return NotFound();
@@ -46,7 +71,12 @@ namespace ZDoneWebApi.Controllers
         [HttpGet("{id}/lists")]
         public async Task<IActionResult> GetLists(int id)
         {
-            var lists = await _folderBl.GetRelatedLists(id);
+            (userId, projectId) = GetUserId();
+            if (!(await _userBl.isHaveAccessToFolder(id, userId)))
+            {
+                return Forbid();
+            }
+            var lists = await _folderBl.GetRelatedLists(id, userId);
             if (lists == null)
                 return NotFound();
             return Ok(lists);

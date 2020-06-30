@@ -13,10 +13,12 @@ namespace ZDoneWebApi.BusinessLogic
     public class ListBl : IListBl
     {
         private readonly IListRepository _listRepository;
+        private readonly IUserBl _userBl;
         private readonly IMapper _mapper;
 
-        public ListBl(IListRepository listRepository, IMapper mapper)
+        public ListBl(IListRepository listRepository, IUserBl userBl, IMapper mapper)
         {
+            _userBl = userBl;
             _mapper = mapper;
             _listRepository = listRepository;
         }
@@ -57,12 +59,21 @@ namespace ZDoneWebApi.BusinessLogic
             return dtoItems;
         }
 
-        public async Task<ListDto> ReadAsync(int id)
+        public async Task<ListDto> ReadAsync(int id, string userId)
         {
+            await CheckUserPermission(id, userId);
             var list = await _listRepository.Read(id);
             var dtoItem = _mapper.Map<ListDto>(list);
             var item = _listRepository.GetLastItemStored();
             return dtoItem;
+        }
+
+        private async Task CheckUserPermission(int id, string userId)
+        {
+            if (!(await _userBl.IsHaveAccessToList(id, userId)))
+            {
+                throw new Exception("User don't have permission to this list");
+            }
         }
 
         public async Task<ItemResponse> CreateAsync(ListDto list)

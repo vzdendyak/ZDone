@@ -2,21 +2,21 @@
 
 namespace ZDoneWebApi.Data.Models
 {
-    [Table("ProjectsUsers")]
-    public class ProjectsUsers
-    {
-        #region Main props
+    //[Table("ProjectsUsers")]
+    //public class ProjectsUsers
+    //{
+    //    #region Main props
 
-        public int ProjectId { get; set; }
-        public string UserId { get; set; }
+    //    public int ProjectId { get; set; }
+    //    public string UserId { get; set; }
 
-        #endregion Main props
+    //    #endregion Main props
 
-        #region Navigation props
+    //    #region Navigation props
 
-        public virtual Project Project { get; set; }
-        public virtual User User { get; set; }
+    //    public virtual Project Project { get; set; }
+    //    public virtual User User { get; set; }
 
-        #endregion Navigation props
-    }
+    //    #endregion Navigation props
+    //}
 }

@@ -41,7 +41,7 @@ namespace ZDoneWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = Configuration.GetConnectionString("Azure");
+            string connectionString = Configuration.GetConnectionString("Default");
             //if (env.IsProduction())
             //{
             //    connectionString = Configuration.GetConnectionString("Azure");
@@ -120,9 +120,6 @@ namespace ZDoneWebApi
 
             services.AddScoped<IAuthBl, AuthBl>();
 
-            services.AddScoped<IProjectsUsersRepository, ProjectsUsersRepository>();
-            services.AddScoped<IProjectsUsersBl, ProjectsUsersBl>();
-
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<ICommentBl, CommentBl>();
 
@@ -184,7 +181,14 @@ namespace ZDoneWebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(builder => builder.WithOrigins("https://localhost:4201").AllowCredentials().AllowAnyMethod().AllowAnyHeader());
+            if (env.IsDevelopment())
+            {
+                app.UseCors(builder => builder.WithOrigins("https://localhost:4201").AllowCredentials().AllowAnyMethod().AllowAnyHeader());
+            }
+            else
+            {
+                app.UseCors(builder => builder.WithOrigins("https://z-done.web.app").AllowCredentials().AllowAnyMethod().AllowAnyHeader());
+            }
             app.UseMiddleware<AuthMiddleware>();
             app.UseAuthentication();
 

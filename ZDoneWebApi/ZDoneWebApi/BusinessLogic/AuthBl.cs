@@ -24,14 +24,16 @@ namespace ZDoneWebApi.BusinessLogic
         private readonly UserManager<User> _userManager;
         private readonly TokenValidationParameters _tokenValidationParameters;
         private readonly IRefreshTokenRepository _refreshTokenRepository;
+        private readonly IProjectRepository _projectRepository;
 
-        public AuthBl(IConfiguration configuration, IRefreshTokenRepository refreshTokenRepository, IAccountRepository accountRepository, UserManager<User> userManager, TokenValidationParameters tokenValidationParameters)
+        public AuthBl(IConfiguration configuration, IRefreshTokenRepository refreshTokenRepository, IAccountRepository accountRepository, UserManager<User> userManager, IProjectRepository projectRepository, TokenValidationParameters tokenValidationParameters)
         {
             _configuration = configuration;
             _accountRepository = accountRepository;
             _userManager = userManager;
             _tokenValidationParameters = tokenValidationParameters;
             _refreshTokenRepository = refreshTokenRepository;
+            _projectRepository = projectRepository;
         }
 
         public async Task<AuthResultDto> LoginAsync(LoginModel model)
@@ -176,6 +178,7 @@ namespace ZDoneWebApi.BusinessLogic
             var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["JwtKey"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var expiryDate = DateTime.UtcNow.AddMinutes(2);
+            var projectId = await GetProjectId(user);
             var tokenDescriptor = new SecurityTokenDescriptor()
             {
                 Subject = new ClaimsIdentity(new[]
@@ -184,7 +187,8 @@ namespace ZDoneWebApi.BusinessLogic
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Email, user.Email),
                     new Claim("id", user.Id),
-                    new Claim("expires in", expiryDate.Subtract(DateTime.UtcNow).TotalSeconds.ToString())
+                    new Claim("expires in", expiryDate.Subtract(DateTime.UtcNow).TotalSeconds.ToString()),
+                    new Claim("projectId", projectId.ToString())
                 }),
                 Expires = expiryDate,
                 SigningCredentials = credentials,
@@ -218,6 +222,18 @@ namespace ZDoneWebApi.BusinessLogic
                 context.Response.Cookies.Delete(".AspNetCore.Application.Id-refresh");
                 context.Response.Cookies.Delete("User-email");
             }
+        }
+
+        public async Task<int> GetProjectId(IdentityUser user)
+        {
+            var project = await _projectRepository.GetByUserId(user.Id);
+            if (project == null)
+            {
+                await _projectRepository.Create(new Project { Id = 0, Name = "Basic", UserId = user.Id });
+                project = await _projectRepository.GetByUserId(user.Id);
+                return project.Id;
+            }
+            return project.Id;
         }
     }
 }

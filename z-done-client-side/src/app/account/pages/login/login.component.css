@@ -1,18 +1,20 @@
 .mainContent{
 height: 100%;
+  overflow: auto;
   background-color: #a1c4ff;
 }
 .loginText{
   margin-bottom: 6%;
 }
 .loginForm{
-  width: 25%;
   margin: 0% auto;
-  padding: 2%;
+  padding: 3vh;
   background-color: white;
   border-radius: 15px;
   position: relative;
-  top: 9rem;
+  top: 20vh;
+  max-height: 100vh;
+  max-width: 41vh;
 }
 
 #emailForm{
@@ -22,10 +24,17 @@ height: 100%;
 
 }
 .submitButton{
-  width: 40%;
+  width: 16vh;
+  /* height: 6vh; */
+  font-size: 15px;
+  padding: 10px;
 }
 .buttonsBlock{
   display: flex;
   margin-top: 30px;
   justify-content: space-around;
+}
+.text{
+  font-size: 12px;
+  text-align: center;
 }

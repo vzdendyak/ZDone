@@ -17,7 +17,9 @@ namespace ZDoneWebApi.BusinessLogic.Interfaces
 
         Task<IEnumerable<ItemDto>> GetUnlistedItems();
 
-        Task<ItemDto> ReadAsync(int id);
+        Task<IEnumerable<ItemDto>> GetAllByProject(int id, string userId);
+
+        Task<ItemDto> ReadAsync(int id, string userId, int projectId);
 
         Task<ItemResponse> CreateAsync(ItemDto item);
 

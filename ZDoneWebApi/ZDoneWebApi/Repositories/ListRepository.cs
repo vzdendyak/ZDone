@@ -64,13 +64,13 @@ namespace ZDoneWebApi.Repositories
 
         public async Task<IEnumerable<Item>> GetDoneItemsByListId(int id)
         {
-            var lists = await _context.Items.Where(l => l.ListId == id && l.IsDone == true).ToListAsync();
+            var lists = await _context.Items.Where(l => l.ListId == id && l.IsDone == true && l.IsDeleted == false).ToListAsync();
             return lists;
         }
 
         public async Task<IEnumerable<Item>> GetUnDoneItemsByListId(int id)
         {
-            var lists = await _context.Items.Where(l => l.ListId == id && l.IsDone == false).ToListAsync();
+            var lists = await _context.Items.Where(l => l.ListId == id && l.IsDone == false && l.IsDeleted == false).ToListAsync();
             return lists;
         }
     }

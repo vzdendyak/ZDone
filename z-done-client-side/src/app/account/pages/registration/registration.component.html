@@ -2,7 +2,7 @@
 
   <div class="wrapper">
     <div class="loginForm  text-center">
-      <h2 class="text-center loginText">Login</h2>
+      <h3 class="text-center loginText">Registration</h3>
       <form [formGroup]="registerReactiveForm" (submit)="onSubmit()">
         <div class="form-group">
           <input type="text" [class.is-invalid] = "registerReactiveForm.get('username').invalid && registerReactiveForm.get('username').touched" placeholder="Enter username" formControlName="username" class="form-control" id="userNameForm">
@@ -47,7 +47,7 @@
         </div>
         <a class="badge " [routerLink]="['/account/login']">Sign in</a>
       </form>
-      <p class="text-muted mt-5 text-center">© Z-Done Application 2019-2020</p>
+      <p class="text-muted text">© Z-Done Application 2019-2020</p>
     </div>
   </div>
 </div>

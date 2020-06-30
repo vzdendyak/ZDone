@@ -21,7 +21,7 @@ namespace ZDoneWebApi.Data
         public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         //public DbSet<User> Users { get; set; }
-        public DbSet<ProjectsUsers> ProjectsUsers { get; set; }
+        //public DbSet<ProjectsUsers> ProjectsUsers { get; set; }
 
         public DbSet<Comment> Comments { get; set; }
 
@@ -50,19 +50,20 @@ namespace ZDoneWebApi.Data
 
             modelBuilder.Entity<Project>()
                 .HasKey(p => new { p.Id });
+            //modelBuilder.Entity<Project>().HasOne(p => p.User)
+            //    .WithOne(u => u.Project);
+            //modelBuilder.Entity<ProjectsUsers>()
+            //    .HasKey(pu => new { pu.UserId, pu.ProjectId });
 
-            modelBuilder.Entity<ProjectsUsers>()
-                .HasKey(pu => new { pu.UserId, pu.ProjectId });
+            //modelBuilder.Entity<ProjectsUsers>()
+            //    .HasOne(pu => pu.Project)
+            //    .WithMany(p => p.ProjectsUsers)
+            //    .HasForeignKey(pu => pu.ProjectId);
 
-            modelBuilder.Entity<ProjectsUsers>()
-                .HasOne(pu => pu.Project)
-                .WithMany(p => p.ProjectsUsers)
-                .HasForeignKey(pu => pu.ProjectId);
-
-            modelBuilder.Entity<ProjectsUsers>()
-                .HasOne(pu => pu.User)
-                .WithMany(u => u.ProjectsUsers)
-                .HasForeignKey(pu => pu.UserId);
+            //modelBuilder.Entity<ProjectsUsers>()
+            //    .HasOne(pu => pu.User)
+            //    .WithMany(u => u.ProjectsUsers)
+            //    .HasForeignKey(pu => pu.UserId);
 
             modelBuilder.Entity<Item>().HasOne(i => i.Parent).WithMany(ii => ii.Children).HasForeignKey(i => i.ParentId).OnDelete(DeleteBehavior.Restrict);
             //modelBuilder.Entity<RefreshToken>().HasKey(r => r.Token);

@@ -15,7 +15,7 @@ namespace ZDoneWebApi.Data.Models
 
         #region Navigation props
 
-        public virtual ICollection<ProjectsUsers> ProjectsUsers { get; set; }
+        public virtual Project Project { get; set; }
 
         #endregion Navigation props
     }

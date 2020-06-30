@@ -121,6 +121,10 @@
               "devServerTarget": "z-done-client-side:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }

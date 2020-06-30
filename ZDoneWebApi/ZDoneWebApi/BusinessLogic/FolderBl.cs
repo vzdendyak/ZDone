@@ -14,11 +14,13 @@ namespace ZDoneWebApi.BusinessLogic
     {
         private readonly IFolderRepository _folderRepository;
         private readonly IMapper _mapper;
+        private readonly IUserBl _userBl;
 
-        public FolderBl(IFolderRepository folderRepository, IMapper mapper)
+        public FolderBl(IFolderRepository folderRepository, IMapper mapper, IUserBl userBl)
         {
             _mapper = mapper;
             _folderRepository = folderRepository;
+            _userBl = userBl;
         }
 
         public async Task<IEnumerable<FolderDto>> GetAllAsync()
@@ -30,8 +32,12 @@ namespace ZDoneWebApi.BusinessLogic
             return dtoItems;
         }
 
-        public async Task<IEnumerable<ListDto>> GetRelatedLists(int id)
+        public async Task<IEnumerable<ListDto>> GetRelatedLists(int id, string userId)
         {
+            if (!(await _userBl.isHaveAccessToFolder(id, userId)))
+            {
+                return null;
+            }
             var lists = await _folderRepository.GetAllLists(id);
             IEnumerable<ListDto> dtoLists = _mapper.Map<IEnumerable<List>, IEnumerable<ListDto>>(lists);
             return dtoLists;
@@ -70,6 +76,19 @@ namespace ZDoneWebApi.BusinessLogic
             if (realItem == null) throw new NotImplementedException();
             await _folderRepository.Delete(id);
             return new ItemResponse(true, "Deleted successfully");
+        }
+
+        public async Task<IEnumerable<FolderDto>> GetByProjectIdAsync(int id, string userId)
+        {
+            if (!(await _userBl.IsHaveProjectPermission(userId, id)))
+            {
+                throw new Exception("You don't have permission to see this project");
+            }
+            var folders = await _folderRepository.GetByProjectId(id);
+
+            IEnumerable<FolderDto> dtoItems = _mapper.Map<IEnumerable<Folder>, IEnumerable<FolderDto>>(folders);
+
+            return dtoItems;
         }
     }
 }

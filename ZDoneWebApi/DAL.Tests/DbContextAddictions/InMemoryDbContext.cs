@@ -54,15 +54,11 @@ namespace DAL.Tests.DbContextAddictions
             // User user1 = new User {  };
             //User user2 = new User { };
 
-            ProjectsUsers projectsUsers1 = new ProjectsUsers { ProjectId = 1, UserId = "1" };
-            ProjectsUsers projectsUsers2 = new ProjectsUsers { ProjectId = 2, UserId = "2" };
-
             context.Comments.AddRange(new[] { comment1, comment2 });
             context.Projects.AddRange(new[] { project1, project2 });
             context.Items.AddRange(new[] { item1, item2, item3, item4, item5 });
             context.Statuses.AddRange(new[] { status1, status2, status3 });
             //context.Users.AddRange(new[] { user1, user2 });
-            context.ProjectsUsers.AddRange(new[] { projectsUsers1, projectsUsers2 });
             context.Folders.AddRange(new[] { folder1, folder2, folder3 });
             context.Lists.AddRange(new[] { list1, list2, list3 });
 

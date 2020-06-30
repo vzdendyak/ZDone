@@ -18,18 +18,34 @@ namespace ZDoneWebApi.Controllers
     public class ItemController : ControllerBase
     {
         private readonly IItemBl _itemBl;
+        private readonly IUserBl _userBl;
+        private string userId;
+        private int projectId;
 
-        public ItemController(IItemBl itemBl)
+        public ItemController(IItemBl itemBl, IUserBl userBl)
         {
             _itemBl = itemBl;
+            _userBl = userBl;
+        }
+
+        private (string, int) GetUserId()
+        {
+            var userId = User != null ? User.Claims.Single(c => c.Type == "id").Value : null;
+            var projectId = User != null ? User.Claims.Single(c => c.Type == "projectId").Value : null;
+            if (projectId != null)
+            {
+                return (userId, int.Parse(projectId));
+            }
+            return (userId, 0);
         }
 
         // GET: api/Item
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            Console.WriteLine(HttpContext.Request.Cookies["refresh"]);
-            var allItems = await _itemBl.GetAllAsync();
+            //Console.WriteLine(HttpContext.Request.Cookies["refresh"]);
+            (userId, projectId) = GetUserId();
+            var allItems = await _itemBl.GetAllByProject(projectId, userId);
             if (allItems == null)
                 return NotFound();
             return Ok(allItems);
@@ -38,7 +54,12 @@ namespace ZDoneWebApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
         {
-            var item = await _itemBl.ReadAsync(id);
+            (userId, projectId) = GetUserId();
+            if (!(await _userBl.IsHaveAccesToItem(id, userId)))
+            {
+                return Forbid();
+            }
+            var item = await _itemBl.ReadAsync(id, userId, projectId);
             if (item == null)
                 return NotFound();
             return Ok(item);

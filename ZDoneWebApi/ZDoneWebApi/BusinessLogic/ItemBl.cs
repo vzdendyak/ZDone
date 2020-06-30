@@ -13,12 +13,18 @@ namespace ZDoneWebApi.BusinessLogic
     public class ItemBl : IItemBl
     {
         private readonly IItemRepository _itemRepository;
+        private readonly IListRepository _listRepository;
+        private readonly IFolderRepository _folderRepository;
+        private readonly IUserBl _userBl;
         private readonly IMapper _mapper;
 
-        public ItemBl(IItemRepository itemRepository, IMapper mapper)
+        public ItemBl(IItemRepository itemRepository, IListRepository listRepository, IUserBl userBl, IFolderRepository folderRepository, IMapper mapper)
         {
             _mapper = mapper;
             _itemRepository = itemRepository;
+            _listRepository = listRepository;
+            _folderRepository = folderRepository;
+            _userBl = userBl;
         }
 
         public async Task<IEnumerable<ItemDto>> GetAllAsync()
@@ -33,6 +39,28 @@ namespace ZDoneWebApi.BusinessLogic
         public async Task<IEnumerable<ItemDto>> GetDeletedItems()
         {
             var items = await _itemRepository.GetDeletedItems();
+            IEnumerable<ItemDto> dtoItems = _mapper.Map<IEnumerable<Item>, IEnumerable<ItemDto>>(items);
+
+            return dtoItems;
+        }
+
+        public async Task<IEnumerable<ItemDto>> GetAllByProject(int id, string userId)
+        {
+            if (!(await _userBl.IsHaveProjectPermission(userId, id)))
+            {
+                return null;
+            }
+            List<Item> items = new List<Item>();
+            var folders = await this._folderRepository.GetByProjectId(id);
+            foreach (var f in folders)
+            {
+                var lists = await _folderRepository.GetAllLists(f.Id);
+                foreach (var l in lists)
+                {
+                    var items1 = await _listRepository.GetItemsByListId(l.Id);
+                    items.AddRange(items1);
+                }
+            }
             IEnumerable<ItemDto> dtoItems = _mapper.Map<IEnumerable<Item>, IEnumerable<ItemDto>>(items);
 
             return dtoItems;
@@ -75,9 +103,15 @@ namespace ZDoneWebApi.BusinessLogic
             return dtoItems;
         }
 
-        public async Task<ItemDto> ReadAsync(int id)
+        public async Task<ItemDto> ReadAsync(int id, string userId, int projectId)
         {
+            if (!(await _userBl.IsHaveAccesToItem(id, userId)))
+            {
+                return null;
+            }
+
             var item = await _itemRepository.Read(id);
+
             var dtoItem = _mapper.Map<ItemDto>(item);
 
             return dtoItem;

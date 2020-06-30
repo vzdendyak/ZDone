@@ -381,24 +381,16 @@ namespace ZDoneWebApi.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Projects");
-                });
-
-            modelBuilder.Entity("ZDoneWebApi.Data.Models.ProjectsUsers", b =>
-                {
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("UserId", "ProjectId");
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("ProjectsUsers");
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("ZDoneWebApi.Data.Models.Status", b =>
@@ -530,19 +522,11 @@ namespace ZDoneWebApi.Migrations
                         .HasForeignKey("FolderId");
                 });
 
-            modelBuilder.Entity("ZDoneWebApi.Data.Models.ProjectsUsers", b =>
+            modelBuilder.Entity("ZDoneWebApi.Data.Models.Project", b =>
                 {
-                    b.HasOne("ZDoneWebApi.Data.Models.Project", "Project")
-                        .WithMany("ProjectsUsers")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ZDoneWebApi.Data.Models.User", "User")
-                        .WithMany("ProjectsUsers")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithOne("Project")
+                        .HasForeignKey("ZDoneWebApi.Data.Models.Project", "UserId");
                 });
 #pragma warning restore 612, 618
         }
