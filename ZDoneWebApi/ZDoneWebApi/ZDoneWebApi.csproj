@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200701092728_Added_IsBasicCase_Folder.cs" />
+    <Compile Remove="Migrations\20200701092728_Added_IsBasicCase_Folder.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Data\AutoMapperProfiles\" />
   </ItemGroup>
 

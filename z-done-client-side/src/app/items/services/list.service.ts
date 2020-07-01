@@ -45,7 +45,9 @@ export class ListService {
       id: 0,
       name: list.name,
       folderId: list.folder.id,
-      folder: null
+      folder: null,
+      isBasic : false
+
     };
     return this.http.post<number>(this.url, sendList);
   }

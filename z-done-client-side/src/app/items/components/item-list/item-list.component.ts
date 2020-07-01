@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {Item} from '../../../models/item';
-import {ItemService} from '../../services/item.service';
-import {ActivatedRoute} from '@angular/router';
-import {ListService} from '../../services/list.service';
-import {List} from '../../../models/list';
+import { Component, OnInit } from '@angular/core';
+import { Item } from '../../../models/item';
+import { ItemService } from '../../services/item.service';
+import { ActivatedRoute } from '@angular/router';
+import { ListService } from '../../services/list.service';
+import { List } from '../../../models/list';
 
 @Component({
   selector: 'app-item-list',
@@ -137,17 +137,17 @@ export class ItemListComponent implements OnInit {
 
   getTaskByListId(id: number) {
     this.listService.getDoneListItems(id).subscribe(value => {
-      if(value==null){
-        this.doneItems= [];
-      }else{
+      if (value == null) {
+        this.doneItems = [];
+      } else {
         this.doneItems = value;
       }
       console.log('GOT : ', this.doneItems);
     });
     this.listService.getUndoneListItems(id).subscribe(value => {
-      if(value==null){
-        this.unDoneItems= [];
-      }else{
+      if (value == null) {
+        this.unDoneItems = [];
+      } else {
         this.unDoneItems = value;
       }
       console.log('GOT : ', this.doneItems);
@@ -162,17 +162,21 @@ export class ItemListComponent implements OnInit {
   createItem(name: string) {
     console.log('Got: ' + name);
     const item = this.itemService.getNullItem();
-    this.route.params.subscribe(value => {
+    let subscription = this.route.params.subscribe(value => {
       if (value.listId) {
-        item.listId =   Number.parseInt(value.listId);
-       } else {
-         item.listId = 0;
-       }
+        item.listId = Number.parseInt(value.listId);
+        if (item.listId === NaN) {
+
+        }
+      } else {
+        item.listId = 0;
+      }
       item.name = name;
       this.itemService.createItem(item).subscribe(value => {
-         console.log('Created:');
-         this.unDoneItems.push(value);
-       });
+        console.log('Created:');
+        this.unDoneItems.push(value);
+      });
+      subscription.unsubscribe();
     });
     // this.unDoneItems[0] === null ? item.listId = null : item.listId = this.doneItems[0].listId;
 

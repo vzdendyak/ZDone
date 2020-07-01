@@ -18,7 +18,7 @@ namespace ZDoneWebApi.Repositories
 
         public async Task<Project> GetByUserId(string id)
         {
-            var project = _context.Projects.Where(p => p.UserId == id).FirstOrDefault();
+            var project = await _context.Projects.Where(p => p.UserId == id).Include(p => p.Folders).ThenInclude(p => p.Lists).FirstOrDefaultAsync();
             return project;
         }
 
@@ -28,10 +28,11 @@ namespace ZDoneWebApi.Repositories
             return project;
         }
 
-        public async Task Create(Project project)
+        public async Task<Project> Create(Project project)
         {
             await _context.Projects.AddAsync(project);
             await _context.SaveChangesAsync();
+            return await GetByUserId(project.UserId);
         }
 
         public async Task Update(Project project)

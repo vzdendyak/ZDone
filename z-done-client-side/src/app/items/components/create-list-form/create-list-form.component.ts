@@ -70,7 +70,8 @@ export class CreateListFormComponent implements OnInit {
         id: this.data.item.id,
         name: this.myFirstReactiveForm.controls.name.value,
         folderId: this.myFirstReactiveForm.controls.folder.value.id,
-        folder: this.myFirstReactiveForm.controls.folder.value
+        folder: this.myFirstReactiveForm.controls.folder.value,
+        isBasic : false
       };
       this.listService.updateList(list).subscribe(value => {
         this.dialogRef.close({folder: this.myFirstReactiveForm.controls.folder.value, list});
@@ -80,7 +81,8 @@ export class CreateListFormComponent implements OnInit {
         id: 0,
         name: this.myFirstReactiveForm.controls.name.value,
         folderId: this.myFirstReactiveForm.controls.folder.value.id,
-        folder: this.myFirstReactiveForm.controls.folder.value
+        folder: this.myFirstReactiveForm.controls.folder.value,
+        isBasic : false
       };
       this.listService.createList(list).subscribe(value => {
         this.dialogRef.close({folder: this.myFirstReactiveForm.controls.folder.value, list});

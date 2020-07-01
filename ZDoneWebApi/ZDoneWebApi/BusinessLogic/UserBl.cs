@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System.Linq;
 using System.Threading.Tasks;
 using ZDoneWebApi.BusinessLogic.Interfaces;
 using ZDoneWebApi.Data.Models;
@@ -23,6 +24,20 @@ namespace ZDoneWebApi.BusinessLogic
             _folderRepository = folderRepository;
             _itemRepository = itemRepository;
             _mapper = mapper;
+        }
+
+        public async Task<int> GetBasicFolderId(string userId)
+        {
+            var project = await _projectRepository.GetByUserId(userId);
+            return project.Folders.Where(f => f.IsBasic == true).FirstOrDefault().Id;
+            //return (await _folderRepository.GetBasicFolderByUserId(project.Id, userId)).Id;
+        }
+
+        public async Task<int> GetBasicListIdId(string userId)
+        {
+            var project = await _projectRepository.GetByUserId(userId);
+            var listId = project.Folders.Where(f => f.IsBasic == true).FirstOrDefault().Lists.Where(l => l.IsBasic == true).FirstOrDefault().Id;
+            return listId;
         }
 
         public async Task<bool> isHaveAccessToFolder(int id, string userId)

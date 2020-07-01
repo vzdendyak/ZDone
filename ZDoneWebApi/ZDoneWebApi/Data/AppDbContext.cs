@@ -50,6 +50,8 @@ namespace ZDoneWebApi.Data
 
             modelBuilder.Entity<Project>()
                 .HasKey(p => new { p.Id });
+            modelBuilder.Entity<Project>()
+                .HasIndex(p => p.UserId).IsUnique();
             //modelBuilder.Entity<Project>().HasOne(p => p.User)
             //    .WithOne(u => u.Project);
             //modelBuilder.Entity<ProjectsUsers>()

@@ -24,16 +24,16 @@ namespace ZDoneWebApi.BusinessLogic
         private readonly UserManager<User> _userManager;
         private readonly TokenValidationParameters _tokenValidationParameters;
         private readonly IRefreshTokenRepository _refreshTokenRepository;
-        private readonly IProjectRepository _projectRepository;
+        private readonly IProjectBl _projectBl;
 
-        public AuthBl(IConfiguration configuration, IRefreshTokenRepository refreshTokenRepository, IAccountRepository accountRepository, UserManager<User> userManager, IProjectRepository projectRepository, TokenValidationParameters tokenValidationParameters)
+        public AuthBl(IConfiguration configuration, IRefreshTokenRepository refreshTokenRepository, IAccountRepository accountRepository, UserManager<User> userManager, IProjectBl projectBl, TokenValidationParameters tokenValidationParameters)
         {
             _configuration = configuration;
             _accountRepository = accountRepository;
             _userManager = userManager;
             _tokenValidationParameters = tokenValidationParameters;
             _refreshTokenRepository = refreshTokenRepository;
-            _projectRepository = projectRepository;
+            _projectBl = projectBl;
         }
 
         public async Task<AuthResultDto> LoginAsync(LoginModel model)
@@ -226,14 +226,7 @@ namespace ZDoneWebApi.BusinessLogic
 
         public async Task<int> GetProjectId(IdentityUser user)
         {
-            var project = await _projectRepository.GetByUserId(user.Id);
-            if (project == null)
-            {
-                await _projectRepository.Create(new Project { Id = 0, Name = "Basic", UserId = user.Id });
-                project = await _projectRepository.GetByUserId(user.Id);
-                return project.Id;
-            }
-            return project.Id;
+            return await _projectBl.CheckProjectExist(user);
         }
     }
 }

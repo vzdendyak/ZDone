@@ -117,8 +117,12 @@ namespace ZDoneWebApi.BusinessLogic
             return dtoItem;
         }
 
-        public async Task<ItemResponse> CreateAsync(ItemDto item)
+        public async Task<ItemResponse> CreateAsync(ItemDto item, string userId)
         {
+            if (item.ListId == null || item.ListId == 0)
+            {
+                item.ListId = await _userBl.GetBasicListIdId(userId);
+            }
             item.CreatedDate = DateTime.Now;
             item.ExpiredDate = null;
             var origItem = _mapper.Map<Item>(item);

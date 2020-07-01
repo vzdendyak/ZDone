@@ -9,7 +9,7 @@ namespace ZDoneWebApi.Repositories.Interfaces
 
         Task<Project> GetByUserId(string id);
 
-        Task Create(Project project);
+        Task<Project> Create(Project project);
 
         Task Update(Project project);
 

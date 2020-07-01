@@ -29,6 +29,12 @@ namespace ZDoneWebApi.Repositories
             return folders;
         }
 
+        public async Task<Folder> GetBasicFolderByUserId(int projectId, string userId)
+        {
+            Folder folder = await _context.Folders.Where(f => f.ProjectId == projectId && f.IsBasic == true).FirstOrDefaultAsync();
+            return folder;
+        }
+
         public async Task<Folder> Read(int id)
         {
             Folder folder = await _context.Folders.FindAsync(id);
@@ -36,10 +42,11 @@ namespace ZDoneWebApi.Repositories
             return folder;
         }
 
-        public async Task Create(Folder folder)
+        public async Task<Folder> Create(Folder folder)
         {
             await _context.Folders.AddAsync(folder);
             await _context.SaveChangesAsync();
+            return GetLastItemStored();
         }
 
         public async Task Update(Folder folder)

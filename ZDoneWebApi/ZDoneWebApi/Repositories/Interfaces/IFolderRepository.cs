@@ -10,11 +10,13 @@ namespace ZDoneWebApi.Repositories.Interfaces
 
         Task<IEnumerable<Folder>> GetByProjectId(int id);
 
+        Task<Folder> GetBasicFolderByUserId(int projectId, string userId);
+
         Task<IEnumerable<List>> GetAllLists(int id);
 
         Task<Folder> Read(int id);
 
-        Task Create(Folder folder);
+        Task<Folder> Create(Folder folder);
 
         Task Update(Folder folder);
 

@@ -96,6 +96,8 @@ namespace ZDoneWebApi.Controllers
             {
                 return BadRequest("Confirmed password not match");
             }
+            model.Name = model.Name.Trim();
+            model.Email = model.Email.Trim();
             var authResult = await _authBl.RegisterAsync(model);
             if (!authResult.Success)
             {

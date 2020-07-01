@@ -76,8 +76,12 @@ namespace ZDoneWebApi.BusinessLogic
             }
         }
 
-        public async Task<ItemResponse> CreateAsync(ListDto list)
+        public async Task<ItemResponse> CreateAsync(ListDto list, string userId)
         {
+            if (list.FolderId == null || list.FolderId == 0)
+            {
+                list.FolderId = await _userBl.GetBasicFolderId(userId);
+            }
             var origList = _mapper.Map<List>(list);
 
             await _listRepository.Create(origList);

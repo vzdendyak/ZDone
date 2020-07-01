@@ -15,6 +15,10 @@ namespace ZDoneWebApi.Data.AutoMapperProfiles
             CreateMap<FolderDto, Folder>();
             CreateMap<List, ListDto>();
             CreateMap<ListDto, List>();
+            CreateMap<Project, ProjectDto>();
+            CreateMap<ProjectDto, Project>();
+            CreateMap<User, UserDto>();
+            CreateMap<UserDto, UserDto>();
         }
     }
 }

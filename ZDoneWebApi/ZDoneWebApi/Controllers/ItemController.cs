@@ -107,7 +107,8 @@ namespace ZDoneWebApi.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            var result = await _itemBl.CreateAsync(item);
+            (userId, projectId) = GetUserId();
+            var result = await _itemBl.CreateAsync(item, userId);
             if (!result.Success)
                 return BadRequest(result.Message);
             return Ok(result.ItemDto);
