@@ -7,6 +7,7 @@ import {RegistrationFunctionalityComponent} from './components/registration-func
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 import {JwtModule} from '@auth0/angular-jwt';
+import { MaterialAppsModule } from '../ngmaterial.module';
 
 export function tokenGetter() {
   return localStorage.getItem('jwt');
@@ -17,6 +18,7 @@ export function tokenGetter() {
   imports: [
     CommonModule,
     RouterModule,
+    MaterialAppsModule,
     ReactiveFormsModule,
     JwtModule.forRoot({
       config: {

@@ -90,11 +90,13 @@ namespace ZDoneWebApi.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState.SelectMany(e => e.Value.Errors.Select(e => e.ErrorMessage)));
+                // return BadRequest(ModelState.SelectMany(e => e.Value.Errors.Select(e => e.ErrorMessage)));
+                return BadRequest("Not confirmed bitch!");
             }
             if (!string.Equals(model.ConfirmedPassword, model.Password))
             {
-                return BadRequest("Confirmed password not match");
+                // return BadRequest("Confirmed password not match");
+                return BadRequest(new string[] { "Confirmed password not match" });
             }
             model.Name = model.Name.Trim();
             model.Email = model.Email.Trim();

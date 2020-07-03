@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginModel} from '../../../models/auth/login-model';
 import {RegisterModel} from '../../../models/auth/register-model';
@@ -11,6 +11,7 @@ import {RegisterModel} from '../../../models/auth/register-model';
 export class RegistrationComponent implements OnInit {
   registerReactiveForm: FormGroup;
   @Output() registerSubmit = new EventEmitter<RegisterModel>();
+  @Input() isLoading: boolean;
 
   constructor(private fb: FormBuilder) {
   }

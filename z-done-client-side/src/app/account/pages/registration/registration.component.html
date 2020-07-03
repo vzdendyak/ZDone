@@ -47,6 +47,11 @@
         </div>
         <a class="badge " [routerLink]="['/account/login']">Sign in</a>
       </form>
+      <section class="example-section">
+          <mat-progress-bar *ngIf="isLoading"
+            mode="indeterminate">
+          </mat-progress-bar>
+    </section>
       <p class="text-muted text">© Z-Done Application 2019-2020</p>
     </div>
   </div>

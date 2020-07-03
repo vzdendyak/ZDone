@@ -25,11 +25,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // import { MatRippleModule } from '@angular/material/core/ripple';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatRadioModule} from '@angular/material/radio';
+import { MatProgressBarModule } from '@angular/material';
 
 @NgModule({
   imports: [
     MatFormFieldModule,
     MatGridListModule,
+    MatProgressBarModule,
     CommonModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
@@ -59,6 +61,7 @@ import {MatRadioModule} from '@angular/material/radio';
   exports: [
     MatGridListModule,
     MatSnackBarModule,
+    MatProgressBarModule,
     MatSortModule,
     MatButtonModule,
     MatFormFieldModule,

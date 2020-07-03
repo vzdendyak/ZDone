@@ -38,6 +38,11 @@
         <button type="button" [routerLink]="['/account/registration']" class="btn btn-lg btn-primary submitButton"  name="register">Sign up</button>
       </div>
     </form>
+    <section class="example-section">
+          <mat-progress-bar *ngIf="isLoading"
+            mode="indeterminate">
+          </mat-progress-bar>
+    </section>
 <p class="text-muted text">© Z-Done Application 2019-2020</p>
   </div>
   </div>

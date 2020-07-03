@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginModel} from '../../../models/auth/login-model';
 
@@ -8,7 +8,7 @@ import {LoginModel} from '../../../models/auth/login-model';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  @Input() isLoading: boolean;
   loginReactiveForm: FormGroup;
   @Output() loginSubmit = new EventEmitter<LoginModel>();
   constructor(private fb: FormBuilder) {
