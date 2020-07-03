@@ -3,25 +3,23 @@
   overflow: auto;
   background-color: #a1c4ff;
 }
+.wrapper{
+  height: 75%;
+  position: relative;
+  top: 7%;
+}
 .loginText{
   margin-bottom: 6%;
 }
 .loginForm{
   margin: 0% auto;
-  padding: 3vh;
-  background-color: white;
-  border-radius: 15px;
-  position: relative;
-  top: 15vh;
-  max-height: 100vh;
-  max-width: 41vh;
-  /*width: 25%;*/
-  /*margin: 0% auto;*/
-  /*padding: 2%;*/
-  /*background-color: white;*/
-  /*border-radius: 15px;*/
-  /*position: relative;*/
-  /*top: 9rem;*/
+    padding: 3vh;
+    background-color: white;
+    border-radius: 15px;
+    position: relative;
+    /* top: 8vh; */
+    max-height: 100%;
+    max-width: 41vh;
 }
 
 #emailForm{
@@ -45,4 +43,20 @@
 .text{
   font-size: 12px;
   text-align: center;
+}
+.cookies-helper{
+  background-color: #5276b4;
+  color: white;
+    padding: 2%;
+    text-align: center;
+    position: relative;
+    top: 7%;
+    margin-top:5px;
+    /* width: 50%; */
+    border-radius: 7px;
+}
+.cookies-helper-text{
+  text-align: center;
+  font-size: 14pt;
+  font-style: italic;
 }

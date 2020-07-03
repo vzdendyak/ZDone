@@ -3,6 +3,9 @@ height: 100%;
   overflow: auto;
   background-color: #a1c4ff;
 }
+.wrapper{
+  height: 70%;
+}
 .loginText{
   margin-bottom: 6%;
 }
@@ -12,8 +15,8 @@ height: 100%;
   background-color: white;
   border-radius: 15px;
   position: relative;
-  top: 20vh;
-  max-height: 100vh;
+  top: 25%;
+  max-height: 100%;
   max-width: 41vh;
 }
 
@@ -37,4 +40,19 @@ height: 100%;
 .text{
   font-size: 12px;
   text-align: center;
+}
+.cookies-helper{
+  background-color: #5276b4;
+  color: white;
+  padding: 2%;
+  text-align: center;
+  position: relative;
+  top: 5%;
+  margin: auto;
+  border-radius: 7px;
+}
+.cookies-helper-text{
+  text-align: center;
+  font-size: 14pt;
+  font-style: italic;
 }
