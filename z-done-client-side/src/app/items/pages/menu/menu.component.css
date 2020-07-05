@@ -90,3 +90,14 @@ text-align: center;
   margin-top: 10%;
   margin-bottom: 15%;
 }
+.new-folder-span{
+
+}
+.new-folder-item{
+  color: white;
+  background-color: #e1e1e14d;
+  margin-top: 5px;
+  border-radius: 7px;
+  text-align: -webkit-center;
+  padding-top: 2%;
+}

@@ -40,16 +40,16 @@ namespace ZDoneWebApi.Controllers
         }
 
         // GET: api/Item
-        [HttpGet]
-        public async Task<ActionResult> Get()
-        {
-            //Console.WriteLine(HttpContext.Request.Cookies["refresh"]);
-            (userId, projectId) = GetUserId();
-            var allItems = await _itemBl.GetAllByProject(projectId, userId);
-            if (allItems == null)
-                return NotFound();
-            return Ok(allItems);
-        }
+        //[HttpGet]
+        //public async Task<ActionResult> Get()
+        //{
+        //    //Console.WriteLine(HttpContext.Request.Cookies["refresh"]);
+        //    (userId, projectId) = GetUserId();
+        //    var allItems = await _itemBl.GetAllByProject(projectId, userId);
+        //    if (allItems == null)
+        //        return NotFound();
+        //    return Ok(allItems);
+        //}
 
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
@@ -65,14 +65,14 @@ namespace ZDoneWebApi.Controllers
             return Ok(item);
         }
 
-        [HttpGet("date/{date}")]
-        public async Task<ActionResult> GetByDate(string date)
-        {
-            var item = await _itemBl.GetDateItems(date);
-            if (item == null)
-                return NotFound();
-            return Ok(item);
-        }
+        //[HttpGet("date/{date}")]
+        //public async Task<ActionResult> GetByDate(string date)
+        //{
+        //    var item = await _itemBl.GetDateItems(date);
+        //    if (item == null)
+        //        return NotFound();
+        //    return Ok(item);
+        //}
 
         [HttpGet("unlisted")]
         public async Task<ActionResult> GetUnlisted()
@@ -83,23 +83,23 @@ namespace ZDoneWebApi.Controllers
             return Ok(item);
         }
 
-        [HttpGet("completed")]
-        public async Task<ActionResult> GetCompleted()
-        {
-            var item = await _itemBl.GetCompletedItems();
-            if (item == null)
-                return NotFound();
-            return Ok(item);
-        }
+        //[HttpGet("completed")]
+        //public async Task<ActionResult> GetCompleted()
+        //{
+        //    var item = await _itemBl.GetCompletedItems();
+        //    if (item == null)
+        //        return NotFound();
+        //    return Ok(item);
+        //}
 
-        [HttpGet("deleted")]
-        public async Task<ActionResult> GetDeleted()
-        {
-            var item = await _itemBl.GetDeletedItems();
-            if (item == null)
-                return NotFound();
-            return Ok(item);
-        }
+        //[HttpGet("deleted")]
+        //public async Task<ActionResult> GetDeleted()
+        //{
+        //    var item = await _itemBl.GetDeletedItems();
+        //    if (item == null)
+        //        return NotFound();
+        //    return Ok(item);
+        //}
 
         // POST: api/Item
         [HttpPost]

@@ -90,20 +90,24 @@ namespace ZDoneWebApi.BusinessLogic
             return new ItemResponse(true, "Created", returnList.Id);
         }
 
-        public async Task<ItemResponse> UpdateAsync(ListDto list)
+        public async Task<ItemResponse> UpdateAsync(ListDto list, string userId)
         {
             //var existingList = await _listRepository.Read(list.Id);
             // Get role
             var newList = _mapper.Map<List>(list);
+            var basicListId = await _userBl.GetBasicListIdId(userId);
+            if (newList.Id == basicListId) throw new Exception("You can't modify basic list");
+
             await _listRepository.Update(newList);
             return new ItemResponse(true, "Updated successfully!");
         }
 
-        public async Task<ItemResponse> DeleteAsync(int id)
+        public async Task<ItemResponse> DeleteAsync(int id, string userId)
         {
             var realList = await _listRepository.Read(id);
-
+            var basicListId = await _userBl.GetBasicListIdId(userId);
             if (realList == null) throw new NotImplementedException();
+            if (realList.Id == basicListId) throw new Exception("You can't delete basic list");
             await _listRepository.Delete(id);
             return new ItemResponse(true, "Deleted successfully");
         }

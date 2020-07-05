@@ -1,0 +1,14 @@
+<div class="mainContent">
+  <div class="myHeader">
+  <span class="h4">{{title}}</span></div>
+  <form [formGroup]="reactiveForm" (submit)="onSubmit()">
+  <div class="form-group">
+  <input  matInput type="text" id="name" class="form-control" placeholder="Name" formControlName="Name" />
+  </div>
+    <div class="buttons form-group">
+      <button type="button" class="btn btn-light closeButton" (click)="close()" >Close</button>
+      <button type="submit" [disabled]="getName.errors?.required" class="btn btn-success saveButton" >Save</button>
+    </div>
+
+</form>
+</div>

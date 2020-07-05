@@ -19,8 +19,8 @@ namespace ZDoneWebApi.BusinessLogic.Interfaces
 
         Task<ItemResponse> CreateAsync(ListDto list, string userId);
 
-        Task<ItemResponse> UpdateAsync(ListDto list);
+        Task<ItemResponse> UpdateAsync(ListDto list, string userId);
 
-        Task<ItemResponse> DeleteAsync(int id);
+        Task<ItemResponse> DeleteAsync(int id, string userId);
     }
 }

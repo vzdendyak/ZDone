@@ -11,7 +11,7 @@ import {List} from '../../models/list';
 export class ListService {
   url: string = environment.basicUrl + '/lists';
   requestOptions: object = {
-   // responseType: 'text',
+    // responseType: 'text',
     withCredentials: true
 
   };
@@ -40,7 +40,7 @@ export class ListService {
     return this.http.get<List>(this.url + `/${id}`);
   }
 
-  createList(list: List): Observable<number> {
+  createList(list: List): Observable<any> {
     const sendList: List = {
       id: 0,
       name: list.name,
@@ -49,7 +49,7 @@ export class ListService {
       isBasic : false
 
     };
-    return this.http.post<number>(this.url, sendList);
+    return this.http.post(this.url, sendList, this.requestOptions);
   }
 
   updateList(list: List): Observable<List> {

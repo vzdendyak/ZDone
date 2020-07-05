@@ -26,6 +26,7 @@
 </div>
 
 <mat-menu #appMenu="matMenu" class="myMenu">
+  <button mat-menu-item (click)="addFolderClick()" >Rename folder</button>
   <button mat-menu-item (click)="addListClick()">Add list</button>
-  <button mat-menu-item (click)="addListClick()" >Rename</button>
+  <button mat-menu-item (click)="deleteFolderClick()" >Delete folder</button>
 </mat-menu>

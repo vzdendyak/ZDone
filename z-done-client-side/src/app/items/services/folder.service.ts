@@ -12,12 +12,14 @@ import {List} from '../../models/list';
 export class FolderService {
   url: string = environment.basicUrl + '/folders';
   requestOptions: object = {
-    //headers: new HttpHeaders().append('Authorization', 'Bearer <yourtokenhere>'),
-    //responseType: 'text'
+    // headers: new HttpHeaders().append('Authorization', 'Bearer <yourtokenhere>'),
+    // responseType: 'text'
     withCredentials: true
 
   };
   openListDialogSubject = new Subject<List>();
+  openFolderDialogSubject = new Subject<Folder>();
+  deleteFolderSubject = new Subject<Folder>();
   deleteListSubject = new Subject<List>();
   folderIdToShow: number = 0;
 
@@ -39,9 +41,9 @@ export class FolderService {
     return this.http.get<Folder>(this.url + `/${id}`);
   }
 
-  createFolder(folder: Folder): Observable<Folder> {
+  createFolder(folder: Folder): Observable<number> {
     console.log('folder to create: ' + folder);
-    return this.http.post<Folder>(this.url, folder);
+    return this.http.post<number>(this.url, folder);
   }
 
   updateFolder(folder: Folder): Observable<Folder> {

@@ -25,7 +25,11 @@ namespace ZDoneWebApi.Repositories
 
         public async Task<IEnumerable<Folder>> GetByProjectId(int id)
         {
-            var folders = await _context.Folders.Where(f => f.ProjectId == id).ToListAsync();
+            var folders = await _context.Folders
+                .Where(f => f.ProjectId == id)
+                .Include(f => f.Lists)
+                .ThenInclude(l => l.Items)
+                .ToListAsync();
             return folders;
         }
 

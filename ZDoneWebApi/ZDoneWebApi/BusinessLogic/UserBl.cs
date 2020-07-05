@@ -54,6 +54,10 @@ namespace ZDoneWebApi.BusinessLogic
         public async Task<bool> IsHaveAccessToList(int id, string userId)
         {
             List list = await _listRepository.Read(id);
+            if (list == null)
+            {
+                return false;
+            }
             Folder folder = await _folderRepository.Read(list.FolderId);
             Project project = await this._projectRepository.Get(folder.ProjectId);
             if (project.UserId != userId)

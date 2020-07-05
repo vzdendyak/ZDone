@@ -70,14 +70,6 @@ export class ItemListComponent implements OnInit {
             this.unDoneItems = null;
             break;
 
-          case 'inbox':
-            this.listName = 'Inbox';
-            this.currentList = null;
-            this.itemService.getUnlistedItems().subscribe(items => {
-              this.doneItems = items.filter(i => i.isDone === true);
-              this.unDoneItems = items.filter(i => i.isDone === false);
-            });
-            break;
 
           default:
             this.listService.getList(value.listId).subscribe(list => {

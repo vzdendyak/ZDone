@@ -9,10 +9,11 @@ import {formatDate} from '@angular/common';
   providedIn: 'root'
 })
 export class ItemService {
-  url: string = environment.basicUrl + '/items';
+  url: string = environment.basicUrl + '/projects/items';
+  itemUrl: string = environment.basicUrl + '/items';
   requestOptions: object = {
-    //headers: new HttpHeaders().append('Authorization', 'Bearer <yourtokenhere>'),
-    //responseType: 'text'
+    // headers: new HttpHeaders().append('Authorization', 'Bearer <yourtokenhere>'),
+    // responseType: 'text'
     withCredentials: true
   };
   reloadTaskSubject = new Subject<number>();
@@ -32,7 +33,7 @@ export class ItemService {
   }
 
   getItemsByDate(date: string): Observable<Item[]> {
-    return this.http.get<Item[]>(`${this.url}/date/${date}`);
+    return this.http.get<Item[]>(`${this.url}/${date}`);
   }
 
   getCompletedItems(): Observable<Item[]> {
@@ -48,26 +49,26 @@ export class ItemService {
   }
 
   getItem(id: number): Observable<Item> {
-    return this.http.get<Item>(this.url + `/${id}`);
+    return this.http.get<Item>(this.itemUrl + `/${id}`);
   }
 
   createItem(item: Item): Observable<Item> {
     console.log('item to create: ' + item);
-    return this.http.post<Item>(this.url, item);
+    return this.http.post<Item>(this.itemUrl, item);
   }
 
   updateItem(item: Item): Observable<Item> {
     console.log(item);
-    return this.http.put<Item>(this.url, item, this.requestOptions);
+    return this.http.put<Item>(this.itemUrl, item, this.requestOptions);
   }
 
   deleteItem(itemId: number): Observable<Item> {
-    return this.http.delete<Item>(this.url + `/${itemId}`, this.requestOptions);
+    return this.http.delete<Item>(this.itemUrl + `/${itemId}`, this.requestOptions);
   }
 
   reloadTask(id: number) {
     this.activeItemId = id;
-    //console.log('SERVICE');
+    // console.log('SERVICE');
     this.reloadTaskSubject.next(id);
   }
 
@@ -111,7 +112,7 @@ export class ItemService {
   getDate(date: Date): string {
     const newDate = new Date(date);
     const month = environment.months[newDate.getMonth()];
-    let text = `${newDate.getDate()} ${month}`;
+    const text = `${newDate.getDate()} ${month}`;
     return text;
   }
   switchCalendar(state: boolean){

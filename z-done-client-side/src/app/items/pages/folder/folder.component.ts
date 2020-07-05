@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {Folder} from '../../../models/folder';
-import {List} from '../../../models/list';
-import {FolderService} from '../../services/folder.service';
-import {MatMenuTrigger} from '@angular/material';
-import {ListService} from '../../services/list.service';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Folder } from '../../../models/folder';
+import { List } from '../../../models/list';
+import { FolderService } from '../../services/folder.service';
+import { MatMenuTrigger } from '@angular/material';
+import { ListService } from '../../services/list.service';
 
 @Component({
   selector: 'app-folder',
@@ -18,9 +18,9 @@ export class FolderComponent implements OnInit {
   menuState: boolean;
   @Output() dialog = new EventEmitter<boolean>();
 
-  @ViewChild(MatMenuTrigger, {static: false}) trigger: MatMenuTrigger;
+  @ViewChild(MatMenuTrigger, { static: false }) trigger: MatMenuTrigger;
 
-  contextMenuPosition = {x: '0px', y: '0px'};
+  contextMenuPosition = { x: '0px', y: '0px' };
 
   constructor(private folderService: FolderService, private listService: ListService) {
 
@@ -60,5 +60,11 @@ export class FolderComponent implements OnInit {
     this.folderService.openListDialogSubject.next(null);
   }
 
+  addFolderClick() {
+    this.folderService.openFolderDialogSubject.next(this.folder);
+  }
 
+  deleteFolderClick() {
+    this.folderService.deleteFolderSubject.next(this.folder);
+  }
 }

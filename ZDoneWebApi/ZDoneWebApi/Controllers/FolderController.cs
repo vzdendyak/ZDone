@@ -95,25 +95,28 @@ namespace ZDoneWebApi.Controllers
         }
 
         // PUT: api/Item/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, FolderDto folder)
+        [HttpPut]
+        public async Task<IActionResult> Put(FolderDto folder)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            var result = await _folderBl.UpdateAsync(folder);
+            (userId, projectId) = GetUserId();
+            var result = await _folderBl.UpdateAsync(folder, userId);
             if (!result.Success)
                 return BadRequest(result.Message);
-            return Ok(result.Message);
+            return Ok();
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await _folderBl.DeleteAsync(id);
+            (userId, projectId) = GetUserId();
+
+            var result = await _folderBl.DeleteAsync(id, userId);
             if (!result.Success)
                 return BadRequest(result.Message);
-            return Ok(result.Message);
+            return Ok();
         }
     }
 }

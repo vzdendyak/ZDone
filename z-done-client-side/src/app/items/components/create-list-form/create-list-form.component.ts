@@ -30,16 +30,23 @@ export class CreateListFormComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    //this.set();
+    // this.set();
   }
 
   compareByValue(f1: any, f2: any) {
-    return f1 && f2 && f1.name === f2.name;
+     return f1 && f2 && f1.name === f2.name;
   }
 
+  get getFolder(){
+      return this.myFirstReactiveForm.get('folder');
+  }
+
+  get getName(){
+    return this.myFirstReactiveForm.get('Name');
+  }
   set() {
     setTimeout(() => {
-      this.myFirstReactiveForm.patchValue({name: 'stop', folder: this.data.item.folder});
+      this.myFirstReactiveForm.patchValue({Name: 'stop', folder: this.data.item.folder});
     }, 0);
 
   }
@@ -48,13 +55,15 @@ export class CreateListFormComponent implements OnInit {
     if (this.data != null) {
       this.selectedFolder = this.data.item.folder;
       this.myFirstReactiveForm = this.fb.group({
-        name: [this.data.item.name, [Validators.required]],
-        folder: [this.selectedFolder]
+        Name: [this.data.item.name, [Validators.required]],
+        folder: [this.selectedFolder, [Validators.required]]
       });
+      console.log('log1');
+
     } else {
       this.myFirstReactiveForm = this.fb.group({
-        name: [null, [Validators.required]],
-        folder: [null]
+        Name: [null, [Validators.required]],
+        folder: [null, [Validators.required]]
       });
     }
   }
@@ -68,7 +77,7 @@ export class CreateListFormComponent implements OnInit {
     if (this.data != null) {
       list = {
         id: this.data.item.id,
-        name: this.myFirstReactiveForm.controls.name.value,
+        name: this.myFirstReactiveForm.controls.Name.value,
         folderId: this.myFirstReactiveForm.controls.folder.value.id,
         folder: this.myFirstReactiveForm.controls.folder.value,
         isBasic : false
@@ -77,9 +86,11 @@ export class CreateListFormComponent implements OnInit {
         this.dialogRef.close({folder: this.myFirstReactiveForm.controls.folder.value, list});
       });
     } else {
+      console.log('logging');
+
       list = {
         id: 0,
-        name: this.myFirstReactiveForm.controls.name.value,
+        name: this.myFirstReactiveForm.controls.Name.value,
         folderId: this.myFirstReactiveForm.controls.folder.value.id,
         folder: this.myFirstReactiveForm.controls.folder.value,
         isBasic : false

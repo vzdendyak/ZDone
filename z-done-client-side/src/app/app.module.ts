@@ -21,13 +21,14 @@ import {AuthInterceptor} from './account/auth-interceptor';
 import {CookieService} from 'ngx-cookie-service';
 import {FullCalendarModule} from '@fullcalendar/angular';
 import {ItemCalendarComponent} from './items/components/item-calendar/item-calendar.component';
+import { CreateFolderFormComponent } from './items/components/create-folder-form/create-folder-form.component';
 
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-  entryComponents: [CreateListFormComponent],
+  entryComponents: [CreateListFormComponent, CreateFolderFormComponent],
   imports: [
     BrowserModule,
     MaterialAppsModule,

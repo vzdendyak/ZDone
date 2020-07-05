@@ -23,10 +23,7 @@
           <span class="material-icons menuIcon"> calendar_today </span>
           <a class="leftDefaultLink">Calendar</a>
         </li>
-        <li (click)="goTo(0,'inbox')" class="defaultLinkItem">
-          <span class="material-icons menuIcon"> inbox </span>
-          <a class="leftDefaultLink">Inbox</a>
-        </li>
+
 
         <li class="defaultLinkItem">
           <div class="userFoldersBlock">
@@ -51,6 +48,9 @@
           <app-folder [folder]="l"></app-folder>
           <!--        <a class="leftDefaultLink" href="#">{{l.name}}</a>-->
         </li>
+        <li (click)="addFolderClick()" class="new-folder-item defaultLinkItem folderItem ">
+          <span  class="new-folder-span">New folder</span>
+         </li>
       </ul>
     </div>
     <div class="logoutBlock">

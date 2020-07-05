@@ -60,20 +60,32 @@ namespace ZDoneWebApi.BusinessLogic
             return new ItemResponse(true, "Created", returnFolder.Id);
         }
 
-        public async Task<ItemResponse> UpdateAsync(FolderDto folder)
+        public async Task<ItemResponse> UpdateAsync(FolderDto folder, string userId)
         {
-            var existingFolder = await _folderRepository.Read(folder.Id);
             // Get role
             var newFolder = _mapper.Map<Folder>(folder);
-            await _folderRepository.Update(newFolder);
+            var basicFolderId = await _userBl.GetBasicFolderId(userId);
+            if (newFolder.Id == basicFolderId) throw new Exception("You  can't change basic folder");
+
+            try
+            {
+                await _folderRepository.Update(newFolder);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Update error. " + ex.Message);
+            }
             return new ItemResponse(true, "Updated successfully!");
         }
 
-        public async Task<ItemResponse> DeleteAsync(int id)
+        public async Task<ItemResponse> DeleteAsync(int id, string userId)
         {
             var realItem = await _folderRepository.Read(id);
+            var basicFolderId = await _userBl.GetBasicFolderId(userId);
 
             if (realItem == null) throw new NotImplementedException();
+            if (realItem.Id == basicFolderId) throw new Exception("You  can't delete basic folder");
+
             await _folderRepository.Delete(id);
             return new ItemResponse(true, "Deleted successfully");
         }

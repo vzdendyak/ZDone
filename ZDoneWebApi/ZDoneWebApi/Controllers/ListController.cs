@@ -139,10 +139,10 @@ namespace ZDoneWebApi.Controllers
             {
                 return Forbid();
             }
-            var result = await _listBl.UpdateAsync(list);
+            var result = await _listBl.UpdateAsync(list, userId);
             if (!result.Success)
                 return BadRequest(result.Message);
-            return Ok(result.Message);
+            return Ok();
         }
 
         // DELETE: api/ApiWithActions/5
@@ -154,10 +154,10 @@ namespace ZDoneWebApi.Controllers
             {
                 return Forbid();
             }
-            var result = await _listBl.DeleteAsync(id);
+            var result = await _listBl.DeleteAsync(id, userId);
             if (!result.Success)
                 return BadRequest(result.Message);
-            return Ok(result.Message);
+            return Ok();
         }
     }
 }
